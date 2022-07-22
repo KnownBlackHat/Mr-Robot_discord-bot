@@ -1,0 +1,8 @@
+aiohttp==3.7.4.post0
+beautifulsoup4==4.11.1
+bot==0.0.1
+disnake==2.5.1
+Flask==2.1.2
+praw==7.6.0
+requests==2.27.1
+youtube_dl==2021.12.17
