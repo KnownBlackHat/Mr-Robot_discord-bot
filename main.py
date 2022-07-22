@@ -80,7 +80,7 @@ keep_alive()
 try:
     client.run(os.getenv('TOKEN'))
     os.system('kill 1')
-except:
+except Exception as error:
     with open('Logs/error.log','a') as file:
-      file.write('\nEXITING...')
+      file.write(f'\nEXITING: {error}\n')
     os.system('kill 1')

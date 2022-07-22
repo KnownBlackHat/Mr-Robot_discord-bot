@@ -1,6 +1,6 @@
 import disnake
 from disnake.ext import commands
-from bot import *
+from main import *
 
 
 def setup(client: commands.Bot):
@@ -14,9 +14,8 @@ class moderation(commands.Cog):
     @commands.command(name='addrole', aliases=['ar'])
     @commands.has_any_role("MR ROBOT Authorised")
     async def addrole(self, ctx, user: disnake.Member, *, roll: disnake.Role):
-        #await ctx.send(roll)
-        role = disnake.utils.get(user.guild.roles, name=str(roll))
         await ctx.message.delete()
+        role = disnake.utils.get(user.guild.roles, name=str(roll))
         await user.add_roles(role)
         await ctx.send(embed=emb(cr.green, "Role Assigned",
                                   f"{user.mention} Has Got  `{role}`  Role !"))
@@ -30,8 +29,8 @@ class moderation(commands.Cog):
     @commands.command(name='rmrole', aliases=['rr'])
     @commands.has_any_role("MR ROBOT Authorised")
     async def rmrole(self, ctx, user: disnake.Member, *, roll: disnake.Role):
-        role = disnake.utils.get(user.guild.roles, name=str(roll))
         await ctx.message.delete()
+        role = disnake.utils.get(user.guild.roles, name=str(roll))
         await user.remove_roles(role)
         await ctx.send(
             embed=emb(cr.red, "Role Removed",

@@ -4,7 +4,7 @@ import aiohttp
 import urllib
 import re
 import asyncio
-from bot import *
+from main import *
 import disnake
 import youtube_dl  # type: ignore
 from disnake.ext import commands

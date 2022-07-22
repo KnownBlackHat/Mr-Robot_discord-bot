@@ -1,7 +1,7 @@
 import aiohttp
 import disnake
 from disnake.ext import commands
-from bot import *
+from main import *
 
 def setup(client: commands.Bot):
     client.add_cog(fun(client))
