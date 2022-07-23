@@ -16,7 +16,10 @@ class Greetings(commands.Cog):
         if ctx is not None:
             try:
                 embed=cr.emb(disnake.Colour.random(),f'Welcome {member.name}')
-                embed.set_thumbnail(url=member.avatar.url, inline=False)
+                try:
+                    embed.set_thumbnail(url=member.avatar.url, inline=False)
+                except Exception:
+                    ...
                 embed.add_field(name="ID", value=member.id, inline=False)
                 embed.add_field(name="Account Created",value=member.created_at.strftime("%a %#d %B %Y, %I:%M %p UTC", inline=False))
                 await ctx.send(embed=embed)
