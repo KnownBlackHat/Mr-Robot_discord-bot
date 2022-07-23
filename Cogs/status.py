@@ -1,5 +1,4 @@
 import psutil
-from asyncio import FastChildWatcher
 import disnake
 from disnake.ext import commands
 from main import *
@@ -43,4 +42,9 @@ class command_handling(commands.Cog):
       embed.add_field("Memory Usage: ",f"{psutil.virtual_memory().percent}%",inline=False)
       embed.add_field("Available Usage: ",f"{round(psutil.virtual_memory().available * 100 / psutil.virtual_memory().total)}%",inline=False)
       embed.add_field("Users: ", ctx.guild.member_count, inline=False)
+<<<<<<< HEAD
       embed.add_field("Channels: ", len(ctx.guild.channels),inline=False)
+=======
+      embed.add_field("Channels: ", len(ctx.guild.channels), inline=False)
+      await ctx.send(embed=embed)
+>>>>>>> Mr_Robot
