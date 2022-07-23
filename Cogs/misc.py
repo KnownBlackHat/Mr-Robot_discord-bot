@@ -50,9 +50,7 @@ class misc(commands.Cog):
 
     @commands.command(name='version')
     async def version(self, context):
-        myEmbed = disnake.Embed(title="Current Version",
-                                description="My Current Version is 7.5",
-                                color=0x00ff00)
+        myEmbed = cr.emb(cr.green,"Current Version","My Current Version is 7.5",)
         myEmbed.add_field(name="Version Code:", value="v.7.5.2", inline=False)
         myEmbed.add_field(name="Last Updated:",
                           value="July 22nd, 2022",
@@ -61,7 +59,6 @@ class misc(commands.Cog):
                           value="September 10th, 2021",
                           inline=False)
         myEmbed.set_author(name="Author: Known_Black_Hat")
-        myEmbed.set_footer(text="MR ROBOT")
         await context.send(embed=myEmbed)
 
 #clear
