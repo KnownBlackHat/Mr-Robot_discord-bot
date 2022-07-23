@@ -41,6 +41,6 @@ class command_handling(commands.Cog):
       embed.add_field("Cpu Usage: ",f"{psutil.cpu_percent()}%",inline=False)
       embed.add_field("Memory Usage: ",f"{psutil.virtual_memory().percent}%",inline=False)
       embed.add_field("Available Usage: ",f"{round(psutil.virtual_memory().available * 100 / psutil.virtual_memory().total)}%",inline=False)
-      embed.add_field("Users: ", ctx.guild.member_count, False)
-      embed.add_field("Channels: ", len(ctx.guild.channels),False)
+      embed.add_field("Users: ", ctx.guild.member_count, inline=False)
+      embed.add_field("Channels: ", len(ctx.guild.channels), inline=False)
       await ctx.send(embed=embed)
