@@ -3,7 +3,6 @@
 import datetime
 import time
 from webserver import keep_alive
-import requests as req
 import os
 import disnake
 from disnake.client import Client
