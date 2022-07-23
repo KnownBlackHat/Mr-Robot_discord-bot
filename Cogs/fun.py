@@ -23,11 +23,11 @@ class fun(commands.Cog):
 
     @commands.command(name='nsfw')
     async def nsfw(self, ctx, topic='porn', amount=int(1)):
-        if not str(ctx.message.author) == "Known_black_hat#9645":
+        if not str(ctx.message.author) == "Known_cr.black_hat#9645":
             amount = 1
         if ctx.channel.is_nsfw():
             async with ctx.typing():
-                await ctx.send(embed=emb(cr.black,"NSFW Command",f"🔎Searching {topic}..."))
+                await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Searching {topic}..."))
             j = 0
 
             while j != amount:
@@ -36,15 +36,15 @@ class fun(commands.Cog):
                     pass
                 await ctx.send(submission.url)
                 j = int(j + 1)
-            await ctx.send(embed=emb(cr.black,"NSFW Command",f"🔎Search Of {topic} Completed!"))
+            await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Search Of {topic} Completed!"))
         else:
             await ctx.send(
-                embed=emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
+                embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
 
 
     @commands.command(name='meme')
     async def meme(self, ctx, amount=int(1)):
-        if not str(ctx.message.author) == "Known_black_hat#9645":
+        if not str(ctx.message.author) == "Known_cr.black_hat#9645":
             amount = 1
         j = 0
         while j != amount:
@@ -63,8 +63,8 @@ class fun(commands.Cog):
               json_data = await response.json()
               await ctx.send(json_data["message"])
             else:
-              await ctx.send(embed=emb(name="Error",value=f"The request was invalid.\nStatus code: {response.status}"))
+              await ctx.send(embed=cr.emb(name="Error",value=f"The request was invalid.\nStatus code: {response.status}"))
       else:
         await ctx.send(
-                embed=emb(cr.red, "Sorry Buddy! This is not nsfw channel!"))
+                embed=cr.emb(red, "Sorry Buddy! This is not nsfw channel!"))
 '''

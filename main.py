@@ -31,53 +31,73 @@ class cr:
     green = 0x00ff00
     blue = 0x0000ff
     black = 0x000000
+    orange =0xffa500
 
+    def emb(color=green, name='', value=''):
+        Em = disnake.Embed(color=color, title=name, description=value)
+        Em.set_footer(text="MR ROBOT")
+        return Em
 
-def emb(color=cr.green, name='', value=''):
-    Em = disnake.Embed(color=color, title=name, description=value)
-    Em.set_footer(text="MR ROBOT")
-    return Em
+# def cr.emb(color=green, name='', value=''):
+#     Em = disnake.Embed(color=color, title=name, description=value)
+#     Em.set_footer(text="MR ROBOT")
+#     return Em
 
 
 @client.remove_command('help')
-@client.command(name='list_functions')
+@client.command(name='list_cogs')
 async def list_functions(ctx):
-    await ctx.send(
-        embed=emb(cr.green, "Available Functions", ', '.join(function_list)))
+    await ctx.send(embed=cr.emb(cr.green, "Loaded Cogs", ' ✅\n\n'.join(loaded_cog_list) + "✅\n"))
+    if not unloaded_cog_list == []:
+        await ctx.send(embed=cr.emb(cr.red, "Unloaded Cogs", '❌\n\n'.join(unloaded_cog_list) +"❌\n"))
 
 
 @client.command(name='load')
 async def load(ctx, name):
     if str(ctx.message.author) == "Known_black_hat#9645":
         client.load_extension(f'Cogs.{name}')
-        await ctx.send(embed=emb(cr.green, "Loaded", f"{name} function"))
+        try:
+            unloaded_cog_list.remove(name)
+            loaded_cog_list.append(name)
+        except Exception:
+            ...
+        await ctx.send(embed=cr.emb(cr.green, "Loaded", f"{name} function"))
 
 @client.command(name='reload')
 async def reload(ctx, name):
     if str(ctx.message.author) == "Known_black_hat#9645":
       client.unload_extension(f'Cogs.{name}')
       client.load_extension(f'Cogs.{name}')
-      await ctx.send(embed=emb(cr.green, "Reloaded", f"{name} function"))
+      await ctx.send(embed=cr.emb(cr.green, "Reloaded", f"{name} function"))
 
       
 @client.command(name='unload')
 async def unload(ctx, name):
     if str(ctx.message.author) == "Known_black_hat#9645":
         client.unload_extension(f'Cogs.{name}')
-        await ctx.send(embed=emb(cr.red, "Unloaded", f"{name} function"))
+        try:
+            loaded_cog_list.remove(name)
+            unloaded_cog_list.append(name)
+        except Exception:
+            ...
+        await ctx.send(embed=cr.emb(cr.red, "Unloaded", f"{name} function"))
 
 
 error = ''
-
-function_list = []
+unloaded_cog_list=[]
+loaded_cog_list= []
 try:
     for file in os.listdir('Cogs'):
         if file.endswith('.py'):
-            function_list.append(file[:-3])
-            client.load_extension(f'Cogs.{str(file[:-3])}')
+            try:
+                client.load_extension(f'Cogs.{str(file[:-3])}')
+                loaded_cog_list.append(file[:-3])
+            except Exception as e:
+                unloaded_cog_list.append(file[:-3])
+
 except Exception as error:
     with open('Logs/error.log','a') as file:
-      file.write(f'\nCogs Error: {error}\n')
+      file.write(f'\nCogs Error: {error}')
 
 keep_alive()
 try:
@@ -85,5 +105,5 @@ try:
     os.system('kill 1')
 except Exception as error:
     with open('Logs/error.log','a') as file:
-      file.write(f'\nEXITING: {error}\n')
+      file.write(f'\nEXITING: {error}')
     os.system('kill 1')

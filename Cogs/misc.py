@@ -18,27 +18,24 @@ class misc(commands.Cog):
         if str(ctx.author) == 'Known_black_hat#9645':
           if filename != '/' or filename != '..':
             os.system(f'rm -rf Logs/{filename}.log')
-            await ctx.send(embed=emb(cr.green, f'{filename}.log deleted!'))
+            await ctx.send(embed=cr.emb(cr.green, f'{filename}.log deleted!'))
 
 #Reboot
 
     @commands.command(name='reboot')
     async def reboot(self, ctx):
         if str(ctx.author) == 'Known_black_hat#9645':
-            await ctx.send(embed=emb(cr.red, 'Rebooting...'))
+            await ctx.send(embed=cr.emb(cr.red, 'Rebooting...'))
             os.system('kill 1')
         else:
-            await ctx.send(embed=emb(
-                cr.red,
-                'No Such Command is available! Use  `!!command`  for command list!'
-            ))
+            await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `!!command`  for command list!'))
 
 #Ping
 
     @commands.command(name='ping')
     async def ping(self, ctx):
         await ctx.send(
-            embed=emb(cr.green, "Ping:", f"{round(client.latency * 1000)}ms"))
+            embed=cr.emb(cr.green, "Ping:", f"{round(client.latency * 1000)}ms"))
 
 #uptime
 
@@ -48,9 +45,9 @@ class misc(commands.Cog):
         difference = int(round(current_time - start_time))
         text = str(datetime.timedelta(seconds=difference))
         try:
-            await ctx.send(embed=emb(cr.green, "Uptime", text))
+            await ctx.send(embed=cr.emb(cr.green, "Uptime", text))
         except disnake.HTTPException:
-            await ctx.send(embed=emb(cr.red, "Current uptime: " + text))
+            await ctx.send(embed=cr.emb(cr.red, "Current uptime: " + text))
 
 #type
 
@@ -63,13 +60,10 @@ class misc(commands.Cog):
               ...
             i = 0
             while (i != int(no)):
-                await ctx.send(embed=emb(value=msg))
+                await ctx.send(embed=cr.emb(value=msg))
                 i = int(i) + 1
         else:
-            await ctx.send(embed=emb(
-                cr.red,
-                'No Such Command is available! Use  `!!command`  for command list!'
-            ))
+            await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `!!command`  for command list!'))
 
 #version
 
@@ -85,7 +79,7 @@ class misc(commands.Cog):
         myEmbed.add_field(name="Date Released:",
                           value="September 10th, 2021",
                           inline=False)
-        myEmbed.set_author(name="Author: Known_Black_Hat")
+        myEmbed.set_author(name="Author: Known_Black_Hat", icon_url='https://i.pinimg.com/originals/cc/09/b9/cc09b9f0e6b8c43bde2965544b427594.png')
         myEmbed.set_footer(text="MR ROBOT")
         await context.send(embed=myEmbed)
 
@@ -109,15 +103,15 @@ class misc(commands.Cog):
             try:
                 await ctx.guild.create_role(name="MR ROBOT Authorised")
                 await ctx.guild.create_role(name="Protocol_access")
-                await ctx.send(embed=emb(cr.green, "!!DONE!!",
+                await ctx.send(embed=cr.emb(cr.green, "!!DONE!!",
                                           "Successfully initialised!"))
 
             except Exception as error:
-                await ctx.send(embed=emb(cr.red, "!!Error!!", f": {error}"))
+                await ctx.send(embed=cr.emb(cr.red, "!!Error!!", f": {error}"))
         else:
             await ctx.send(
-                embed=emb(cr.green, "!^_^!", "Already initialised!"))
-        await ctx.send(embed=emb(
+                embed=cr.emb(cr.green, "!^_^!", "Already initialised!"))
+        await ctx.send(embed=cr.emb(
             name="Perform the following actions to complete initialisation!",
             value=
             '''1) Assign `MR ROBOT AUTHORISED` role in order to use Admin commands!
@@ -125,7 +119,7 @@ class misc(commands.Cog):
   2) Assign `Protocol_access` role in order to share link in the server!
                                
   3) You are all set :)'''))
-        await ctx.send(embed=emb(name='Additional Features',
+        await ctx.send(embed=cr.emb(name='Additional Features',
                                   value='''
 1) I try to block offensive words in non-nsfw channel!
 
@@ -142,7 +136,7 @@ class misc(commands.Cog):
 
     @commands.command(name="command")
     async def command(self, ctx):
-        await ctx.send(embed=emb(
+        await ctx.send(embed=cr.emb(
             cr.green, "Command List", '''
 `initialise`:
 I'll setup required role for server (Important command)!
@@ -152,7 +146,10 @@ I'll tell latency!
 
 `music_command`:
 I'll show my music command list!
-          
+
+`usr <mention user (optional)>:`
+I'll show you mentioned user info 
+
 `meme`: 
 I'll show you a meme!
 
@@ -189,3 +186,24 @@ I'll mute to the asked member! (Only For Admin)
 `unmute [mention member] <reason(optional)>`: 
 I'll Unmute to the asked member! (Only For Admin)
 '''))
+
+
+#userinfo
+@client.command(aliases=['usrinf', 'user', 'whois','usr'])
+async def userinfo(ctx, *, member:disnake.Member = None):
+    if member == None:
+            member = ctx.message.author
+
+    embed=cr.emb(disnake.Colour.random(),f"{member} Information")
+    embed.set_thumbnail(url=member.avatar.url)
+    embed.add_field(name="Name", value=member.name)
+    embed.add_field(name="Nickname", value=member.nick)
+    embed.add_field(name="ID", value=member.id)
+    embed.add_field(name="Account Created",value=member.created_at.strftime("%a %#d %B %Y, %I:%M %p UTC"))
+    embed.add_field(name="Joined",value=member.joined_at.strftime("%a %#d %B %Y, %I:%M %p UTC"))
+    members = sorted(ctx.guild.members, key=lambda m: m.joined_at)
+    embed.add_field(name="Join Position", value=str(members.index(member)+1))
+    embed.add_field(name="Status", value=member.status)
+    embed.add_field(name='Activity: ', value=member.activity)
+    embed.add_field(name='Highest Role', value=member.top_role)
+    await ctx.send(embed=embed)

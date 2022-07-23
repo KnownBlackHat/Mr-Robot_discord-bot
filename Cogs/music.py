@@ -69,7 +69,7 @@ class Music(commands.Cog):
 
     @commands.command(name='music_command')
     async def music_help(self, ctx):
-        await ctx.send(embed=emb(
+        await ctx.send(embed=cr.cr.emb(
             cr.blue, "Music Commands", """
 
 `play [Multiple URLs | Search topic]`:
@@ -99,9 +99,9 @@ I'll get disconnected from voice channel
         await self.ensure_voice(ctx)
         player = await YTDLSource.from_url(url,loop=self.bot.loop,stream=True)
             
-        ctx.voice_client.play(player,after=lambda e:  ctx.send(embed=emb(cr.red,"Player Error", e))if e else None)
+        ctx.voice_client.play(player,after=lambda e:  ctx.send(embed=cr.emb(cr.red,"Player Error", e))if e else None)
         
-        await ctx.send(embed=emb(cr.blue,"Playing...",f"""
+        await ctx.send(embed=cr.emb(cr.blue,"Playing...",f"""
 Name: {player.title}
                                  
 """))
@@ -111,10 +111,10 @@ Name: {player.title}
         """Changes the player's volume"""
 
         if ctx.voice_client is None:
-            return await ctx.send(embed=emb(cr.red,"Not connected to a voice channel."))
+            return await ctx.send(embed=cr.emb(cr.red,"Not connected to a voice channel."))
 
         ctx.voice_client.source.volume = volume / 100
-        await ctx.send(embed=emb(cr.blue,"Volume",f"Changed volume to {volume}%"))
+        await ctx.send(embed=cr.emb(cr.blue,"Volume",f"Changed volume to {volume}%"))
 
     @commands.command(name='stop')
     async def stop(self, ctx):
@@ -127,7 +127,7 @@ Name: {player.title}
             if ctx.author.voice:
                 await ctx.author.voice.channel.connect()
             else:
-                await ctx.send(embed=emb(
+                await ctx.send(embed=cr.emb(
                     cr.red, "Your aren't connected to voice Channel",
                     "Connect to voice channel"))
         elif ctx.voice_client.is_playing():

@@ -17,11 +17,11 @@ class moderation(commands.Cog):
         await ctx.message.delete()
         role = disnake.utils.get(user.guild.roles, name=str(roll))
         await user.add_roles(role)
-        await ctx.send(embed=emb(cr.green, "Role Assigned",
+        await ctx.send(embed=cr.emb(cr.green, "Role Assigned",
                                   f"{user.mention} Has Got  `{role}`  Role !"))
         try:
             await user.send(
-                embed=emb(cr.green, "Role Assigned",
+                embed=cr.emb(cr.green, "Role Assigned",
                           f" You got `{role}` Role In {ctx.guild.name} !"))
         except:
             ...
@@ -33,10 +33,10 @@ class moderation(commands.Cog):
         role = disnake.utils.get(user.guild.roles, name=str(roll))
         await user.remove_roles(role)
         await ctx.send(
-            embed=emb(cr.red, "Role Removed",
+            embed=cr.emb(cr.red, "Role Removed",
                       f"{user.mention} Was Removed  `{role}` Role !"))
         try:
-            await user.send(embed=emb(
+            await user.send(embed=cr.emb(
                 cr.red, "Role Removed",
                 f"You got removed from `{role}` Role In {ctx.guild.name}!"))
         except:
@@ -53,9 +53,9 @@ class moderation(commands.Cog):
                                                    member_discriminator):
                 await context.guild.unban(user)
                 await context.send(
-                    embed=emb(cr.green, value=f'Unbanned {user}'))
+                    embed=cr.emb(cr.green,"Unbanned",f'Unbanned: {user}'))
                 try:
-                    await member.send(embed=emb(
+                    await member.send(embed=cr.emb(
                         name=
                         f'You Were Unbanned From The {context.guild.name} Server!'
                     ))
@@ -68,15 +68,12 @@ class moderation(commands.Cog):
     @commands.has_any_role("MR ROBOT Authorised")
     async def ban(self, context, member: disnake.Member, *, reason=None):
         try:
-            await member.send(embed=emb(
-                cr.red,
-                f'You Were Banned From The {context.guild.name} Server! Reason: {reason}'
-            ))
+            await member.send(embed=cr.emb(cr.red,f'You Were Banned From The {context.guild.name} Server! Reason: {reason}'))
         except:
             pass
         await member.ban(reason=reason)
         await context.send(
-            embed=emb(cr.red, value=f'Banned {member} Reason: {reason}'))
+            embed=cr.emb(cr.red,"Banned",f'Banned: {member} Reason: {reason}'))
 
     @commands.command(name="mute", aliases=['m'])
     @commands.has_any_role("MR ROBOT Authorised")
@@ -96,9 +93,9 @@ class moderation(commands.Cog):
                                               view_channel=True)
 
         await member.add_roles(mutedRole)
-        await ctx.send(embed=emb(
-            cr.red, value=f" Muted {member.mention} Reason: {reason}"))
-        await member.send(embed=emb(
+        await ctx.send(embed=cr.emb(
+            cr.red,"Muted",f" Muted: {member.mention} Reason: {reason}"))
+        await member.send(embed=cr.emb(
             cr.red,
             f"You are Muted in the {guild.name} server  Reason: {reason}"))
 
@@ -109,15 +106,15 @@ class moderation(commands.Cog):
         mutedRole = disnake.utils.get(guild.roles, name="Muted")
         await member.remove_roles(mutedRole)
         await ctx.send(
-            embed=emb(name="Unmuted", value=f"Unmuted {member.mention}"))
-        await member.send(embed=emb(
+            embed=cr.emb(cr.green,"Unmuted",f"Unmuted {member.mention}"))
+        await member.send(embed=cr.emb(
             f"You are Unmuted in the {guild.name} server! 😉😉Enjoy😉😉!"))
 
     @commands.command(name='kick', aliases=['k', 'nikal'])
     @commands.has_any_role("MR ROBOT Authorised")
     async def kick(self, context, member: disnake.Member, *, reason=None):
         try:
-            await member.send(embed=emb(
+            await member.send(embed=cr.emb(
                 cr.red,
                 f'You Were Kicked From The {context.guild.name} Server! Reason: {reason}'
             ))
@@ -125,15 +122,15 @@ class moderation(commands.Cog):
             pass
         await member.kick(reason=reason)
         await context.send(
-            embed=emb(cr.red, value=f'Kicked {member} Reason: {reason}'))
+            embed=cr.emb(cr.red,"Kicked",f'Kicked: {member} Reason: {reason}'))
 
     @commands.command(name="warn")
     @commands.has_any_role("MR ROBOT Authorised")
     async def warn(self, ctx, member: disnake.Member, *, msg):
         await ctx.message.delete()
-        await ctx.send(embed=emb(cr.red, f"WARNING {member}",
+        await ctx.send(embed=cr.emb(cr.red, f"WARNING {member}",
                                   f'{member.mention} --> {msg}'))
         try:
-            await member.send(embed=emb(cr.red, f"WARNING", msg))
+            await member.send(embed=cr.emb(cr.red, f"WARNING", msg))
         except:
             ...
