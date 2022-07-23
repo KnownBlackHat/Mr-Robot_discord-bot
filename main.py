@@ -48,9 +48,9 @@ class cr:
 @client.remove_command('help')
 @client.command(name='list_cogs')
 async def list_functions(ctx):
-    await ctx.send(embed=cr.emb(cr.green, "Loaded Cogs", ' ✅\n\n'.join(loaded_cog_list) + "✅\n"))
+    await ctx.send(embed=cr.emb(cr.green, "Loaded Cogs", '   ✅\n\n'.join(loaded_cog_list) + "  ✅\n"))
     if not unloaded_cog_list == []:
-        await ctx.send(embed=cr.emb(cr.red, "Unloaded Cogs", '❌\n\n'.join(unloaded_cog_list) +"❌\n"))
+        await ctx.send(embed=cr.emb(cr.red, "Unloaded Cogs", '  ❌\n\n'.join(unloaded_cog_list) +"  ❌\n"))
 
 
 @client.command(name='load')
