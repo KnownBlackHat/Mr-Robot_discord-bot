@@ -166,27 +166,26 @@ I'll Unmute to the asked member! (Only For Admin)
 '''))
 
 
-#userinfo
-@client.command(aliases=['usrinf', 'user', 'whois','usr'])
-async def userinfo(self,ctx, *, member:disnake.Member = None):
-    if member == None:
-            member = ctx.message.author
-    try:
-        embed=cr.emb(disnake.Colour.random(),f"{member} Information")
+    @commands.command(aliases=['usrinf', 'user', 'whois','usr'])
+    async def userinfo(self,ctx, *, member:disnake.Member = None):
+        if member == None:
+                member = ctx.message.author
         try:
-            embed.set_thumbnail(url=member.avatar.url)
-        except Exception:
-            embed.set_thumbnail(url="https://cdn.logojoy.com/wp-content/uploads/20210422095037/discord-mascot.png")
-        embed.add_field(name="Name", value=member.name,inline=False)
-        embed.add_field(name="Nickname", value=member.nick,inline=False)
-        embed.add_field(name="ID", value=member.id,inline=False)
-        embed.add_field(name="Account Created",value=member.created_at.strftime("%a %#d %B %Y, %I:%M %p UTC"),inline=False)
-        embed.add_field(name="Joined",value=member.joined_at.strftime("%a %#d %B %Y, %I:%M %p UTC"),inline=False)
-        members = sorted(ctx.guild.members, key=lambda m: m.joined_at)
-        embed.add_field(name="Join Position", value=str(members.index(member)+1),inline=False)
-        embed.add_field(name="Status", value=member.status,inline=False)
-        embed.add_field(name='Activity: ', value=member.activity,inline=False)
-        embed.add_field(name='Highest Role', value=member.top_role,inline=False)
-        await ctx.send(embed=embed)
-    except Exception as e:
-        await ctx.send(embed=cr.emb(cr.red,'User Info Error', f"Error: {e}"))
+            embed=cr.emb(disnake.Colour.random(),f"{member} Information")
+            try:
+                embed.set_thumbnail(url=member.avatar.url)
+            except Exception:
+                embed.set_thumbnail(url="https://cdn.logojoy.com/wp-content/uploads/20210422095037/discord-mascot.png")
+            embed.add_field(name="Name", value=member.name,inline=False)
+            embed.add_field(name="Nickname", value=member.nick,inline=False)
+            embed.add_field(name="ID", value=member.id,inline=False)
+            embed.add_field(name="Account Created",value=member.created_at.strftime("%a %#d %B %Y, %I:%M %p UTC"),inline=False)
+            embed.add_field(name="Joined",value=member.joined_at.strftime("%a %#d %B %Y, %I:%M %p UTC"),inline=False)
+            members = sorted(ctx.guild.members, key=lambda m: m.joined_at)
+            embed.add_field(name="Join Position", value=str(members.index(member)+1),inline=False)
+            embed.add_field(name="Status", value=member.status,inline=False)
+            embed.add_field(name='Activity: ', value=member.activity,inline=False)
+            embed.add_field(name='Highest Role', value=member.top_role,inline=False)
+            await ctx.send(embed=embed)
+        except Exception as e:
+            await ctx.send(embed=cr.emb(cr.red,'User Info Error', f"Error: {e}"))
