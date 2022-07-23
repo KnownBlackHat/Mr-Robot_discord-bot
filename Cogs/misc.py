@@ -211,4 +211,4 @@ async def userinfo(ctx, *, member:disnake.Member = None):
         embed.add_field(name='Highest Role', value=member.top_role,inline=False)
         await ctx.send(embed=embed)
     except Exception as e:
-        await ctx.send(embed=cr.emb(cr.red,f'User Info Error',f"Error: {e}"))
+        await ctx.send(embed=cr.emb(cr.red,'User Info Error', f"Error: {e}"))
