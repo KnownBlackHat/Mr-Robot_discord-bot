@@ -1,3 +1,4 @@
+from msilib.schema import Icon
 import disnake
 from disnake.ext import commands
 from main import *
@@ -70,16 +71,16 @@ class misc(commands.Cog):
     @commands.command(name='version')
     async def version(self, context):
         myEmbed = disnake.Embed(title="Current Version",
-                                description="My Current Version is 6.9",
+                                description="My Current Version is 7.5",
                                 color=0x00ff00)
-        myEmbed.add_field(name="Version Code:", value="v.6.9.1", inline=False)
+        myEmbed.add_field(name="Version Code:", value="v.7.5.2", inline=False)
         myEmbed.add_field(name="Last Updated:",
-                          value="July 20th, 2022",
+                          value="July 22nd, 2022",
                           inline=False)
         myEmbed.add_field(name="Date Released:",
                           value="September 10th, 2021",
                           inline=False)
-        myEmbed.set_author(name="Author: Known_Black_Hat", icon_url='https://i.pinimg.com/originals/cc/09/b9/cc09b9f0e6b8c43bde2965544b427594.png')
+        myEmbed.set_author(name="Author: Known_Black_Hat")
         myEmbed.set_footer(text="MR ROBOT")
         await context.send(embed=myEmbed)
 
@@ -196,14 +197,14 @@ async def userinfo(ctx, *, member:disnake.Member = None):
 
     embed=cr.emb(disnake.Colour.random(),f"{member} Information")
     embed.set_thumbnail(url=member.avatar.url)
-    embed.add_field(name="Name", value=member.name)
-    embed.add_field(name="Nickname", value=member.nick)
-    embed.add_field(name="ID", value=member.id)
-    embed.add_field(name="Account Created",value=member.created_at.strftime("%a %#d %B %Y, %I:%M %p UTC"))
-    embed.add_field(name="Joined",value=member.joined_at.strftime("%a %#d %B %Y, %I:%M %p UTC"))
+    embed.add_field(name="Name", value=member.name,inline=False)
+    embed.add_field(name="Nickname", value=member.nick,inline=False)
+    embed.add_field(name="ID", value=member.id,inline=False)
+    embed.add_field(name="Account Created",value=member.created_at.strftime("%a %#d %B %Y, %I:%M %p UTC"),inline=False)
+    embed.add_field(name="Joined",value=member.joined_at.strftime("%a %#d %B %Y, %I:%M %p UTC"),inline=False)
     members = sorted(ctx.guild.members, key=lambda m: m.joined_at)
-    embed.add_field(name="Join Position", value=str(members.index(member)+1))
-    embed.add_field(name="Status", value=member.status)
-    embed.add_field(name='Activity: ', value=member.activity)
-    embed.add_field(name='Highest Role', value=member.top_role)
+    embed.add_field(name="Join Position", value=str(members.index(member)+1),inline=False)
+    embed.add_field(name="Status", value=member.status,inline=False)
+    embed.add_field(name='Activity: ', value=member.activity,inline=False)
+    embed.add_field(name='Highest Role', value=member.top_role,inline=False)
     await ctx.send(embed=embed)
