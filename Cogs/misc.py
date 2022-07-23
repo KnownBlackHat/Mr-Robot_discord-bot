@@ -198,7 +198,7 @@ async def userinfo(ctx, *, member:disnake.Member = None):
         try:
             embed.set_thumbnail(url=member.avatar.url)
         except Exception:
-            ...
+            embed.set_thumbnail(url="https://cdn.logojoy.com/wp-content/uploads/20210422095037/discord-mascot.png")
         embed.add_field(name="Name", value=member.name,inline=False)
         embed.add_field(name="Nickname", value=member.nick,inline=False)
         embed.add_field(name="ID", value=member.id,inline=False)
