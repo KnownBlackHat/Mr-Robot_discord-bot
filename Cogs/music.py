@@ -1,8 +1,3 @@
-# pyright: reportUnknownLambdaType=false
-from bs4 import BeautifulSoup as bs
-import aiohttp
-import urllib
-import re
 import asyncio
 from main import *
 import disnake
