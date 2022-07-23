@@ -195,7 +195,10 @@ async def userinfo(ctx, *, member:disnake.Member = None):
             member = ctx.message.author
     try:
         embed=cr.emb(disnake.Colour.random(),f"{member} Information")
-        embed.set_thumbnail(url=member.avatar.url)
+        try:
+            embed.set_thumbnail(url=member.avatar.url)
+        except Exception:
+            ...
         embed.add_field(name="Name", value=member.name,inline=False)
         embed.add_field(name="Nickname", value=member.nick,inline=False)
         embed.add_field(name="ID", value=member.id,inline=False)
@@ -208,4 +211,4 @@ async def userinfo(ctx, *, member:disnake.Member = None):
         embed.add_field(name='Highest Role', value=member.top_role,inline=False)
         await ctx.send(embed=embed)
     except Exception as e:
-        await ctx.send(embed=cr.emb(cr.red,f'User Info Error',"Error: {e}"))
+        await ctx.send(embed=cr.emb(cr.red,f'User Info Error',f"Error: {e}"))
