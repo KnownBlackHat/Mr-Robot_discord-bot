@@ -1,3 +1,5 @@
+import psutil
+from asyncio import FastChildWatcher
 import disnake
 from disnake.ext import commands
 from main import *
@@ -26,3 +28,19 @@ class command_handling(commands.Cog):
 
         await self.bot.change_presence(status=disnake.Status.idle,
                                        activity=disnake.Game(name='!!command'))
+
+
+
+    @commands.command(name="stats")
+    async def status(self,ctx):
+      current_time = time.time()
+      difference = int(round(current_time - start_time))
+      text = str(datetime.timedelta(seconds=difference))
+      embed=cr.emb(cr.green,"Status")
+      embed.add_field("Ping: ",f"{round(client.latency * 1000)}ms",False)
+      embed.add_field("Uptime: ",f"{text}",False)
+      embed.add_field("Cpu Usage: ",f"{psutil.cpu_percent()}%",False)
+      embed.add_field("Memory Usage: ",f"{psutil.virtual_memory().percent}%",False)
+      embed.add_field("Available Usage: ",f"{psutil.virtual_memory().available * 100 / psutil.virtual_memory().total}%",False)
+      embed.add_field("Users: ", ctx.guild.member_count, False)
+      embed.add_field("Channels: ", len(ctx.guild.channels),False)

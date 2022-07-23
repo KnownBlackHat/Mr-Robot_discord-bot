@@ -23,7 +23,7 @@ class fun(commands.Cog):
 
     @commands.command(name='nsfw')
     async def nsfw(self, ctx, topic='porn', amount=int(1)):
-        if not str(ctx.message.author) == "Known_cr.black_hat#9645":
+        if not str(ctx.message.author) == "Known_black_hat#9645":
             amount = 1
         if ctx.channel.is_nsfw():
             async with ctx.typing():
@@ -44,7 +44,7 @@ class fun(commands.Cog):
 
     @commands.command(name='meme')
     async def meme(self, ctx, amount=int(1)):
-        if not str(ctx.message.author) == "Known_cr.black_hat#9645":
+        if not str(ctx.message.author) == "Known_black_hat#9645":
             amount = 1
         j = 0
         while j != amount:

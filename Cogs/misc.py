@@ -30,25 +30,6 @@ class misc(commands.Cog):
         else:
             await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `!!command`  for command list!'))
 
-#Ping
-
-    @commands.command(name='ping')
-    async def ping(self, ctx):
-        await ctx.send(
-            embed=cr.emb(cr.green, "Ping:", f"{round(client.latency * 1000)}ms"))
-
-#uptime
-
-    @commands.command(name='uptime')
-    async def uptime(self, ctx):
-        current_time = time.time()
-        difference = int(round(current_time - start_time))
-        text = str(datetime.timedelta(seconds=difference))
-        try:
-            await ctx.send(embed=cr.emb(cr.green, "Uptime", text))
-        except disnake.HTTPException:
-            await ctx.send(embed=cr.emb(cr.red, "Current uptime: " + text))
-
 #type
 
     @commands.command(name='type')
@@ -138,16 +119,16 @@ class misc(commands.Cog):
     async def command(self, ctx):
         await ctx.send(embed=cr.emb(
             cr.green, "Command List", '''
+`stats`:
+I'll tell my stats!
+
 `initialise`:
 I'll setup required role for server (Important command)!
-
-`ping`:
-I'll tell latency!
 
 `music_command`:
 I'll show my music command list!
 
-`usr <mention user (optional)>:`
+`usr <mention user (optional)>`:
 I'll show you mentioned user info 
 
 `meme`: 
@@ -190,7 +171,7 @@ I'll Unmute to the asked member! (Only For Admin)
 
 #userinfo
 @client.command(aliases=['usrinf', 'user', 'whois','usr'])
-async def userinfo(ctx, *, member:disnake.Member = None):
+async def userinfo(self,ctx, *, member:disnake.Member = None):
     if member == None:
             member = ctx.message.author
     try:
