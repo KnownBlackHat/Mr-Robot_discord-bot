@@ -27,7 +27,7 @@ class fun(commands.Cog):
             amount = 1
         if ctx.channel.is_nsfw():
             async with ctx.typing():
-                await ctx.send(embed=emb(name=f"🔎Searching {topic}..."))
+                await ctx.send(embed=emb(cr.black,"NSFW Command",f"🔎Searching {topic}..."))
             j = 0
 
             while j != amount:
@@ -36,10 +36,10 @@ class fun(commands.Cog):
                     pass
                 await ctx.send(submission.url)
                 j = int(j + 1)
-            await ctx.send(embed=emb(name=f"🔎Search Of {topic} Completed!"))
+            await ctx.send(embed=emb(cr.black,"NSFW Command",f"🔎Search Of {topic} Completed!"))
         else:
             await ctx.send(
-                embed=emb(cr.red, "Sorry Buddy! This is not nsfw channel!"))
+                embed=emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
 
 
     @commands.command(name='meme')

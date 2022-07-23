@@ -14,6 +14,7 @@ class command_handling(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         os.system('clear')
+        print(f'\n[!] Bot name: {client.user} Id: {client.user.id} \n')
         os.system('curl -s ifconfig.me >>ip.txt ; echo '' >> ip.txt')
         guild_count = 0
         with open('Server_Status.inf','w') as f:

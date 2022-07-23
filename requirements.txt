@@ -5,3 +5,4 @@ Flask
 praw
 requests
 youtube_dl
+PyNaCl

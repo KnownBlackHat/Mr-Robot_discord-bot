@@ -70,7 +70,7 @@ class Music(commands.Cog):
     @commands.command(name='music_command')
     async def music_help(self, ctx):
         await ctx.send(embed=emb(
-            cr.green, "Music Commands", """
+            cr.blue, "Music Commands", """
 
 `play [Multiple URLs | Search topic]`:
 I'll play music from youtube
@@ -94,15 +94,17 @@ I'll get disconnected from voice channel
 
     @commands.command(name='play')
     async def play(self, ctx, *, url):
+        async with ctx.typing():
+          ...
         await self.ensure_voice(ctx)
-        player = await YTDLSource.from_url(url,                                              loop=self.bot.loop,
-                                               stream=True)
+        player = await YTDLSource.from_url(url,loop=self.bot.loop,stream=True)
             
-        ctx.voice_client.play(player,
-                                  after=lambda e: print(f"Player error: {e}")
-                                  if e else None)
-
-        await ctx.send(embed=emb(value=f"Now playing: {player.title}"))
+        ctx.voice_client.play(player,after=lambda e:  ctx.send(embed=emb(cr.red,"Player Error", e))if e else None)
+        
+        await ctx.send(embed=emb(cr.blue,"Playing...",f"""
+Name: {player.title}
+                                 
+"""))
 
     @commands.command(name='volume')
     async def volume(self, ctx, volume: int):
@@ -112,7 +114,7 @@ I'll get disconnected from voice channel
             return await ctx.send(embed=emb(cr.red,"Not connected to a voice channel."))
 
         ctx.voice_client.source.volume = volume / 100
-        await ctx.send(embed=emb(value=f"Changed volume to {volume}%"))
+        await ctx.send(embed=emb(cr.blue,"Volume",f"Changed volume to {volume}%"))
 
     @commands.command(name='stop')
     async def stop(self, ctx):

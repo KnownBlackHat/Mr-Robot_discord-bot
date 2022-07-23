@@ -29,6 +29,8 @@ reddit = praw.Reddit(client_id='gn-1O5327M3caeYY25qBIg',
 class cr:
     red = 0xff0000
     green = 0x00ff00
+    blue = 0x0000ff
+    black = 0x000000
 
 
 def emb(color=cr.green, name='', value=''):
@@ -73,12 +75,13 @@ try:
         if file.endswith('.py'):
             function_list.append(file[:-3])
             client.load_extension(f'Cogs.{str(file[:-3])}')
-except Exception as e:
-    print(e)
+except Exception as error:
+    with open('Logs/error.log','a') as file:
+      file.write(f'\nCogs Error: {error}\n')
 
 keep_alive()
 try:
-    client.run(os.getenv('TOKEN'))
+    client.run(str(os.getenv('TOKEN')))
     os.system('kill 1')
 except Exception as error:
     with open('Logs/error.log','a') as file:
