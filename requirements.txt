@@ -8,4 +8,4 @@ youtube_dl
 PyNaCl
 ffmpeg
 psutil
-dotenv
+python-dotenv
