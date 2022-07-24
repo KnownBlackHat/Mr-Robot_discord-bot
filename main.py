@@ -2,7 +2,7 @@
 
 import datetime
 import time
-from webserver import keep_alive
+#from webserver import keep_alive
 import os
 import disnake
 from disnake.client import Client
@@ -92,7 +92,7 @@ except Exception as error:
     with open('Logs/error.log','a') as file:
       file.write(f'\nCogs Error: {error}')
 
-keep_alive()
+#keep_alive()
 try:
     client.run(str(os.getenv('TOKEN')))
     os.system('kill 1')
