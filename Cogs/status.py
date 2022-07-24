@@ -1,3 +1,4 @@
+import os
 import psutil
 import disnake
 from disnake.ext import commands

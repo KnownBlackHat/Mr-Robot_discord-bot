@@ -2,13 +2,19 @@ import aiohttp
 import disnake
 from disnake.ext import commands
 from main import *
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def setup(client: commands.Bot):
     client.add_cog(fun(client))
 
+client_id = os.getenv('client_id')
 
-reddit = praw.Reddit(client_id='gn-1O5327M3caeYY25qBIg',
-                     client_secret='fNu5KPbonvUa6H-KqGD1nouGpYMfUA',
+client_secret = os.getenv('client_secret')
+
+reddit = praw.Reddit(client_id = client_id,
+                     client_secret = client_secret,
                      user_agent='MR ROBOT meme',
                      timeout=60)
 
@@ -22,7 +28,7 @@ class fun(commands.Cog):
 
 
     @commands.command(name='nsfw')
-    async def nsfw(self, ctx, topic='porn', amount=int(1)):
+    async def nsfw(self, ctx, topic='porn', amount=1):
         if not str(ctx.message.author) == "Known_black_hat#9645":
             amount = 1
         if ctx.channel.is_nsfw():

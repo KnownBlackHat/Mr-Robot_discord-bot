@@ -10,6 +10,7 @@ from disnake.ext import tasks, commands
 import praw
 import asyncio
 import random
+from dotenv import load_dotenv
 
 # VARIABLE INIT
 
@@ -17,10 +18,7 @@ start_time = time.time()
 
 client = commands.Bot(command_prefix=commands.when_mentioned_or('!!'),intents = disnake.Intents.all())
 
-reddit = praw.Reddit(client_id='gn-1O5327M3caeYY25qBIg',
-                     client_secret='fNu5KPbonvUa6H-KqGD1nouGpYMfUA',
-                     user_agent='MR ROBOT meme',
-                     timeout=60)
+load_dotenv()
 
 # EVENTS
 
@@ -37,11 +35,6 @@ class cr:
         Em.timestamp = datetime.datetime.utcnow()
         Em.set_footer(text="MR ROBOT", icon_url="https://img1.pnghut.com/t/5/0/13/LQ7V4wPn14/facial-hair-mr-robot-kali-linux-tshirt-brand.jpg")
         return Em
-
-# def cr.emb(color=green, name='', value=''):
-#     Em = disnake.Embed(color=color, title=name, description=value)
-#     Em.set_footer(text="MR ROBOT")
-#     return Em
 
 
 @client.remove_command('help')
