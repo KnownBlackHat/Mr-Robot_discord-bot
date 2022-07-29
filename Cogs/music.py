@@ -22,7 +22,7 @@ ytdl_format_options = {
     "0.0.0.0",  # bind to ipv4 since ipv6 addresses cause issues sometimes
 }
 
-ffmpeg_options = {"options": "-vn"}
+ffmpeg_options = {"option": "-vn"}
 
 ytdl = youtube_dl.YoutubeDL(ytdl_format_options)
 
