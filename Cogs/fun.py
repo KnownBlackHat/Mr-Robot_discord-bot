@@ -1,7 +1,7 @@
 import aiohttp
 import disnake
 from disnake.ext import commands
-from main import *
+from bot import *
 from dotenv import load_dotenv
 
 load_dotenv()

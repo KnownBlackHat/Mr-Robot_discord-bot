@@ -1,5 +1,5 @@
 import asyncio
-from main import *
+from bot import *
 import disnake
 import youtube_dl  # type: ignore
 from disnake.ext import commands

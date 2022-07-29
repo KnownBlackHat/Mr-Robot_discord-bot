@@ -2,7 +2,7 @@ import os
 import psutil
 import disnake
 from disnake.ext import commands
-from main import *
+from bot import *
 
 
 def setup(client: commands.Bot):
