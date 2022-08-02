@@ -2,6 +2,7 @@ import disnake
 from disnake.ext import commands
 from bot import *
 import subprocess
+import os
 
 def setup(client: commands.Bot):
     client.add_cog(Oscmd(client))
