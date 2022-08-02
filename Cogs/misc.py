@@ -1,6 +1,6 @@
 import disnake
 from disnake.ext import commands
-from main import *
+from bot import *
 
 
 def setup(client: commands.Bot):
@@ -171,7 +171,7 @@ I'll Unmute to the asked member! (Only For Admin)
         if member == None:
                 member = ctx.message.author
         try:
-            embed=cr.emb(disnake.Colour.random(),f"{member} Information")
+            embed=cr.emb(member.color,f"{member} Information")
             try:
                 embed.set_thumbnail(url=member.avatar.url)
             except Exception:

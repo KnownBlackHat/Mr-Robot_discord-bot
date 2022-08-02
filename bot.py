@@ -1,15 +1,17 @@
-<<<<<<< HEAD
 # MODULES IMPORT
 
 import datetime
 import time
-#from webserver import keep_alive
-=======
-from bot import *
->>>>>>> Mr_Robot
+from webserver import keep_alive
 import os
+import disnake
+from disnake.client import Client
+from disnake.ext import tasks, commands
+import praw
+import asyncio
+import random
+from dotenv import load_dotenv
 
-<<<<<<< HEAD
 # VARIABLE INIT
 
 start_time = time.time()
@@ -90,11 +92,12 @@ except Exception as error:
     with open('Logs/error.log','a') as file:
       file.write(f'\nCogs Error: {error}')
 
-#keep_alive()
+keep_alive()
 try:
     client.run(str(os.getenv('TOKEN')))
-=======
-while True:
-    os.system('python bot.py')
->>>>>>> Mr_Robot
     os.system('kill 1')
+except Exception as error:
+    with open('Logs/error.log','a') as file:
+      file.write(f'\nEXITING: {error}')
+    os.system('kill 1')
+
