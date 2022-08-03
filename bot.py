@@ -93,11 +93,6 @@ except Exception as error:
       file.write(f'\nCogs Error: {error}')
 
 keep_alive()
-try:
+while True:
     client.run(str(os.getenv('TOKEN')))
     os.system('kill 1')
-except Exception as error:
-    with open('Logs/error.log','a') as file:
-      file.write(f'\nEXITING: {error}')
-    os.system('kill 1')
-

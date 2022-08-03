@@ -1,4 +1,3 @@
-from bot import *
 import os
 
 while True:
