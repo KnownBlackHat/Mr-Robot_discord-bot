@@ -17,7 +17,7 @@ class command_error_handling(commands.Cog):
                 error):
             await ctx.send(
                 embed=cr.emb(cr.red, 'Sorry Permissions are missing! '))
-        elif 'is not found' in str(error) and 'command' in str(error):
+        elif 'is not found' in str(error) and 'Command' in str(error):
             with open('Logs/error.log', 'a') as file:
                 file.write(f'Not Found: {error}\n')
             await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `!!command`  for command list!'))
