@@ -14,9 +14,9 @@ class Greetings(commands.Cog):
     async def on_member_join(self, member):
         with open('greeting_channel.json','r') as file:
             greet_channel=json.load(file)
-        if greet_channel[member.guild.id]:
-            member_channel= self.bot.get_channel(greet_channel[member.guild.id]["greet_channel"])
-        else:
+        try:
+            member_channel= self.bot.get_channel(int(greet_channel[str(member.guild.id)]["greet_channel"]))
+        except:
             member_channel = member.guild.system_channel
         if member_channel is not None:
             try:
@@ -32,12 +32,10 @@ class Greetings(commands.Cog):
                 ...
     @commands.command(name='welcome_set')
     async def welcome_set(self,ctx,channel):
-        print('hello world')
-        channel = commands.TextChannelConverter().convert(ctx,channel)
-        print(channel)
+        #channel = commands.TextChannelConverter().convert(ctx,channel)
         with open('greeting_channel.json','r') as file:
             greet_channel=json.load(file)
-        greet_channel[ctx.guild.id] = {}
-        greet_channel[ctx.guild.id]["greet_channel"] = channel
-        json.dump(greet_channel,open('greeting_channel.json','w'))
+        #y = {"greet_channel":channel}
+        greet_channel[str(ctx.guild.id)]["greet_channel"] = channel   #.update(y)
+        json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
         await ctx.send(embed=cr.emb(cr.green,"Welcome Channel Set Sucessfully",f"Channel: {channel}"))
