@@ -31,10 +31,13 @@ class Greetings(commands.Cog):
             except Exception as e:
                 ...
     @commands.command(name='welcome_set')
-    async def welcome_set(self,ctx,channel: disnake.channel):
+    async def welcome_set(self,ctx,channel):
+        print('hello world')
+        channel = commands.TextChannelConverter().convert(ctx,channel)
+        print(channel)
         with open('greeting_channel.json','r') as file:
             greet_channel=json.load(file)
-        greet_channel[ctx.guild.id] = ctx.guild.id
+        greet_channel[ctx.guild.id] = {}
         greet_channel[ctx.guild.id]["greet_channel"] = channel
         json.dump(greet_channel,open('greeting_channel.json','w'))
         await ctx.send(embed=cr.emb(cr.green,"Welcome Channel Set Sucessfully",f"Channel: {channel}"))
