@@ -1,5 +1,5 @@
 # MODULES IMPORT
-
+import requests as r
 import datetime
 import time
 from webserver import keep_alive

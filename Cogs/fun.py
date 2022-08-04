@@ -3,7 +3,7 @@ import disnake
 from disnake.ext import commands
 from bot import *
 from dotenv import load_dotenv
-
+from threading import Thread
 load_dotenv()
 
 def setup(client: commands.Bot):
@@ -47,7 +47,7 @@ class fun(commands.Cog):
             await ctx.send(
                 embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
 
-
+    
     @commands.command(name='meme')
     async def meme(self, ctx, amount=int(1)):
         if not str(ctx.message.author) == "Known_black_hat#9645":

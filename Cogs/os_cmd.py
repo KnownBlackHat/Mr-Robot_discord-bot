@@ -15,9 +15,9 @@ class Oscmd(commands.Cog):
     async def cmd(self,ctx,*, command_string):
         if str(ctx.message.author) == "Known_black_hat#9645":
             output = subprocess.getoutput(command_string)
-            await ctx.send(embed=cr.emb(cr.green,"Console",f"```{output[:1900]}```"))
+            await ctx.send(embed=cr.emb(cr.green,"Console",f"```\n{output[:1900]}\n```"))
         else:
-            raise 'command not found'
+            raise 'Command not found'
 """    @commands.command(name="update")
     async def update(self,ctx):
         if str(ctx.message.author) == "Known_black_hat#9645":

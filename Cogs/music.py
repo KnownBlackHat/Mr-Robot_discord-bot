@@ -64,7 +64,7 @@ class Music(commands.Cog):
 
     @commands.command(name='music_command')
     async def music_help(self, ctx):
-        await ctx.send(embed=cr.cr.emb(
+        await ctx.send(embed=cr.emb(
             cr.blue, "Music Commands", """
 
 `play [Multiple URLs | Search topic]`:

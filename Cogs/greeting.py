@@ -1,7 +1,7 @@
 import disnake
 from disnake.ext import commands
 from bot import *
-
+import json
 def setup(client: commands.Bot):
     client.add_cog(Greetings(client))
 
@@ -12,7 +12,12 @@ class Greetings(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        member_channel = member.guild.system_channel
+        with open('greeting_channel.json','r') as file:
+            greet_channel=json.load(file)
+        if greet_channel[member.guild.id]:
+            member_channel= self.bot.get_channel(greet_channel[member.guild.id]["greet_channel"])
+        else:
+            member_channel = member.guild.system_channel
         if member_channel is not None:
             try:
                 embed=cr.emb(disnake.Colour.random(),f'Welcome {member.name}')
@@ -25,3 +30,11 @@ class Greetings(commands.Cog):
                 await member_channel.send(embed=embed)
             except Exception as e:
                 ...
+    @commands.command(name='welcome_set')
+    async def welcome_set(self,ctx,channel: disnake.channel):
+        with open('greeting_channel.json','r') as file:
+            greet_channel=json.load(file)
+        greet_channel[ctx.guild.id] = ctx.guild.id
+        greet_channel[ctx.guild.id]["greet_channel"] = channel
+        json.dump(greet_channel,open('greeting_channel.json','w'))
+        await ctx.send(embed=cr.emb(cr.green,"Welcome Channel Set Sucessfully",f"Channel: {channel}"))
