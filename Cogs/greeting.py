@@ -32,12 +32,11 @@ class Greetings(commands.Cog):
                 await member_channel.send(embed=embed)
             except Exception as e:
                 ...
-    @commands.command(name='welcome_set')
-    async def welcome_set(self,ctx,channel: disnake.TextChannel):
-        #channel = commands.TextChannelConverter().convert(ctx,channel)
+    @commands.command(name='set_wlcm')
+    @commands.has_any_role("MR ROBOT Authorised")
+    async def set_wlcm(self,ctx,channel: disnake.TextChannel):
         with open('greeting_channel.json','r') as file:
             greet_channel=json.load(file)
-        #y = {"greet_channel":channel}
-        greet_channel[str(ctx.guild.id)]["greet_channel"] = str(channel.id)   #.update(y)
+        greet_channel[str(ctx.guild.id)]["greet_channel"] = str(channel.id)
         json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
         await ctx.send(embed=cr.emb(cr.green,"Welcome Channel Set Sucessfully",f"Channel: {channel}"))

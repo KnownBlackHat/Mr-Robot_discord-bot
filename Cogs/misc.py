@@ -106,6 +106,8 @@ class misc(commands.Cog):
 3) I won't allow `everyone and here` mention until you don't have `Protocol_access` role!
 
 4) I can play Musics from youtube `!!music_command`!
+
+5) I can greet members on join and you can set custom welcome channel using `set_wlcm`
                                  '''
                                   ))
 
@@ -160,6 +162,9 @@ I'll unban the asked member! (Only For Admin)
 
 `mute [mention member] <reason(optional)>`: 
 I'll mute to the asked member! (Only For Admin)
+
+`set_wlcm [mention channel]`:
+Set channel for on member on join! (Only For Admin)
 
 `unmute [mention member] <reason(optional)>`: 
 I'll Unmute to the asked member! (Only For Admin)
