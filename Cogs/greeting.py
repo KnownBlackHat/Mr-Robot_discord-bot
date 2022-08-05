@@ -16,8 +16,10 @@ class Greetings(commands.Cog):
             greet_channel=json.load(file)
         try:
             member_channel= self.bot.get_channel(int(greet_channel[str(member.guild.id)]["greet_channel"]))
-        except:
+        except Exception as e:
+#            print(e)
             member_channel = member.guild.system_channel
+#        print(member_channel)
         if member_channel is not None:
             try:
                 embed=cr.emb(disnake.Colour.random(),f'Welcome {member.name}')
@@ -31,11 +33,11 @@ class Greetings(commands.Cog):
             except Exception as e:
                 ...
     @commands.command(name='welcome_set')
-    async def welcome_set(self,ctx,channel):
+    async def welcome_set(self,ctx,channel: disnake.TextChannel):
         #channel = commands.TextChannelConverter().convert(ctx,channel)
         with open('greeting_channel.json','r') as file:
             greet_channel=json.load(file)
         #y = {"greet_channel":channel}
-        greet_channel[str(ctx.guild.id)]["greet_channel"] = channel   #.update(y)
+        greet_channel[str(ctx.guild.id)]["greet_channel"] = str(channel.id)   #.update(y)
         json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
         await ctx.send(embed=cr.emb(cr.green,"Welcome Channel Set Sucessfully",f"Channel: {channel}"))
