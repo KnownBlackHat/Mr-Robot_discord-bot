@@ -34,7 +34,7 @@ class cr:
     def emb(color=green, name='', value=''):
         Em = disnake.Embed(color=color, title=name, description=value)
         Em.timestamp = datetime.datetime.utcnow()
-        Em.set_footer(text="MR ROBOT", icon_url="https://img1.pnghut.com/t/5/0/13/LQ7V4wPn14/facial-hair-mr-robot-kali-linux-tshirt-brand.jpg")
+        Em.set_footer(text="MR ROBOT", icon_url="https://i.pinimg.com/originals/60/55/31/6055317f063a9c2ed937efecdb7daf82.gif")
         return Em
 
 
