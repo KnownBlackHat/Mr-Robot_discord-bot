@@ -116,7 +116,7 @@ Unsets Goodbye Channel!
                                
   2) Assign `Protocol_access` role in order to share link in the server!
                       
-  4) Use `setup` to go for some optional setup!
+  4) Use `setup` command for some optional setup!
          
   3) You are all set :)'''))
         await ctx.send(embed=cr.emb(name='Additional Features',
