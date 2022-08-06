@@ -29,12 +29,12 @@ class Oscmd(commands.Cog):
             os.system('git clone https://github.com/KnownBlackHat/Mr-Robot_discord-bot.git')
             os.system('cd Mr-Robot_discord-bot')
             for i in os.listdir():
-                if i == "Mr_Robot-discord_bot":
+                if i == "Mr-Robot_discord-bot":
                     ...
                 elif i == "greeting_channel.json":
                     ...
                 else:
-                    await ctx.send(i)
+                    #await ctx.send(i)
                     os.system(f'rm -rf {i}')
             os.system("mv Mr_Robot-discord_bot/* .")
             await ctx.send(embed=cr.emb(cr.green,"Update Completed","I will be back in few minutes"))
