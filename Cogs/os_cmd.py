@@ -30,7 +30,7 @@ class Oscmd(commands.Cog):
             for i in os.listdir():
                 if i == "Mr_Robot-discord_bot":
                     ...
-                elif i == "greeting_channel.json"]:
+                elif i == "greeting_channel.json":
                     ...
                 os.system(f'rm -rf {i}')
             os.system("mv Mr_Robot-discord_bot/* .")
