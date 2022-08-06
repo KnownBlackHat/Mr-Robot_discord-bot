@@ -31,4 +31,6 @@ class Oscmd(commands.Cog):
                 if i not in ["Mr_Robot-discord_bot","greeting_channel.json"]:
                     os.system(f'rm -rf {i}')
             os.system("mv Mr_Robot-discord_bot/* .")
+            os.system("rm -rf Mr_Robot-discord_bot")
+            await ctx.send(embed=cr.emb(cr.green,"Update Completed","I will be back in few minutes"))
             os.system("python main.py")
