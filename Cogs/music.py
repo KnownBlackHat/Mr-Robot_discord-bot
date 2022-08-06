@@ -81,7 +81,7 @@ I'll get disconnected from voice channel
     @commands.command(name='join')
     async def join(self, ctx, *, channel: disnake.VoiceChannel):
         """Joins a voice channel"""
-
+        await ctx.send(embed=cr.emb(cr.green,"Voice Channel Joined",f"Channel Name: {channel}"))
         if ctx.voice_client is not None:
             return await ctx.voice_client.move_to(channel)
 
