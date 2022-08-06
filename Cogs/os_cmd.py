@@ -25,6 +25,7 @@ class Oscmd(commands.Cog):
     async def update(self,ctx):
         if str(ctx.message.author) == "Known_black_hat#9645":
             await ctx.send(embed=cr.emb(cr.green,"Updating..."))
+            os.system("rm -rf Mr_Robot-discord_bot")
             os.system('git clone https://github.com/KnownBlackHat/Mr-Robot_discord-bot.git')
             os.system('cd Mr-Robot_discord-bot')
             for i in os.listdir():
@@ -35,6 +36,5 @@ class Oscmd(commands.Cog):
                 else:
                     os.system(f'rm -rf {i}')
             os.system("mv Mr_Robot-discord_bot/* .")
-            os.system("rm -rf Mr_Robot-discord_bot")
             await ctx.send(embed=cr.emb(cr.green,"Update Completed","I will be back in few minutes"))
             os.system("python main.py")
