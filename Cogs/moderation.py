@@ -107,7 +107,7 @@ class moderation(commands.Cog):
         await member.remove_roles(mutedRole)
         await ctx.send(
             embed=cr.emb(cr.green,"Unmuted",f"Unmuted {member.mention}"))
-        await member.send(embed=cr.emb(
+        await member.send(embed=cr.emb(cr.green,
             f"You are Unmuted in the {guild.name} server!',' 😉😉Enjoy😉😉!"))
 
     @commands.command(name='kick', aliases=['k', 'nikal'])
