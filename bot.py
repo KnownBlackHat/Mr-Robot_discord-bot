@@ -28,7 +28,8 @@ class cr:
     green = 0x00ff00
     blue = 0x0000ff
     black = 0x000000
-    orange =0xffa500
+    orange = 0xffa500
+    yellow = 0xffff00
 
     def emb(color=green, name='', value=''):
         Em = disnake.Embed(color=color, title=name, description=value)

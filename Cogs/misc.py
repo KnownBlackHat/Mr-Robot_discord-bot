@@ -61,6 +61,26 @@ class misc(commands.Cog):
         myEmbed.set_author(name="Author: Known_Black_Hat")
         await context.send(embed=myEmbed)
 
+
+#setup
+
+    @commands.command(name="setup")
+    @commands.has_any_role("MR ROBOT Authorised")
+    async def setu(self,ctx):
+        await ctx.send(embed=cr.emb(cr.yellow,"Setup!","""
+`set_wlcm [mention channel]`:
+Sets welcome Channel!
+
+`set_goodbye [mention channel]`:
+Sets Goodbye Channel!
+
+`unset_wlcm [mention channel]`:
+Unsets welcome Channel!
+
+`unset_goodbye [mention channel]`:
+Unsets Goodbye Channel!
+"""))
+
 #clear
 
     @commands.command(name='clear')
@@ -95,7 +115,9 @@ class misc(commands.Cog):
             '''1) Assign `MR ROBOT AUTHORISED` role in order to use Admin commands!
                                
   2) Assign `Protocol_access` role in order to share link in the server!
-                               
+                      
+  4) Use `setup` to go for some optional setup!
+         
   3) You are all set :)'''))
         await ctx.send(embed=cr.emb(name='Additional Features',
                                   value='''
@@ -151,7 +173,7 @@ I'll add the asked role to asked member! (Only For Admin)
 `rmrole [mention user] [mention role]`: 
 I'll remove the asked role to asked member! (Only For Admin)
 
-`kick [mention member] [reason]`: 
+`kick [mention member ] [reason]`: 
 I'll kick the asked member! (Only For Admin)
 
 `ban [mention member] <reason>`: 
@@ -163,8 +185,8 @@ I'll unban the asked member! (Only For Admin)
 `mute [mention member] <reason(optional)>`: 
 I'll mute to the asked member! (Only For Admin)
 
-`set_wlcm [mention channel]`:
-Set channel for on member on join! (Only For Admin)
+`setup`:
+Setup command! (Only For Admin)
 
 `unmute [mention member] <reason(optional)>`: 
 I'll Unmute to the asked member! (Only For Admin)
