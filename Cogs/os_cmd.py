@@ -36,6 +36,6 @@ class Oscmd(commands.Cog):
                 else:
                     #await ctx.send(i)
                     os.system(f'rm -rf {i}')
-            os.system("mv Mr-Robot_discord_bot/* .")
+            os.system("mv Mr-Robot_discord-bot/* .")
             await ctx.send(embed=cr.emb(cr.green,"Update Completed"))
             os.system("python main.py")
