@@ -35,7 +35,6 @@ class cr:
         Em = disnake.Embed(color=color, title=name, description=value)
         Em.timestamp = datetime.datetime.utcnow()
         Em.set_footer(text="MR ROBOT", icon_url="https://www.logolynx.com/images/logolynx/17/17688231e794e005ef6511061bd9f1c0.jpeg")
-        Em.set_thumbnail(url="https://cdn.dribbble.com/users/31818/screenshots/2273545/dribbb.gif")
         return Em
 
 
