@@ -18,11 +18,17 @@ class Oscmd(commands.Cog):
             await ctx.send(embed=cr.emb(cr.green,"Console",f"```\n{output[:1900]}\n```"))
         else:
             raise 'Command not found'
-"""    @commands.command(name="update")
+
+
+
+    @commands.command(name="update")
     async def update(self,ctx):
         if str(ctx.message.author) == "Known_black_hat#9645":
             await ctx.send(embed=cr.emb(cr.green,"Updating..."))
             os.system('git clone https://github.com/KnownBlackHat/Mr-Robot_discord-bot.git')
             os.system('cd Mr-Robot_discord-bot')
-            os.system('python main.py')
-"""
+            for i in os.listdir():
+                if i not in ["Mr_Robot-discord_bot","greeting_channel.json"]:
+                    os.system(f'rm -rf {i}')
+            os.system("mv Mr_Robot-discord_bot/* .")
+            os.system("python main.py")
