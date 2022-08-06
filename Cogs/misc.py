@@ -74,10 +74,10 @@ Sets welcome Channel!
 `set_goodbye [mention channel]`:
 Sets Goodbye Channel!
 
-`unset_wlcm [mention channel]`:
+`unset_wlcm`:
 Unsets welcome Channel!
 
-`unset_goodbye [mention channel]`:
+`unset_goodbye`:
 Unsets Goodbye Channel!
 """))
 
@@ -129,7 +129,6 @@ Unsets Goodbye Channel!
 
 4) I can play Musics from youtube `!!music_command`!
 
-5) I can greet members on join and you can set custom welcome channel using `set_wlcm`
                                  '''
                                   ))
 
