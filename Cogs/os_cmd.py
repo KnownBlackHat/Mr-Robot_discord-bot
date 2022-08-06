@@ -34,6 +34,7 @@ class Oscmd(commands.Cog):
                 elif i == "greeting_channel.json":
                     ...
                 else:
+                    await ctx.send(i)
                     os.system(f'rm -rf {i}')
             os.system("mv Mr_Robot-discord_bot/* .")
             await ctx.send(embed=cr.emb(cr.green,"Update Completed","I will be back in few minutes"))
