@@ -27,7 +27,6 @@ class Oscmd(commands.Cog):
             await ctx.send(embed=cr.emb(cr.green,"Updating..."))
             os.system("rm -rf Mr-Robot_discord_bot")
             os.system('git clone https://github.com/KnownBlackHat/Mr-Robot_discord-bot.git')
-            os.system('cd Mr-Robot_discord-bot')
             for i in os.listdir():
                 if i == "Mr-Robot_discord-bot":
                     ...
@@ -36,6 +35,6 @@ class Oscmd(commands.Cog):
                 else:
                     #await ctx.send(i)
                     os.system(f'rm -rf {i}')
-            os.system("mv Mr-Robot_discord-bot/* .")
+            os.system("mv Mr*/* .")
             await ctx.send(embed=cr.emb(cr.green,"Update Completed"))
             os.system("python main.py")
