@@ -145,6 +145,9 @@ I'll tell my stats!
 `initialise`:
 I'll setup required role for server (Important command)!
 
+`translate/tr [language name to be translated] [Content to be translated]`:
+Translates the asked message to any language
+
 `music_command`:
 I'll show my music command list!
 
