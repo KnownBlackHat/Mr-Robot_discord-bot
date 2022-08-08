@@ -9,3 +9,4 @@ PyNaCl
 ffmpeg
 psutil
 python-dotenv
+praw
