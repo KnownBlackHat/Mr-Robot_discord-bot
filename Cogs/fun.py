@@ -3,6 +3,8 @@ import disnake
 from disnake.ext import commands
 from bot import *
 from dotenv import load_dotenv
+import apraw
+import asyncio
 from threading import Thread
 load_dotenv()
 
@@ -13,7 +15,7 @@ client_id = os.getenv('client_id')
 
 client_secret = os.getenv('client_secret')
 
-reddit = praw.Reddit(client_id = client_id,
+reddit = apraw.Reddit(client_id = client_id,
                      client_secret = client_secret,
                      user_agent='MR ROBOT meme',
                      timeout=60)
