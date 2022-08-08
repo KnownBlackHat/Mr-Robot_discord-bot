@@ -5,7 +5,7 @@ app = Flask('')
 
 @app.route('/')
 def main():
-    return '<meta http-equiv="refresh" content="0; URL=https://discord-bots-2.ittejas2004.repl.co"/>'
+    return 'Bot Ready'
 
 def run():
     app.run(host="0.0.0.0", port=8080)
