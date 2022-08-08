@@ -9,4 +9,3 @@ PyNaCl
 ffmpeg
 psutil
 python-dotenv
-asyncio
