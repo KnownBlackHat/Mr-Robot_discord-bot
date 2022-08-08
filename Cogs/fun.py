@@ -7,6 +7,7 @@ import apraw
 import praw
 import asyncio
 from threading import Thread
+import os
 load_dotenv()
 
 def setup(client: commands.Bot):
