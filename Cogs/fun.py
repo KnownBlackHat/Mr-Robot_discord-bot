@@ -4,7 +4,7 @@ from disnake.ext import commands
 from bot import cr
 from dotenv import load_dotenv
 import apraw
-import praw
+#import praw
 import asyncio
 from threading import Thread
 import os
@@ -16,11 +16,13 @@ def setup(client: commands.Bot):
 client_id = os.getenv('client_id')
 
 client_secret = os.getenv('client_secret')
-
-reddit = praw.Reddit(client_id = client_id,
+user = os.getenv('user')
+passw = os.getenv('passw')
+reddit = apraw.Reddit(client_id = client_id,
                      client_secret = client_secret,
-                     user_agent='MR ROBOT meme',
-                     timeout=60)
+                     user_agent='Mr Robot',
+                    password=passw,
+                    username=user)
 
 headers={
          "Content-Type": "application/json",
