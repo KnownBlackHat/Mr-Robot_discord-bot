@@ -12,7 +12,7 @@ def setup(client: commands.Bot):
 class translate(commands.Cog):
     def __init__(self, client):
         self.bot = client
-    @commands.command(aliases=["tr","translate"])
+    @commands.command(name="translate")
     async def translate(self,ctx, lang, *, thing):
         translator = Translator()
         translation = translator.translate(thing, dest=lang)
