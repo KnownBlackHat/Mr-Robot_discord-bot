@@ -2,10 +2,11 @@ aiohttp
 beautifulsoup4
 disnake
 Flask
-praw
+apraw
 requests
 youtube_dl
 PyNaCl
 ffmpeg
 psutil
 python-dotenv
+asyncio
