@@ -43,7 +43,8 @@ class fun(commands.Cog):
             j = 0
 
             while j != amount:
-                submission = reddit.subreddit(str(topic)).random()
+                #submission = reddit.subreddit(str(topic)).random()
+                submission = await reddit.subreddit(str(topic)).random()
                 async with ctx.typing():
                     pass
                 await ctx.send(submission.url)
@@ -60,7 +61,7 @@ class fun(commands.Cog):
             amount = 1
         j = 0
         while j != amount:
-            submission = reddit.subreddit('dankmemes').random()
+            submission = await reddit.subreddit('dankmemes').random()
             async with ctx.typing():
                 pass
             await ctx.send(submission.url)
