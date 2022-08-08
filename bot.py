@@ -9,7 +9,6 @@ from webserver import keep_alive
 import disnake
 from disnake.client import Client
 from disnake.ext import tasks, commands
-import praw
 import asyncio
 import random
 from dotenv import load_dotenv
