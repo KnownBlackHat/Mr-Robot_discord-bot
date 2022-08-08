@@ -1,9 +1,11 @@
+# MODULE INSTALLATION
+import os
+os.system("pip install -r requirements.txt")
 # MODULES IMPORT
 import requests as r
 import datetime
 import time
 from webserver import keep_alive
-import os
 import disnake
 from disnake.client import Client
 from disnake.ext import tasks, commands
