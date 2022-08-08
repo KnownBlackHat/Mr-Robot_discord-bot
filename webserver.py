@@ -5,7 +5,7 @@ app = Flask('')
 
 @app.route('/')
 def main():
-    return '<meta http-equiv="refresh" content="0; URL=https://Cybergirl.ittejas2004.repl.co"/>'
+    return '<meta http-equiv="refresh" content=0; URL="https://Cybergirl.ittejas2004.repl.co"/>'
 
 def run():
     app.run(host="0.0.0.0", port=8080)
