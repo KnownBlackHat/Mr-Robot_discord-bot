@@ -4,7 +4,7 @@ from disnake.ext import commands
 from bot import cr
 from dotenv import load_dotenv
 import apraw
-#import praw
+import praw
 import asyncio
 from threading import Thread
 import os
@@ -18,11 +18,9 @@ client_id = os.getenv('client_id')
 client_secret = os.getenv('client_secret')
 user = os.getenv('user')
 passw = os.getenv('passw')
-reddit = apraw.Reddit(client_id = client_id,
+reddit = praw.Reddit(client_id = client_id,
                      client_secret = client_secret,
-                     user_agent='Mr Robot',
-                    password=passw,
-                    username=user)
+                     user_agent='Mr Robot')
 
 headers={
          "Content-Type": "application/json",
@@ -43,8 +41,8 @@ class fun(commands.Cog):
             j = 0
 
             while j != amount:
-                #submission = reddit.subreddit(str(topic)).random()
-                submission = await reddit.subreddit(str(topic)).random()
+                submission = reddit.subreddit(str(topic)).random()
+                #submission = await reddit.subreddit(str(topic)).random()
                 async with ctx.typing():
                     pass
                 await ctx.send(submission.url)
@@ -61,7 +59,7 @@ class fun(commands.Cog):
             amount = 1
         j = 0
         while j != amount:
-            submission = await reddit.subreddit('dankmemes').random()
+            submission = reddit.subreddit('dankmemes').random()
             async with ctx.typing():
                 pass
             await ctx.send(submission.url)
