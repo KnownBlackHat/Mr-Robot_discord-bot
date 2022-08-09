@@ -165,6 +165,7 @@ You will know about my version!
 
 `changeprefix [new prefix]`
 Set custom prefix! (Only For Admin)
+
 `clear <amount>`:
 I'll delete the asked no. of previous chat! (Only For Admin)
 
