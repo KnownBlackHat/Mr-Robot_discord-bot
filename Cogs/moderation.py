@@ -23,7 +23,7 @@ class moderation(commands.Cog):
             prefix = prefix.replace("'","")
         prefixes[str(ctx.guild.id)]["prefix"] = prefix
         json.dump(prefixes,open('greeting_channel.json','w'),indent=2)
-        await ctx.send(embed=cr.emb(cr.green,"New Server Prefix",prefix))
+        await ctx.send(embed=cr.emb(cr.green,"New Server Prefix",f'`{prefix}`'))
 
     @commands.command(name='addrole', aliases=['ar'])
     @commands.has_any_role("MR ROBOT Authorised")
