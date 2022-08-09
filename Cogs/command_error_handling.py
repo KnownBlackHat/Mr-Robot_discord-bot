@@ -20,7 +20,7 @@ class command_error_handling(commands.Cog):
         elif 'is not found' in str(error) and 'Command' in str(error):
             with open('Logs/error.log', 'a') as file:
                 file.write(f'Not Found: {error}\n')
-            await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `!!command`  for command list!'))
+            await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `<server prefix>command`  for command list!'))
         elif 'required argument that is missing.' in str(error):
             await ctx.send(embed=cr.emb(cr.red, 'Arguments Are Missing!'))
         elif '404 HTTP response' in str(error) or '403 HTTP response' in str(
