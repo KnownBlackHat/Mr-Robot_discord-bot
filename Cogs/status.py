@@ -22,7 +22,6 @@ class command_handling(commands.Cog):
         with open('Server_Status.inf','w') as f:
           f.write(f'\n[!] Bot name: {client.user} Id: {client.user.id} \n')
           for guild in self.bot.guilds:
-
             with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
             try:
@@ -30,13 +29,16 @@ class command_handling(commands.Cog):
             except Exception as e:
                 greet_channel[guild.id] = {}
                 greet_channel[guild.id]["name"] = guild.name
+                greet_channel[guild.id]["prefix"] = "!!"
                 json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
-
-
+            try:
+                greet_channel[str(guild.id)]["prefix"]
+            except Exception:
+                greet_channel[str(guild.id)]["prefix"] = "!!"
+                json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
             f.write(f"\n[-] {guild.id} (Name: {guild.name})")
             guild_count = guild_count +1
           f.write(f"\n\n[=] {client.user} is in " + str(guild_count) + " guilds.")
-#          json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
         await self.bot.change_presence(status=disnake.Status.idle,
                                        activity=disnake.Game(name='!!command'))
 

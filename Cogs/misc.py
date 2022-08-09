@@ -163,6 +163,8 @@ I'll show you a nsfw content on authorised channel!
 `version`: 
 You will know about my version!
 
+`changeprefix [new prefix]`
+
 `clear <amount>`:
 I'll delete the asked no. of previous chat! (Only For Admin)
 

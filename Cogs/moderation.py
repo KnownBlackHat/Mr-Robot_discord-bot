@@ -11,6 +11,16 @@ class moderation(commands.Cog):
     def __init__(self, client):
         self.bot = client
 
+
+    @commands.command(name='changeprefix')
+    @commands.has_any_role("MR ROBOT Authorised")
+    async def changeprefix(self, ctx, *,prefix):
+        with open('greeting_channel.json','r') as file:
+                prefixes=json.load(file)
+        prefixes[str(ctx.guild.id)]["prefix"] = prefix
+        json.dump(prefixes,open('greeting_channel.json','w'),indent=2)
+        await ctx.send(embed=cr.emb(cr.green,"New Server Prefix",prefix))
+
     @commands.command(name='addrole', aliases=['ar'])
     @commands.has_any_role("MR ROBOT Authorised")
     async def addrole(self, ctx, user: disnake.Member, *, roll: disnake.Role):

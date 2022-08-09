@@ -1,6 +1,9 @@
 import disnake
 from disnake.ext import commands
 import re
+from bot import cr,client
+import json
+
 
 def setup(client: commands.Bot):
     client.add_cog(anti_abusive(client))
@@ -12,6 +15,12 @@ class anti_abusive(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        with open('greeting_channel.json','r') as file:
+            prefixes=json.load(file)
+        #print(message)
+        #print(client.user.mention))
+        #if client.user.mention:
+        #    await message.channel.send(embed=cr.emb(cr.red,"Server Prefix",prefixes[str(message.guild.id)]["prefix"]))
         try:
             with open(f'Logs/{message.guild.name}.log', 'a') as msg:
                 msg.write(
@@ -37,7 +46,8 @@ class anti_abusive(commands.Cog):
 
 
 
-
+        if str(message.content) == f"<@{client.user.id}>":
+            await message.channel.send(embed=cr.emb(cr.red,"Server Prefix",prefixes[str(message.guild.id)]["prefix"])) 
         try:
           if  message.author.id == self.bot.user.id:
              ...

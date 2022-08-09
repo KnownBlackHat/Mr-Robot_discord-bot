@@ -18,9 +18,17 @@ class Joinalert(commands.Cog):
             greet_channel=json.load(file)
         greet_channel[guild.id] = {}
         greet_channel[guild.id]["name"] = guild.name
+        greet_channel[guild.id]["prefix"] = "!!"
         json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
         #link = client.create_invite(destination=guild,xkcd=True,max_age=0,max_uses=number)
         await channel.send(embed=cr.emb(disnake.Colour.random(),"Joined",f"""
 Name: {guild.name}
 Id: {guild.id}
 """))
+
+    @commands.Cog.listener()
+    async def on_guild_remove(self, guild):
+        with open('greeting_channel.json','r') as file:
+            greet_channel=json.load(file)
+        greet_channel.pop(str(guild.id))
+        json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)

@@ -12,12 +12,22 @@ from disnake.ext import tasks, commands
 import asyncio
 import random
 from dotenv import load_dotenv
-
+import json
 # VARIABLE INIT
 
 start_time = time.time()
+def get_prefix(client,message):
+    with open('greeting_channel.json','r') as file:
+        prefixes=json.load(file)
+    try:
+        prefixes[str(message.guild.id)]["prefix"]
+    except:
+        prefixes[str(message.guild.id)]["prefix"] = "!!"
+        json.dump(prefixes,open('greeting_channel.json','w'),indent=2)
+    return commands.when_mentioned_or(prefixes[str(message.guild.id)]["prefix"])(client,message)
 
-client = commands.Bot(command_prefix=commands.when_mentioned_or('!!'),intents = disnake.Intents.all())
+
+client = commands.Bot(command_prefix=get_prefix, intents = disnake.Intents.all())
 
 load_dotenv()
 
