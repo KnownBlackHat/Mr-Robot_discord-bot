@@ -40,7 +40,7 @@ class command_handling(commands.Cog):
             guild_count = guild_count +1
           f.write(f"\n\n[=] {client.user} is in " + str(guild_count) + " guilds.")
         await self.bot.change_presence(status=disnake.Status.idle,
-                                       activity=disnake.Game(name='!!command'))
+                                       activity=disnake.Game(name='@MR ROBOT'))
 
 
 
