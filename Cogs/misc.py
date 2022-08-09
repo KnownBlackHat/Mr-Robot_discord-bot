@@ -71,13 +71,13 @@ class misc(commands.Cog):
 `set_wlcm [mention channel]`:
 Sets welcome Channel!
 
-`set_goodbye [mention channel]`:
+`set_bye [mention channel]`:
 Sets Goodbye Channel!
 
 `unset_wlcm`:
 Unsets welcome Channel!
 
-`unset_goodbye`:
+`unset_bye`:
 Unsets Goodbye Channel!
 """))
 

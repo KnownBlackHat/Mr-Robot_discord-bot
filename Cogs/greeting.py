@@ -65,9 +65,9 @@ class Greetings(commands.Cog):
 
 
 
-    @commands.command(name='set_goodbye')
+    @commands.command(name='set_bye')
     @commands.has_any_role("MR ROBOT Authorised")
-    async def set_goodbye(self,ctx,channel: disnake.TextChannel):
+    async def set_bye(self,ctx,channel: disnake.TextChannel):
         with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
         greet_channel[str(ctx.guild.id)]["goodbye_channel"] = str(channel.id)
@@ -75,9 +75,9 @@ class Greetings(commands.Cog):
         await ctx.send(embed=cr.emb(cr.green,"Goodbye Channel Set Sucessfully",f"Channel: {channel}"))
 
 
-    @commands.command(name='unset_goodbye')
+    @commands.command(name='unset_bye')
     @commands.has_any_role("MR ROBOT Authorised")
-    async def unset_goodbye(self,ctx):
+    async def unset_bye(self,ctx):
         with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
         greet_channel[str(ctx.guild.id)]["goodbye_channel"] = None
