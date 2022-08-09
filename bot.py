@@ -1,6 +1,6 @@
 # MODULE INSTALLATION
 import os
-os.system("pip install -r requirements.txt")
+#os.system("pip install -r requirements.txt")
 # MODULES IMPORT
 import requests as r
 import datetime
