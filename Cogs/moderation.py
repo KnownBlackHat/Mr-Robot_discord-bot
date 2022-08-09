@@ -17,6 +17,10 @@ class moderation(commands.Cog):
     async def changeprefix(self, ctx, *,prefix):
         with open('greeting_channel.json','r') as file:
                 prefixes=json.load(file)
+        if prefix.startswith('"') and prefix.endswith('"'):
+            prefix = prefix.replace('"','')
+        elif prefix.startswith("'") and prefix.endswith("'"):
+            prefix = prefix.replace("'","")
         prefixes[str(ctx.guild.id)]["prefix"] = prefix
         json.dump(prefixes,open('greeting_channel.json','w'),indent=2)
         await ctx.send(embed=cr.emb(cr.green,"New Server Prefix",prefix))

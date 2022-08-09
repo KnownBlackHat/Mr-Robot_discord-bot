@@ -105,6 +105,8 @@ except Exception as error:
       file.write(f'\nCogs Error: {error}')
 
 keep_alive()
-while True:
+try:
     client.run(str(os.getenv('TOKEN')))
+    os.system('kill 1')
+except:
     os.system('kill 1')
