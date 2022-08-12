@@ -1,6 +1,6 @@
 import disnake
 from disnake.ext import commands
-from bot import *
+from bot import cr,client
 import json
 
 def setup(client: commands.Bot):

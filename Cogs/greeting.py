@@ -1,6 +1,6 @@
 import disnake
 from disnake.ext import commands
-from bot import *
+from bot import cr
 import json
 def setup(client: commands.Bot):
     client.add_cog(Greetings(client))

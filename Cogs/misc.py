@@ -1,7 +1,7 @@
 import disnake
 from disnake.ext import commands
-from bot import *
-
+from bot import cr
+import os
 
 def setup(client: commands.Bot):
     client.add_cog(misc(client))
@@ -50,10 +50,10 @@ class misc(commands.Cog):
 
     @commands.command(name='version')
     async def version(self, context):
-        myEmbed = cr.emb(cr.green,"Current Version","My Current Version is 7.5",)
-        myEmbed.add_field(name="Version Code:", value="v.7.5.2", inline=False)
+        myEmbed = cr.emb(cr.green,"Current Version","My Current Version is 10.0",)
+        myEmbed.add_field(name="Version Code:", value="v.10.0.0", inline=False)
         myEmbed.add_field(name="Last Updated:",
-                          value="July 22nd, 2022",
+                          value="August 12th, 2022",
                           inline=False)
         myEmbed.add_field(name="Date Released:",
                           value="September 10th, 2021",

@@ -3,3 +3,5 @@ __pycache__
 Server_Status.inf
 ip.txt
 .env
+*.json
+env

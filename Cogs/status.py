@@ -1,8 +1,10 @@
+import time,datetime
 import os
+from flask import g
 import psutil
 import disnake
 from disnake.ext import commands
-from bot import *
+from bot import cr,client,start_time
 import json
 
 def setup(client: commands.Bot):
@@ -21,9 +23,9 @@ class command_handling(commands.Cog):
         guild_count = 0
         with open('Server_Status.inf','w') as f:
           f.write(f'\n[!] Bot name: {client.user} Id: {client.user.id} \n')
-          for guild in self.bot.guilds:
-            with open('greeting_channel.json','r') as file:
+          with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
+          for guild in self.bot.guilds:
             try:
                 greet_channel[str(guild.id)]
             except Exception as e:
@@ -33,7 +35,7 @@ class command_handling(commands.Cog):
                 json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
             try:
                 greet_channel[str(guild.id)]["prefix"]
-            except Exception:
+            except:
                 greet_channel[str(guild.id)]["prefix"] = "!!"
                 json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
             f.write(f"\n[-] {guild.id} (Name: {guild.name})")

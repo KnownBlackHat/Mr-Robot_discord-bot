@@ -1,6 +1,5 @@
-import disnake
 from disnake.ext import commands
-from bot import *
+from bot import cr
 import subprocess
 import os
 
