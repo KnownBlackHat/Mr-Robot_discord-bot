@@ -31,7 +31,7 @@ class fun(commands.Cog):
         self.bot = client
 
     @commands.command(name='nsfw')
-    async def nsfw(self,ctx,term,amount=1):
+    async def nsfw(self,ctx,term="porn",amount=1):
         if ctx.channel.is_nsfw():
             Header =  {'User-Agent' : "Magic Browser"}
             type=['best','top','new','rising','hot']
