@@ -39,6 +39,8 @@ class command_error_handling(commands.Cog):
                 embed=cr.emb(cr.red, 'Command not available in private'))
         elif "Command raised an exception: AttributeError: 'NoneType' object has no attribute 'play'" in str(error):
           ...
+        elif "Cannot send messages to this user" in str(error):
+          ...
         else:
             with open('Logs/error.log', 'a') as file:
                 file.write(f'Error: {error}\n')
