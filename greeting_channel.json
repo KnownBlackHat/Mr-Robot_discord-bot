@@ -53,12 +53,6 @@
     "name": "bot-testing",
     "prefix": "!!"
   },
-  "1005333565266997328": {
-    "name": "Known_black_hat's server",
-    "goodbye_channel": "1005333565266997331",
-    "greet_channel": "1005333565266997330",
-    "prefix": "!!"
-  },
   "1005546596257239050": {
     "name": "Server von 7AGAM"
   },
@@ -70,6 +64,16 @@
   },
   "853572202901143562": {
     "name": "Bot Tester",
+    "prefix": "!!"
+  },
+  "820273294032764939": {
+    "name": "NINJA KINGDOM",
+    "prefix": ".",
+    "greet_channel": "846718055626440704",
+    "goodbye_channel": "846718141429972994"
+  },
+  "939296248664555561": {
+    "name": "Personal server",
     "prefix": "!!"
   }
 }
