@@ -20,12 +20,9 @@ class command_handling(commands.Cog):
         os.system('clear')
         print(f'\n[!] Bot name: {client.user} Id: {client.user.id} \n')
         os.system('curl -s ifconfig.me >>ip.txt ; echo '' >> ip.txt')
-        guild_count = 0
-        with open('Server_Status.inf','w') as f:
-          f.write(f'\n[!] Bot name: {client.user} Id: {client.user.id} \n')
-          with open('greeting_channel.json','r') as file:
-                greet_channel=json.load(file)
-          for guild in self.bot.guilds:
+        with open('greeting_channel.json','r') as file:
+            greet_channel=json.load(file)
+        for guild in self.bot.guilds:
             try:
                 greet_channel[str(guild.id)]
             except Exception as e:
@@ -33,14 +30,13 @@ class command_handling(commands.Cog):
                 greet_channel[guild.id]["name"] = guild.name
                 greet_channel[guild.id]["prefix"] = "!!"
                 json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
+            with open('greeting_channel.json','r') as file:
+                greet_channel=json.load(file)
             try:
                 greet_channel[str(guild.id)]["prefix"]
             except:
                 greet_channel[str(guild.id)]["prefix"] = "!!"
                 json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
-            f.write(f"\n[-] {guild.id} (Name: {guild.name})")
-            guild_count = guild_count +1
-          f.write(f"\n\n[=] {client.user} is in " + str(guild_count) + " guilds.")
         await self.bot.change_presence(status=disnake.Status.idle,
                                        activity=disnake.Game(name='@MR ROBOT'))
 
