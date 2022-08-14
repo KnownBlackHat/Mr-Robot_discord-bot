@@ -3,7 +3,7 @@
 <div>
 <p>It is advanced under development multitasking bot coded in python for your discord server for free.</p>
 <p>Prefix: Just mention in server it will tell your custom server prefix</p>
-<p>
+<pre>
 Features:
 1) Welcome & Goodbye notifier
 2) Moderation
@@ -14,5 +14,5 @@ Features:
 7) Link Blocker
 8) Google Translation
 9) Basic Misc 
-</p>
+</pre>
 </div>
