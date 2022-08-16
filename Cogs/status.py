@@ -17,7 +17,6 @@ class command_handling(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         channel = client.get_channel(1009182794712367164)
-        await channel.send(embed=cr.emb(cr.green,"Booted"))
         os.system('clear')
         print(f'\n[!] Bot name: {client.user} Id: {client.user.id} \n')
         os.system('curl -s ifconfig.me >>ip.txt ; echo '' >> ip.txt')
@@ -40,6 +39,7 @@ class command_handling(commands.Cog):
                 json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
         await self.bot.change_presence(status=disnake.Status.idle,
                                        activity=disnake.Game(name='@MR ROBOT'))
+        await channel.send(embed=cr.emb(cr.green,"Booted"))
 
 
 
