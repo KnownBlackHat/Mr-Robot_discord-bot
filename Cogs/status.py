@@ -17,7 +17,7 @@ class command_handling(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         channel = client.get_channel(1009182794712367164)
-        await channel.send(embed=cr.emb(cr.green,"Booted",start_time))
+        await channel.send(embed=cr.emb(cr.green,"Booted"))
         os.system('clear')
         print(f'\n[!] Bot name: {client.user} Id: {client.user.id} \n')
         os.system('curl -s ifconfig.me >>ip.txt ; echo '' >> ip.txt')
