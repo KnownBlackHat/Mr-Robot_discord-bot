@@ -1,3 +1,4 @@
+import os
 import disnake
 from disnake.ext import commands
 from bot import cr
@@ -41,6 +42,8 @@ class command_error_handling(commands.Cog):
           ...
         elif "Cannot send messages to this user" in str(error):
           ...
+        elif "Access denied | discord.com used Cloudflare to restrict access" in str(error):
+          os.system("kill 1")
         else:
             with open('Logs/error.log', 'a') as file:
                 file.write(f'Error: {error}\n')
