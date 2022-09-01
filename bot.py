@@ -107,6 +107,6 @@ except Exception as error:
 keep_alive()
 try:
     client.run(str(os.getenv('TOKEN')))
-    os.system("kill 1")
-except:
-    os.system("kill 1")
+    # os.system("kill 1")
+except Exception as e:
+    print(e)
