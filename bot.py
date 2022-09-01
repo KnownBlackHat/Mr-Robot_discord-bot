@@ -107,6 +107,9 @@ except Exception as error:
 keep_alive()
 try:
     client.run(str(os.getenv('TOKEN')))
-    # os.system("kill 1")
 except Exception as e:
-    print(e)
+    if 'Access denied | discord.com used Cloudflare to restrict access' in e:
+        with open('Logs/error.log','a') as file:
+            file.write(f'\nBot Blocked: {error}')
+        os.system("kill 1")
+        
