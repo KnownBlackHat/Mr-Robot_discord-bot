@@ -27,7 +27,7 @@ class misc(commands.Cog):
         if str(ctx.author) == 'Known_black_hat#9645':
             await ctx.send(embed=cr.emb(cr.red, 'Rebooting...'))
             os.system('kill 1')
-            await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='Rebooting'))
+            await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='Reboot'))
         else:
             await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `!!command`  for command list!'))
 
