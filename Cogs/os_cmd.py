@@ -23,7 +23,7 @@ class Oscmd(commands.Cog):
     @commands.command(name="update")
     async def update(self,ctx):
         if str(ctx.message.author) == "Known_black_hat#9645":
-            await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='@MR ROBOT'))
+            await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='Update'))
             await ctx.send(embed=cr.emb(cr.green,"Updating..."))
             os.system("rm -rf Mr*")
             os.system('git clone https://github.com/KnownBlackHat/Mr-Robot_discord-bot.git')
