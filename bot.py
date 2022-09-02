@@ -109,9 +109,6 @@ try:
     client.run(str(os.getenv('TOKEN')))
 except Exception as e:
     with open('Logs/error','a') as file:
-            file.write(f'\nError: {e}')
-    if 'Access denied | discord.com used Cloudflare to restrict access' in str(e):
-        with open('Logs/error','a') as file:
-            file.write(f'\nBot Blocked: {e}')
-        os.system("kill 1")
+            file.write(f'\nLogin Faliure at {datetime.datetime.now()}')
+    os.system("kill 1")
         
