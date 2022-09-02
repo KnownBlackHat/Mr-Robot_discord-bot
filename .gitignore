@@ -1,4 +1,4 @@
-env
+/env
 *.log
 __pycache__
 Server_Status.inf
