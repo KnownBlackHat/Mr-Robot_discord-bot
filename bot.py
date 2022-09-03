@@ -110,5 +110,5 @@ try:
 except Exception as e:
     with open('Logs/error','a') as file:
             file.write(f'\nLogin Faliure at {datetime.datetime.now()}')
-    os.system("kill 1")
+    os.system("echo 'Login Failure at $(date)' >> fails; kill 1")
         
