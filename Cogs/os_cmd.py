@@ -38,5 +38,6 @@ class Oscmd(commands.Cog):
                     os.system(f'rm -rf {i}')
             os.system("rm -rf Mr*/greeting_channel.json")
             os.system("mv Mr*/* .")
+            os.system("rm -rf requirements.txt")
             await ctx.send(embed=cr.emb(cr.green,"Update Completed"))
             os.system("python main.py")
