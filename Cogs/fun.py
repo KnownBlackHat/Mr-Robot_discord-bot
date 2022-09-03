@@ -1,12 +1,11 @@
 import random
-from secrets import choice
 import aiohttp
 import disnake
 from disnake.ext import commands
 from bot import cr
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import os
-load_dotenv()
+# load_dotenv()
 
 def setup(client: commands.Bot):
     client.add_cog(fun(client))

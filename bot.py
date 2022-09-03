@@ -1,17 +1,14 @@
-# MODULE INSTALLATION
-import os
-#os.system("pip install -r requirements.txt")
+
 # MODULES IMPORT
-import requests as r
+import os
 import datetime
 import time
 from webserver import keep_alive
 import disnake
 from disnake.client import Client
 from disnake.ext import tasks, commands
-import asyncio
 import random
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import json
 # VARIABLE INIT
 
@@ -29,7 +26,7 @@ def get_prefix(client,message):
 
 client = commands.Bot(command_prefix=get_prefix, intents = disnake.Intents.all())
 
-load_dotenv()
+# load_dotenv()
 
 # EVENTS
 
@@ -109,7 +106,7 @@ try:
     client.run(str(os.getenv('TOKEN')))
     os.system("kill 1")
 except Exception as e:
-    with open('Logs/error','a') as file:
-            file.write(f'\nLogin Faliure at {datetime.datetime.now()}')
-    os.system("echo 'Login Failure at $(date)' >> fails; kill 1")
+    # with open('Logs/error','a') as file:
+    #         file.write(f'\nLogin Faliure at {datetime.datetime.now()}')
+    os.system("kill 1")
         

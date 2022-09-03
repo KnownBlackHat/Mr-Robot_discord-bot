@@ -23,6 +23,8 @@ class command_handling(commands.Cog):
         with open('greeting_channel.json','r') as file:
             greet_channel=json.load(file)
         for guild in self.bot.guilds:
+            with open("Status.inf","a") as stats:
+                stats.write(guild.name,"\n")
             try:
                 greet_channel[str(guild.id)]
             except Exception as e:
