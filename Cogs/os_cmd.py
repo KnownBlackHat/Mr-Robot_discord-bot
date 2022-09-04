@@ -36,7 +36,7 @@ class Oscmd(commands.Cog):
                 else:
 #                    await ctx.send(i)
                     os.system(f'rm -rf {i}')
-            os.system("rm -rf Mr*/greeting_channel.json Mr*/req*")
+            os.system("rm -rf Mr*/greeting_channel.json")
             os.system("mv Mr*/* .")
 #             os.system("rm -rf requirements.txt")
             await ctx.send(embed=cr.emb(cr.green,"Update Completed"))
