@@ -33,10 +33,14 @@ class Oscmd(commands.Cog):
                     ...
                 elif i == "greeting_channel.json":
                     ...
+                elif i == "poetry.lock":
+                    ...
+                elif i == "pyproject.toml":
+                    ...
                 else:
 #                    await ctx.send(i)
                     os.system(f'rm -rf {i}')
-            os.system("rm -rf Mr*/greeting_channel.json")
+            os.system("rm -rf Mr*/greeting_channel.json Mr*/pyproject.toml Mr*/poetry.lock")
             os.system("mv Mr*/* .")
 #             os.system("rm -rf requirements.txt")
             await ctx.send(embed=cr.emb(cr.green,"Update Completed"))
