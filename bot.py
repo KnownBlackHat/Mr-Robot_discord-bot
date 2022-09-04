@@ -104,9 +104,7 @@ except Exception as error:
 keep_alive()
 try:
     client.run(str(os.getenv('TOKEN')))
-    os.system("kill 1")
 except Exception as e:
-    # with open('Logs/error','a') as file:
-    #         file.write(f'\nLogin Faliure at {datetime.datetime.now()}')
+    print(f"Login Failure at {datetime.datetime.now()}")
     os.system("kill 1")
         
