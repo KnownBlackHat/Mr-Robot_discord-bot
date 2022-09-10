@@ -101,7 +101,7 @@ class fun(commands.Cog):
                 link = extract_video_link(page)
                 await ctx.send(embed=cr.emb(cr.black,page.title))
                 await ctx.send(link)
-            except:
-                raise "Term Not Found. Try another search term!"
+            except Exception as e:
+                raise e
         else:
             await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
