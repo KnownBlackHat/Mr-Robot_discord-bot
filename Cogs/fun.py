@@ -86,7 +86,7 @@ class fun(commands.Cog):
 
     
     @commands.command(name='xxx')
-    async def xxx(self, term):
+    async def xxx(self,*,term):
         if ctx.channel.is_nsfw():
             try:
                 term = term.replace(" ","+")
