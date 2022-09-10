@@ -158,6 +158,9 @@ I'll show you mentioned user info
 `meme`: 
 I'll show you a meme!
 
+`xxx [search term]`:
+I'll show you a nsfw premium content on authorised channel!
+
 `nsfw <topic(optional)>`:
 I'll show you a nsfw content on authorised channel!
 
