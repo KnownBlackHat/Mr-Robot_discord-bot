@@ -98,7 +98,7 @@ class fun(commands.Cog):
                 i = next(i)
                 link = i.get('href')
                 page = get("https://www.xnxx.tv"+link)
-                link = extract_video_link(page))
+                link = extract_video_link(page)
                 await ctx.send(embed=cr.emb(cr.black,page.title))
                 await ctx.send(link)
             except:
