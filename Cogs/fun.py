@@ -16,9 +16,11 @@ def extract_video_link(soup):
     link = json.loads(link.string) # if any problem switch to link.text
     link = link["contentUrl"]
     return link
-
+proxies = { 
+              "https" : "20.230.175.193:8080"
+            }
 def get(url):
-    page = requests.get(url)
+    page = requests.get(url,proxies=proxies)
     htmlcontent = page.content
     soup = BeautifulSoup(htmlcontent, "html.parser")
     return soup
@@ -90,16 +92,16 @@ class fun(commands.Cog):
         if ctx.channel.is_nsfw():
             try:
                 term = term.replace(" ","+")
-                term_url = "https://www.xnxx.tv/search/random/"+str(term)
+                term_url = "http://www.xnxx.com/search/random/"+str(term)
                 search_term = get(term_url)
                 div = search_term.find('div', class_='mozaique cust-nb-cols')
                 div = div.find_all('a')
                 i = iter(div) 
                 i = next(i)
                 link = i.get('href')
-                page = get("https://www.xnxx.tv"+link)
+                page = get("http://www.xnxx.com"+link)
                 link = extract_video_link(page)
-                await ctx.send(embed=cr.emb(cr.black,page.title))
+                await ctx.send(embed=cr.emb(cr.black,page.title.string))
                 await ctx.send(link)
             except Exception as e:
                 raise e
