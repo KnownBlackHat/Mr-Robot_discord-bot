@@ -1,3 +1,4 @@
+import traceback
 import os
 import disnake
 from disnake.ext import commands
@@ -46,6 +47,10 @@ class command_error_handling(commands.Cog):
           os.system("kill 1")
         else:
             with open('Logs/error.log', 'a') as file:
-                file.write(f'Error: {error}\n')
+                file.write('\n\n')
+                file.write('-'*10)
+                file.write(f'Error: {error}')
+                file.write(f'\nTraceback: {traceback.format_exc()}')
                 await ctx.send(
                     embed=cr.emb(cr.red, 'Oops! Something went wrong!',f'Error: {error}'))
+            
