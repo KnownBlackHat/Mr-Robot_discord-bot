@@ -98,6 +98,9 @@ class fun(commands.Cog):
                 div = div.find_all('a')
                 i = list(div) 
                 i = random.choice(i)
+                if i == None:
+                    return i = random.choice(list(div))
+
                 link = i.get('href')
                 page = get("http://www.xnxx.com"+link)
                 link = extract_video_link(page)
