@@ -98,15 +98,13 @@ class fun(commands.Cog):
                 div = div.find_all('a')
                 i = list(div) 
                 i = random.choice(i)
-                if i == None:
-                    return i = random.choice(list(div))
-
                 link = i.get('href')
                 page = get("http://www.xnxx.com"+link)
                 link = extract_video_link(page)
                 await ctx.send(embed=cr.emb(cr.black,page.title.string))
                 await ctx.send(link)
-            except Exception as e:
-                raise e
+            except Exception:
+                await ctx.send(embed=cr.emb(cr.red,"Try Again Later!"))
+
         else:
             await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
