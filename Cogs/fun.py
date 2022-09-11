@@ -92,14 +92,14 @@ class fun(commands.Cog):
         if ctx.channel.is_nsfw():
             try:
                 term = term.replace(" ","+")
-                term_url = "http://www.xnxx.com/search/random/"+str(term)
+                term_url = "https://www.xnxx.com/search/"+str(term)
                 search_term = get(term_url)
                 div = search_term.find('div', class_='mozaique cust-nb-cols')
                 div = div.find_all('a')
                 i = list(div) 
                 i = random.choice(i)
                 link = i.get('href')
-                page = get("http://www.xnxx.com"+link)
+                page = get("https://www.xnxx.com"+link)
                 link = extract_video_link(page)
                 await ctx.send(embed=cr.emb(cr.black,page.title.string))
                 await ctx.send(link)
