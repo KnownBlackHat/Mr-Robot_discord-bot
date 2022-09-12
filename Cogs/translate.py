@@ -1,5 +1,7 @@
 from disnake.ext import commands
 from bot import cr
+import os
+os.system("pip install googletrans==3.1.0a0")
 from googletrans import Translator
 
 
