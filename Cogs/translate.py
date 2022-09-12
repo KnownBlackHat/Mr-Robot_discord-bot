@@ -15,6 +15,10 @@ class translate(commands.Cog):
     @commands.command(name="translate",aliases=['tr'])
     async def translate(self,ctx, lang, *, thing):
         translator = Translator()
-        translation = translator.translate(thing, dest=lang)
+        try:
+            translation = translator.translate(thing, dest=lang)
+        except Exception as e:
+            if "invalid destination language" in str(e):
+                await ctx.send(embed = cr.emb(cr.orange,f"Destination Translation Language List (DTLL) :",googletrans.LANGUAGES))
         await ctx.send(embed = cr.emb(cr.orange,f"Translation To {lang}",translation.text))
       
