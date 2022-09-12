@@ -103,11 +103,14 @@ except Exception as error:
 
 keep_alive()
 try:
-	client.loop.run_until_complete(client.start(os.getenv("TOKEN")))
-except:
-    	print(f"Login Failure at {datetime.datetime.now()}")
-	client.loop.run_until_complete(client.logout())
+  client.loop.run_until_complete(client.start(os.getenv("TOKEN")))
+except Exception as e:
+  print(f"Login Failure at {datetime.datetime.now()}")
+  with open('Runtime_error.log','a') as f:
+    f.write("-"*20)
+    f.write(str(e))
+  if "429 Too Many Requests" in str(e):
+    os.system("kill 1")
+  client.loop.run_until_complete(client.logout())
 finally:
-	client.loop.close()
-	os.system("kill 1")
-        
+  client.loop.close()
