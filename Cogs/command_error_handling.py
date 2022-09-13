@@ -1,4 +1,3 @@
-from enum import _EnumMemberT
 import traceback
 import os
 import disnake
@@ -23,7 +22,7 @@ class command_error_handling(commands.Cog):
                 embed=cr.emb(cr.red, 'Sorry Permissions are missing! '))
 
 
-        elif isinstance(error, disnake.errors.NotFound):
+        elif isinstance(error, commands.errors.CommandNotFound):
             await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `<server prefix>command`  for command list!'))
 
 
@@ -40,7 +39,7 @@ class command_error_handling(commands.Cog):
             await ctx.send(embed=cr.emb(cr.red, 'ERROR',str(error)))
 
         elif isinstance(error, commands.BadArgument):
-            await ctx.send(embed=cr.emb(cr.red,'Argument Error'))
+            await ctx.send(embed=cr.emb(cr.red,'Argument Error','Pass valid argument'))
 
         elif 'This command cannot be used in private messages.' in str(error):
             await ctx.send(embed=cr.emb(cr.red, 'Command not available in private'))
