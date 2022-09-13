@@ -12,41 +12,34 @@ class misc(commands.Cog):
         self.bot = client
 
 #Clearlog
-
+    @commands.is_owner()
     @commands.command(name='clearlog')
     async def clearlog(self, ctx, *, filename):
-        if str(ctx.author) == 'Known_black_hat#9645':
-          if filename != '/' or filename != '..':
+        if filename != '/' or filename != '..':
             os.system(f'rm -rf Logs/{filename}.log')
             await ctx.send(embed=cr.emb(cr.green, f'{filename}.log deleted!'))
 
 #Reboot
-
+    @commands.is_owner()
     @commands.command(name='reboot')
     async def reboot(self, ctx):
-        if str(ctx.author) == 'Known_black_hat#9645':
-            await ctx.send(embed=cr.emb(cr.red, 'Rebooting...'))
-            os.system('kill 1')
-            await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='Reboot'))
-        else:
-            await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `!!command`  for command list!'))
-
+        await ctx.send(embed=cr.emb(cr.red, 'Rebooting...'))
+        os.system('kill 1')
+        await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='Reboot'))
+        
 #type
-
-    @commands.command(name='type')
+    @commands.is_owner()
+    @commands.command(name='msg')
     async def type(self, ctx, no=1, *, msg):
-        if str(ctx.message.author) == "Known_black_hat#9645":
-            try:
-              await ctx.message.delete()
-            except Exception:
-              ...
-            i = 0
-            while (i != int(no)):
-                await ctx.send(embed=cr.emb(value=msg))
-                i = int(i) + 1
-        else:
-            await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `!!command`  for command list!'))
-
+        try:
+            await ctx.message.delete()
+        except Exception:
+            ...
+        i = 0
+        while (i != int(no)):
+            await ctx.send(embed=cr.emb(value=msg))
+            i = int(i) + 1
+    
 #version
 
     @commands.command(name='version')
@@ -150,9 +143,6 @@ I'll show you mentioned user info
 
 `meme`: 
 I'll show you a meme!
-
-`xxx [search term]`:
-I'll show you a nsfw premium content on authorised channel!
 
 `nsfw <topic(optional)>`:
 I'll show you a nsfw content on authorised channel!
