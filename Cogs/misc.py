@@ -82,17 +82,10 @@ Unsets welcome Channel!
 Unsets Goodbye Channel!
 """))
 
-#clear
-
-    @commands.command(name='clear')
-    @commands.has_any_role("MR ROBOT Authorised")
-    async def clear(self, context, amount=1):
-        await context.message.channel.purge(limit=int(amount) + 1)
-        print("\n [!] Chat Clearing System Was Activated!")
-
 #init
 
     @commands.command(name='initialise', aliases=['init'])
+    @commands.has_permissions(manage_guild=True)
     async def initialise(self, ctx):
         global error
         authrole = disnake.utils.get(ctx.guild.roles,
@@ -113,11 +106,11 @@ Unsets Goodbye Channel!
         await ctx.send(embed=cr.emb(
             name="Perform the following actions to complete initialisation!",
             value=
-            '''1) Assign `MR ROBOT AUTHORISED` role in order to use Admin commands!
+            '''
                                
-  2) Assign `Protocol_access` role in order to share link in the server!
+  1) Assign `Protocol_access` role in order to share link in the server!
                       
-  4) Use `setup` command for some optional setup!
+  2) Use `setup` command for some optional setup!
          
   3) You are all set :)'''))
         await ctx.send(embed=cr.emb(name='Additional Features',
@@ -136,7 +129,7 @@ Unsets Goodbye Channel!
 
 #commands
 
-    @commands.command(name="command")
+    @commands.command(name="command",aliases=['help'])
     async def command(self, ctx):
         await ctx.send(embed=cr.emb(
             cr.green, "Command List", '''

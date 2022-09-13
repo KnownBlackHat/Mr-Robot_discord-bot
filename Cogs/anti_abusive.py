@@ -1,3 +1,4 @@
+# TODO: implement addition features on/off toggle integration
 import disnake
 from disnake.ext import commands
 import re
