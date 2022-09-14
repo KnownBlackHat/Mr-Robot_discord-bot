@@ -21,20 +21,20 @@ def extract_video_link(soup):
 def proxy_generator():
     response = requests.get("https://sslproxies.org/")
     soup = BeautifulSoup(response.content, 'html5lib')
-    proxy = f"https://{random.choice(list(map(lambda x:x[0]+':'+x[1], list(zip(map(lambda x:x.text, soup.findAll('td')[::8]), map(lambda x:x.text, soup.findAll('td')[1::8]))))))}"
+    proxy = f"http://{random.choice(list(map(lambda x:x[0]+':'+x[1], list(zip(map(lambda x:x.text, soup.findAll('td')[::8]), map(lambda x:x.text, soup.findAll('td')[1::8]))))))}"
     return proxy
   
 async def get(url):
   while True:
     try:
       proxy=proxy_generator()
-      print(f"Proxy currently being used: {proxy}")
-      async with aiohttp.ClientSession() as session:
-            async with session.get(url,proxy=proxy,timeout=10) as response:
+      # print(f"Proxy currently being used: {proxy}")
+      async with aiohttp.ClientSession(trust_env=True) as session:
+            async with session.get(url,proxy=proxy,ssl=False,timeout=7) as response:
               htmlcontent = await response.text()
               break
     except:
-      print("Connection error, looking for another proxy")
+      # print("Connection error, looking for another proxy")
       continue
   soup = BeautifulSoup(htmlcontent, "html.parser")
   return soup
@@ -100,29 +100,38 @@ class fun(commands.Cog):
                 else:
                     await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
 
-    @commands.is_owner()
+    # @commands.is_owner()
     @commands.command(name='xxx')
     async def xxx(self,ctx,*,term):
         if ctx.channel.is_nsfw():
-          while True:
+          await ctx.send(embed=cr.emb(cr.yellow,"Results may take time, so hold on!"),delete_after=10)
+          term = term.replace(" ","+")
+          term_url = "https://www.xnxx.com/search/"+str(term)
+          # print(await get(term_url))
+          async with ctx.typing():
             try:
-                term = term.replace(" ","+")
-                term_url = "https://www.xnxx.com/search/"+str(term)
-                search_term = await get(term_url)
-                div = search_term.find('div', class_='mozaique cust-nb-cols')
-                div = div.find_all('a')
-                i = list(div) 
-                i = random.choice(i)
-                link = i.get('href')
-                page = await get("https://www.xnxx.com"+link)
-                link = extract_video_link(page)
-                await ctx.send(embed=cr.emb(cr.black,page.title.string))
-                await ctx.send(link)
-                break
-            except Exception as e:
-                print(e)
-                await ctx.send(embed=cr.emb(cr.red,"Try Again Later!"))
-                continue
+                while True:
+                  try:
+                    search_term = await get(term_url)
+                    div = search_term.find('div', class_='mozaique cust-nb-cols')
+                    div = div.find_all('a')
+                    i = list(div)
+                    i = random.choice(i)
+                    link = i.get('href')
+                    page = await get("https://www.xnxx.com"+link)
+                    link = extract_video_link(page)
+                    await ctx.send(embed=cr.emb(cr.black,page.title.string))
+                    await ctx.send(link)
+                    break
+                  except Exception as aw:
+                    print(aw)
+                    continue
+                  # print(link)
+                # break
+            except Exception as ex:
+                # print("Trying Again")
+                await ctx.send(embed=cr.emb(cr.red,"Try Again Later!",ex))
+                  # continue
 
         else:
             await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
