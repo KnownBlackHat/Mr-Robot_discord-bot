@@ -27,10 +27,10 @@ def proxy_generator():
 async def get(url):
   while True:
     try:
-      proxy=proxy_generator()
+      #proxy=proxy_generator()
       # print(f"Proxy currently being used: {proxy}")
       async with aiohttp.ClientSession(trust_env=True) as session:
-            async with session.get(url,proxy=proxy,ssl=False,timeout=7) as response:
+            async with session.get(url,ssl=False,timeout=7) as response:
               htmlcontent = await response.text()
               break
     except:
