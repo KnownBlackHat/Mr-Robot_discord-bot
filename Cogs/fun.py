@@ -96,7 +96,6 @@ class fun(commands.Cog):
                 term = term.replace(" ","+")
                 term_url = "https://www.xnxx.com/search/"+str(term)
                 search_term = await get(term_url)
-                print(search_term.text)
                 div = search_term.find('div', class_='mozaique cust-nb-cols')
                 div = div.find_all('a')
                 i = list(div) 
