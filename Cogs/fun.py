@@ -102,7 +102,7 @@ class fun(commands.Cog):
 
     @commands.is_owner()
     @commands.command(name='xxx')
-    async def xxx(self,ctx,*,term):
+    async def xxx(self,ctx,*,term = "porn"):
         if ctx.channel.is_nsfw():
           await ctx.send(embed=cr.emb(cr.yellow,"Results may take time, so hold on!"),delete_after=10)
           term = term.replace(" ","+")
