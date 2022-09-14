@@ -44,10 +44,10 @@ class misc(commands.Cog):
 
     @commands.command(name='version')
     async def version(self, context):
-        myEmbed = cr.emb(cr.green,"Current Version","My Current Version is 10.0",)
+        myEmbed = cr.emb(cr.green,"Current Version","My Current Version is 11.5",)
         myEmbed.add_field(name="Version Code:", value="v.10.0.0", inline=False)
         myEmbed.add_field(name="Last Updated:",
-                          value="August 12th, 2022",
+                          value="September 14th, 2022",
                           inline=False)
         myEmbed.add_field(name="Date Released:",
                           value="September 10th, 2021",
@@ -146,6 +146,9 @@ I'll show you a meme!
 
 `nsfw <topic(optional)>`:
 I'll show you a nsfw content on authorised channel!
+    
+`xxx <topic(optional)>`:
+I'll show you a premium nsfw content on authorised channel!
 
 `version`: 
 You will know about my version!
