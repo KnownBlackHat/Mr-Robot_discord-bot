@@ -100,7 +100,7 @@ class fun(commands.Cog):
                 else:
                     await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
 
-    # @commands.is_owner()
+    @commands.is_owner()
     @commands.command(name='xxx')
     async def xxx(self,ctx,*,term):
         if ctx.channel.is_nsfw():
