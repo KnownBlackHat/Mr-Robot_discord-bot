@@ -8,7 +8,7 @@ import disnake
 from disnake.client import Client
 from disnake.ext import tasks, commands
 import random
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import json
 # VARIABLE INIT
 
@@ -30,7 +30,7 @@ def get_prefix(client,message):
 
 client = commands.Bot(command_prefix=get_prefix, intents = disnake.Intents.all())
 
-# load_dotenv()
+load_dotenv()
 
 # EVENTS
 
