@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 import disnake
 from disnake.ext import commands
-from bot import cr
+from bot import cr 
 # from dotenv import load_dotenv
 import os
 # load_dotenv()
@@ -19,11 +19,12 @@ def extract_video_link(soup):
 proxies = { 
               "https" : "20.230.175.193:8080"
             }
-def get(url):
-    page = requests.get(url,proxies=proxies)
-    htmlcontent = page.content
-    soup = BeautifulSoup(htmlcontent, "html.parser")
-    return soup
+async def get(url):
+  async with aiohttp.ClientSession() as session:
+        async with session.get(url,proxy="https://20.230.175.193:8080") as response:
+          htmlcontent = await response.text()
+  soup = BeautifulSoup(htmlcontent, "html.parser")
+  return soup
 
 
 def setup(client: commands.Bot):
@@ -90,21 +91,26 @@ class fun(commands.Cog):
     @commands.command(name='xxx')
     async def xxx(self,ctx,*,term):
         if ctx.channel.is_nsfw():
+          while True:
             try:
                 term = term.replace(" ","+")
                 term_url = "https://www.xnxx.com/search/"+str(term)
-                search_term = get(term_url)
+                search_term = await get(term_url)
+                print(search_term.text)
                 div = search_term.find('div', class_='mozaique cust-nb-cols')
                 div = div.find_all('a')
                 i = list(div) 
                 i = random.choice(i)
                 link = i.get('href')
-                page = get("https://www.xnxx.com"+link)
+                page = await get("https://www.xnxx.com"+link)
                 link = extract_video_link(page)
                 await ctx.send(embed=cr.emb(cr.black,page.title.string))
                 await ctx.send(link)
-            except Exception:
+                break
+            except Exception as e:
+                print(e)
                 await ctx.send(embed=cr.emb(cr.red,"Try Again Later!"))
+                continue
 
         else:
             await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
