@@ -16,13 +16,26 @@ def extract_video_link(soup):
     link = json.loads(link.string) # if any problem switch to link.text
     link = link["contentUrl"]
     return link
-proxies = { 
-              "https" : "20.230.175.193:8080"
-            }
+
+
+def proxy_generator():
+    response = requests.get("https://sslproxies.org/")
+    soup = BeautifulSoup(response.content, 'html5lib')
+    proxy = f"https://{random.choice(list(map(lambda x:x[0]+':'+x[1], list(zip(map(lambda x:x.text, soup.findAll('td')[::8]), map(lambda x:x.text, soup.findAll('td')[1::8]))))))}"
+    return proxy
+  
 async def get(url):
-  async with aiohttp.ClientSession() as session:
-        async with session.get(url,proxy="https://20.230.175.193:8080") as response:
-          htmlcontent = await response.text()
+  while True:
+    try:
+      proxy=proxy_generator()
+      print(f"Proxy currently being used: {proxy}")
+      async with aiohttp.ClientSession() as session:
+            async with session.get(url,proxy=proxy,timeout=10) as response:
+              htmlcontent = await response.text()
+              break
+    except:
+      print("Connection error, looking for another proxy")
+      continue
   soup = BeautifulSoup(htmlcontent, "html.parser")
   return soup
 
