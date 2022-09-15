@@ -113,7 +113,7 @@ class fun(commands.Cog):
           await ctx.send(embed=cr.emb(cr.yellow,"Results may take time, so hold on!"),delete_after=10)
           stri = ""
           for n in term:
-            stri = term+" "+n
+            stri = stri+" "+n
           term = stri
           if term == "":
             term = "porn"
