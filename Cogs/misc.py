@@ -27,7 +27,7 @@ class misc(commands.Cog):
         os.system('kill 1')
         await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='Reboot'))
         
-#type
+#msg
     @commands.is_owner()
     @commands.command(name='msg')
     async def type(self, ctx, no=1, *, msg):
