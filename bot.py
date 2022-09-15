@@ -52,7 +52,7 @@ class cr:
 
 @client.remove_command('help')
 
-@client.is_owner()
+@commands.is_owner()
 @client.command(name='list_cogs')
 async def list_functions(ctx):
     await ctx.send(embed=cr.emb(cr.green, "Loaded Cogs", '   ✅\n\n'.join(loaded_cog_list) + "  ✅\n"))
@@ -60,7 +60,7 @@ async def list_functions(ctx):
         await ctx.send(embed=cr.emb(cr.red, "Unloaded Cogs", '  ❌\n\n'.join(unloaded_cog_list) +"  ❌\n"))
 
 
-@client.is_owner()
+@commands.is_owner()
 @client.command(name='load')
 async def load(ctx, name):
     client.load_extension(f'Cogs.{name}')
@@ -71,7 +71,7 @@ async def load(ctx, name):
         ...
     await ctx.send(embed=cr.emb(cr.green, "Loaded", f"{name} function"))
 
-@client.is_owner()
+@commands.is_owner()
 @client.command(name='reload')
 async def reload(ctx, name):
     client.unload_extension(f'Cogs.{name}')
@@ -79,7 +79,7 @@ async def reload(ctx, name):
     await ctx.send(embed=cr.emb(cr.green, "Reloaded", f"{name} function"))
 
 
-@client.is_owner()
+@commands.is_owner()
 @client.command(name='unload')
 async def unload(ctx, name):
     client.unload_extension(f'Cogs.{name}')
