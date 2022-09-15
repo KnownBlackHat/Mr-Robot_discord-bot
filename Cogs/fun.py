@@ -127,6 +127,7 @@ class fun(commands.Cog):
                     div = search_term.find('div', class_='mozaique cust-nb-cols')
                     div = div.find_all('a')
                     i = list(div)
+                    p=0
                     while p != int(amount):
                         i = random.choice(i)
                         link = i.get('href')
