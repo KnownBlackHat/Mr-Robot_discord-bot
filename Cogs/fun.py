@@ -102,9 +102,17 @@ class fun(commands.Cog):
 
     #@commands.is_owner()
     @commands.command(name='xxx')
-    async def xxx(self,ctx,*,term = "porn"):
+    async def xxx(self,ctx,**term = "porn"):
         if ctx.channel.is_nsfw():
+          try:
+            amount = int(term[0])
+            term.pop(0)
+          except:
+            amount = 1
           await ctx.send(embed=cr.emb(cr.yellow,"Results may take time, so hold on!"),delete_after=10)
+          term = ""
+          for n in term:
+            term = term+" "+n
           term = term.replace(" ","+")
           term_url = "https://www.xnxx.com/search/"+str(term)
           # print(await get(term_url))
