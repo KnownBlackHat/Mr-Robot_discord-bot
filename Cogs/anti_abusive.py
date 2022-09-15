@@ -1,4 +1,6 @@
-# TODO: implement addition features on/off toggle integration
+# TODO: Add features on/off toggle integration
+# TODO: Add custom block list , protocol list
+
 import disnake
 from disnake.ext import commands
 import re
