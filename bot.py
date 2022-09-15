@@ -3,30 +3,34 @@
 import os
 import datetime
 import time
-from webserver import keep_alive
+# from webserver import keep_alive
 import disnake
 from disnake.client import Client
 from disnake.ext import tasks, commands
 import random
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import json
 # VARIABLE INIT
 
 start_time = time.time()
 def get_prefix(client,message):
-    with open('greeting_channel.json','r') as file:
-        prefixes=json.load(file)
     try:
-        prefixes[str(message.guild.id)]["prefix"]
+      with open('greeting_channel.json','r') as file:
+          prefixes=json.load(file)
+      try:
+          prefixes[str(message.guild.id)]["prefix"]
+      except:
+          prefixes[str(message.guild.id)]["prefix"] = "!!"
+          json.dump(prefixes,open('greeting_channel.json','w'),indent=2)
+      return commands.when_mentioned_or(prefixes[str(message.guild.id)]["prefix"])(client,message)
     except:
-        prefixes[str(message.guild.id)]["prefix"] = "!!"
-        json.dump(prefixes,open('greeting_channel.json','w'),indent=2)
-    return commands.when_mentioned_or(prefixes[str(message.guild.id)]["prefix"])(client,message)
+      return commands.when_mentioned_or("!!")(client,message)
+      
 
 
 client = commands.Bot(command_prefix=get_prefix, intents = disnake.Intents.all())
 
-# load_dotenv()
+load_dotenv()
 
 # EVENTS
 
@@ -101,10 +105,16 @@ except Exception as error:
     with open('Logs/error.log','a') as file:
       file.write(f'\nCogs Error: {error}')
 
-keep_alive()
+# keep_alive()
 try:
-    client.run(str(os.getenv('TOKEN')))
+  client.loop.run_until_complete(client.start(os.getenv("TOKEN")))
 except Exception as e:
-    print(f"Login Failure at {datetime.datetime.now()}")
+  print(f"Login Failure at {datetime.datetime.now()}")
+  with open('Runtime_error.log','a') as f:
+    f.write("-"*20)
+    f.write(str(e))
+  if "429 Too Many Requests" in str(e):
     os.system("kill 1")
-        
+  client.loop.run_until_complete(client.logout())
+finally:
+  client.loop.close()

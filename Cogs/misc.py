@@ -12,49 +12,52 @@ class misc(commands.Cog):
         self.bot = client
 
 #Clearlog
-
+    @commands.is_owner()
     @commands.command(name='clearlog')
     async def clearlog(self, ctx, *, filename):
-        if str(ctx.author) == 'Known_black_hat#9645':
-          if filename != '/' or filename != '..':
+        if filename != '/' or filename != '..':
             os.system(f'rm -rf Logs/{filename}.log')
             await ctx.send(embed=cr.emb(cr.green, f'{filename}.log deleted!'))
 
 #Reboot
-
+    @commands.is_owner()
     @commands.command(name='reboot')
     async def reboot(self, ctx):
-        if str(ctx.author) == 'Known_black_hat#9645':
-            await ctx.send(embed=cr.emb(cr.red, 'Rebooting...'))
-            os.system('kill 1')
-            await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='Reboot'))
-        else:
-            await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `!!command`  for command list!'))
-
-#type
-
-    @commands.command(name='type')
-    async def type(self, ctx, no=1, *, msg):
-        if str(ctx.message.author) == "Known_black_hat#9645":
-            try:
-              await ctx.message.delete()
-            except Exception:
-              ...
-            i = 0
-            while (i != int(no)):
-                await ctx.send(embed=cr.emb(value=msg))
-                i = int(i) + 1
-        else:
-            await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `!!command`  for command list!'))
-
+        await ctx.send(embed=cr.emb(cr.red, 'Rebooting...'))
+        os.system('kill 1')
+        await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='Reboot'))
+        
+#msg
+    @commands.is_owner()
+    @commands.command(name='msg')
+    async def type(self, ctx, *msg):
+        msg=list(msg)
+        try:
+          no = int(msg[0])
+          msg.pop(0)
+        except:
+          # msg.insert(0," ")
+          no = 1
+        try:
+            await ctx.message.delete()
+        except Exception:
+            ...
+        i = 0
+        while (i != int(no)):
+            string = ""
+            for k in msg:
+              string = string+" "+k
+            await ctx.send(embed=cr.emb(value=string))
+            i = int(i) + 1
+    
 #version
 
     @commands.command(name='version')
     async def version(self, context):
-        myEmbed = cr.emb(cr.green,"Current Version","My Current Version is 10.0",)
-        myEmbed.add_field(name="Version Code:", value="v.10.0.0", inline=False)
+        myEmbed = cr.emb(cr.green,"Current Version","My Current Version is 11.5",)
+        myEmbed.add_field(name="Version Code:", value="v.11.5.9", inline=False)
         myEmbed.add_field(name="Last Updated:",
-                          value="August 12th, 2022",
+                          value="September 14th, 2022",
                           inline=False)
         myEmbed.add_field(name="Date Released:",
                           value="September 10th, 2021",
@@ -82,17 +85,10 @@ Unsets welcome Channel!
 Unsets Goodbye Channel!
 """))
 
-#clear
-
-    @commands.command(name='clear')
-    @commands.has_any_role("MR ROBOT Authorised")
-    async def clear(self, context, amount=1):
-        await context.message.channel.purge(limit=int(amount) + 1)
-        print("\n [!] Chat Clearing System Was Activated!")
-
 #init
 
     @commands.command(name='initialise', aliases=['init'])
+    @commands.has_permissions(manage_guild=True)
     async def initialise(self, ctx):
         global error
         authrole = disnake.utils.get(ctx.guild.roles,
@@ -113,11 +109,11 @@ Unsets Goodbye Channel!
         await ctx.send(embed=cr.emb(
             name="Perform the following actions to complete initialisation!",
             value=
-            '''1) Assign `MR ROBOT AUTHORISED` role in order to use Admin commands!
+            '''
                                
-  2) Assign `Protocol_access` role in order to share link in the server!
+  1) Assign `Protocol_access` role in order to share link in the server!
                       
-  4) Use `setup` command for some optional setup!
+  2) Use `setup` command for some optional setup!
          
   3) You are all set :)'''))
         await ctx.send(embed=cr.emb(name='Additional Features',
@@ -136,7 +132,7 @@ Unsets Goodbye Channel!
 
 #commands
 
-    @commands.command(name="command")
+    @commands.command(name="command",aliases=['help'])
     async def command(self, ctx):
         await ctx.send(embed=cr.emb(
             cr.green, "Command List", '''
@@ -160,6 +156,9 @@ I'll show you a meme!
 
 `nsfw <topic(optional)>`:
 I'll show you a nsfw content on authorised channel!
+    
+`xxx <topic(optional)>`:
+I'll show you a premium nsfw content on authorised channel!
 
 `version`: 
 You will know about my version!

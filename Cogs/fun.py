@@ -1,30 +1,49 @@
 import random
+import json
 import aiohttp
+import requests
+from bs4 import BeautifulSoup
 import disnake
 from disnake.ext import commands
-from bot import cr
+from bot import cr 
 # from dotenv import load_dotenv
 import os
 # load_dotenv()
 
+
+def extract_video_link(soup):
+    link = soup.find('script', type='application/ld+json')
+    link = json.loads(link.string) # if any problem switch to link.text
+    link = link["contentUrl"]
+    return link
+
+
+def proxy_generator():
+    response = requests.get("https://sslproxies.org/")
+    soup = BeautifulSoup(response.content, 'html5lib')
+    proxy = f"http://{random.choice(list(map(lambda x:x[0]+':'+x[1], list(zip(map(lambda x:x.text, soup.findAll('td')[::8]), map(lambda x:x.text, soup.findAll('td')[1::8]))))))}"
+    return proxy
+  
+async def get(url):
+  while True:
+    try:
+      #proxy=proxy_generator()
+      # print(f"Proxy currently being used: {proxy}")
+      async with aiohttp.ClientSession(trust_env=True) as session:
+            async with session.get(url,ssl=False,timeout=7) as response:
+              htmlcontent = await response.text()
+              break
+    except:
+      # print("Connection error, looking for another proxy")
+      continue
+  soup = BeautifulSoup(htmlcontent, "html.parser")
+  return soup
+
+
 def setup(client: commands.Bot):
     client.add_cog(fun(client))
 
-client_id = os.getenv('client_id')
 
-client_secret = os.getenv('client_secret')
-user = os.getenv('user')
-passw = os.getenv('passw')
-# reddit = apraw.Reddit(client_id = client_id,
-#                      client_secret = client_secret,
-#                      password=passw,
-#                      user_agent='Mr Robot',
-#                      username=user)
-
-# headers={
-#          "Content-Type": "application/json",
-#   "Authorization": "Required for certain image types, Key for testing: `015445535454455354D6`"
-#         }
 class fun(commands.Cog):
     def __init__(self, client):
         self.bot = client
@@ -56,27 +75,6 @@ class fun(commands.Cog):
         else:
             await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
 
-    # @commands.command(name='nsfw')
-    # async def nsfw(self, ctx, topic='porn', amount=1):
-    #     if not str(ctx.message.author) == "Known_black_hat#9645":
-    #         amount = 1
-    #     if ctx.channel.is_nsfw():
-    #         async with ctx.typing():
-    #             await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Searching {topic}..."))
-    #         j = 0
-
-    #         while j != amount:
-    #             submission = reddit.subreddit(str(topic)).random()
-    #             #submission = await reddit.subreddit(str(topic)).random()
-    #             async with ctx.typing():
-    #                 pass
-    #             await ctx.send(submission.url)
-    #             j = int(j + 1)
-    #         await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Search Of {topic} Completed!"))
-    #     else:
-    #         await ctx.send(
-    #             embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
-
     
     @commands.command(name='meme')
     async def meme(self, ctx, amount=int(1)):
@@ -102,17 +100,54 @@ class fun(commands.Cog):
                 else:
                     await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
 
-    '''@commands.command(name='nsfw')
-    async def nsfw(self,ctx,search='boobs'):
-      if ctx.channel.is_nsfw():
-        async with aiohttp.ClientSession(headers=headers) as session:
-          async with session.get(f"https://nekobot.xyz/api/image?type={search}") as response:
-            if response.status == 200:
-              json_data = await response.json()
-              await ctx.send(json_data["message"])
-            else:
-              await ctx.send(embed=cr.emb(name="Error",value=f"The request was invalid.\nStatus code: {response.status}"))
-      else:
-        await ctx.send(
-                embed=cr.emb(red, "Sorry Buddy! This is not nsfw channel!"))
-'''
+    #@commands.is_owner()
+    @commands.command(name='xxx')
+    async def xxx(self,ctx,*term):
+        if ctx.channel.is_nsfw():
+          term = list(term)
+          try:
+            amount = int(term[0])
+            term.pop(0)
+          except:
+            amount = 1
+          await ctx.send(embed=cr.emb(cr.yellow,"Results may take time, so hold on!"),delete_after=10)
+          stri = ""
+          for n in term:
+            stri = stri+" "+n
+          term = stri
+          if term == "":
+            term = "porn"
+          ufrm_term = term
+          term = term.replace(" ","+")
+          term_url = "https://www.xnxx.com/search/"+str(term)
+          # print(await get(term_url))
+          async with ctx.typing():
+            try:
+                p=0
+                while True:
+                  try:
+                    search_term = await get(term_url)
+                    div = search_term.find('div', class_='mozaique cust-nb-cols')
+                    div = div.find_all('a')
+                    i = list(div)
+                    while p != int(amount):
+                        i = random.choice(i)
+                        link = i.get('href')
+                        page = await get("https://www.xnxx.com"+link)
+                        link = extract_video_link(page)
+                        await ctx.send(embed=cr.emb(cr.black,"Search Term: "+ufrm_term,"Video Title: "+page.title.string))
+                        await ctx.send(link)
+                        p = p+1
+                    break
+                  except Exception as aw:
+                    #print(aw)
+                    continue
+                  # print(link)
+                # break
+            except Exception as ex:
+                # print("Trying Again")
+                await ctx.send(embed=cr.emb(cr.red,"Try Again Later!",ex))
+                  # continue
+
+        else:
+            await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
