@@ -51,6 +51,8 @@ class cr:
 
 
 @client.remove_command('help')
+
+@client.is_owner()
 @client.command(name='list_cogs')
 async def list_functions(ctx):
     await ctx.send(embed=cr.emb(cr.green, "Loaded Cogs", '   ✅\n\n'.join(loaded_cog_list) + "  ✅\n"))
@@ -58,35 +60,35 @@ async def list_functions(ctx):
         await ctx.send(embed=cr.emb(cr.red, "Unloaded Cogs", '  ❌\n\n'.join(unloaded_cog_list) +"  ❌\n"))
 
 
+@client.is_owner()
 @client.command(name='load')
 async def load(ctx, name):
-    if str(ctx.message.author) == "Known_black_hat#9645":
-        client.load_extension(f'Cogs.{name}')
-        try:
-            unloaded_cog_list.remove(name)
-            loaded_cog_list.append(name)
-        except Exception:
-            ...
-        await ctx.send(embed=cr.emb(cr.green, "Loaded", f"{name} function"))
+    client.load_extension(f'Cogs.{name}')
+    try:
+        unloaded_cog_list.remove(name)
+        loaded_cog_list.append(name)
+    except Exception:
+        ...
+    await ctx.send(embed=cr.emb(cr.green, "Loaded", f"{name} function"))
 
+@client.is_owner()
 @client.command(name='reload')
 async def reload(ctx, name):
-    if str(ctx.message.author) == "Known_black_hat#9645":
-      client.unload_extension(f'Cogs.{name}')
-      client.load_extension(f'Cogs.{name}')
-      await ctx.send(embed=cr.emb(cr.green, "Reloaded", f"{name} function"))
+    client.unload_extension(f'Cogs.{name}')
+    client.load_extension(f'Cogs.{name}')
+    await ctx.send(embed=cr.emb(cr.green, "Reloaded", f"{name} function"))
 
-      
+
+@client.is_owner()
 @client.command(name='unload')
 async def unload(ctx, name):
-    if str(ctx.message.author) == "Known_black_hat#9645":
-        client.unload_extension(f'Cogs.{name}')
-        try:
-            loaded_cog_list.remove(name)
-            unloaded_cog_list.append(name)
-        except Exception:
-            ...
-        await ctx.send(embed=cr.emb(cr.red, "Unloaded", f"{name} function"))
+    client.unload_extension(f'Cogs.{name}')
+    try:
+        loaded_cog_list.remove(name)
+        unloaded_cog_list.append(name)
+    except Exception:
+        ...
+    await ctx.send(embed=cr.emb(cr.red, "Unloaded", f"{name} function"))
 
 
 error = ''
