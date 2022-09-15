@@ -111,9 +111,10 @@ class fun(commands.Cog):
           except:
             amount = 1
           await ctx.send(embed=cr.emb(cr.yellow,"Results may take time, so hold on!"),delete_after=10)
-          term = ""
+          stri = ""
           for n in term:
-            term = term+" "+n
+            stri = term+" "+n
+          term = stri
           if term == "":
             term = "porn"
           term = term.replace(" ","+")
