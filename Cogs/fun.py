@@ -114,7 +114,7 @@ class fun(commands.Cog):
           term = ""
           for n in term:
             term = term+" "+n
-          if term = "":
+          if term == "":
             term = "porn"
           term = term.replace(" ","+")
           term_url = "https://www.xnxx.com/search/"+str(term)
