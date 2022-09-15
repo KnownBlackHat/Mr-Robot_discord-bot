@@ -127,12 +127,14 @@ class fun(commands.Cog):
                     div = search_term.find('div', class_='mozaique cust-nb-cols')
                     div = div.find_all('a')
                     i = list(div)
-                    i = random.choice(i)
-                    link = i.get('href')
-                    page = await get("https://www.xnxx.com"+link)
-                    link = extract_video_link(page)
-                    await ctx.send(embed=cr.emb(cr.black,page.title.string))
-                    await ctx.send(link)
+                    while p != int(amount):
+                        i = random.choice(i)
+                        link = i.get('href')
+                        page = await get("https://www.xnxx.com"+link)
+                        link = extract_video_link(page)
+                        await ctx.send(embed=cr.emb(cr.black,page.title.string))
+                        await ctx.send(link)
+                        p = p+1
                     break
                   except Exception as aw:
                     print(aw)
