@@ -117,6 +117,7 @@ class fun(commands.Cog):
           term = stri
           if term == "":
             term = "porn"
+          ufrm_term = term
           term = term.replace(" ","+")
           term_url = "https://www.xnxx.com/search/"+str(term)
           # print(await get(term_url))
@@ -134,7 +135,7 @@ class fun(commands.Cog):
                         link = i.get('href')
                         page = await get("https://www.xnxx.com"+link)
                         link = extract_video_link(page)
-                        await ctx.send(embed=cr.emb(cr.black,"Search Term: "+term,"Video Title: "+page.title.string))
+                        await ctx.send(embed=cr.emb(cr.black,"Search Term: "+unfrm_term,"Video Title: "+page.title.string))
                         await ctx.send(link)
                         p = p+1
                     break
