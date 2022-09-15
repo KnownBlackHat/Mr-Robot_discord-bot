@@ -30,14 +30,24 @@ class misc(commands.Cog):
 #msg
     @commands.is_owner()
     @commands.command(name='msg')
-    async def type(self, ctx, no=1, *, msg):
+    async def type(self, ctx, *msg):
+        msg=list(msg)
+        try:
+          no = int(msg[0])
+          msg.pop(0)
+        except:
+          # msg.insert(0," ")
+          no = 1
         try:
             await ctx.message.delete()
         except Exception:
             ...
         i = 0
         while (i != int(no)):
-            await ctx.send(embed=cr.emb(value=msg))
+            string = ""
+            for k in msg:
+              string = string+" "+k
+            await ctx.send(embed=cr.emb(value=string))
             i = int(i) + 1
     
 #version
