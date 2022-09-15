@@ -104,7 +104,7 @@ class fun(commands.Cog):
     @commands.command(name='xxx')
     async def xxx(self,ctx,*term):
         if ctx.channel.is_nsfw():
-            term = list(term)
+          term = list(term)
           try:
             amount = int(term[0])
             term.pop(0)
