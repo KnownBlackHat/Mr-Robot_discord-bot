@@ -66,7 +66,7 @@ class moderation(commands.Cog):
             ...
 
     @commands.command(name='unban', aliases=['ub'])
-    @commands.has_permissions(manage_guild=True)
+    @commands.has_permissions(ban_members=True)
     async def unban(self, context, *, member):
         banned_users = await context.guild.bans()
         member_name, member_discriminator = member.split('#')
@@ -88,7 +88,7 @@ class moderation(commands.Cog):
                 return
 
     @commands.command(name='ban', aliases=['b'])
-    @commands.has_permissions(manage_guild=True)
+    @commands.has_permissions(ban_members=True)
     async def ban(self, context, member: disnake.Member, *, reason=None):
         try:
             await member.send(embed=cr.emb(cr.red,f'You Were Banned From The {context.guild.name} Server!',f'Reason: {reason}'))
@@ -99,7 +99,7 @@ class moderation(commands.Cog):
             embed=cr.emb(cr.red,"Banned",f'Banned: {member} Reason: {reason}'))
 
     @commands.command(name="mute", aliases=['m'])
-    @commands.has_permissions(manage_guild=True)
+    @commands.has_permissions(manage_roles=True)
     async def mute(self, ctx, member: disnake.Member, *, reason=None):
         guild = ctx.guild
         mutedRole = disnake.utils.get(guild.roles, name="Muted")
@@ -123,7 +123,7 @@ class moderation(commands.Cog):
             f"You are Muted in the {guild.name} server',f'Reason: {reason}"))
 
     @commands.command(name="unmute", aliases=['um'])
-    @commands.has_permissions(manage_guild=True)
+    @commands.has_permissions(manage_roles=True)
     async def unmute(self, ctx, member: disnake.Member, *, reason=None):
         guild = ctx.guild
         mutedRole = disnake.utils.get(guild.roles, name="Muted")
@@ -134,7 +134,7 @@ class moderation(commands.Cog):
             f"You are Unmuted in the {guild.name} server!',' 😉😉Enjoy😉😉!"))
 
     @commands.command(name='kick', aliases=['bye','goodbye'])
-    @commands.has_permissions(manage_guild=True)
+    @commands.has_permissions(kick_members=True)
     async def kick(self, context, member: disnake.Member, *, reason=None):
         try:
             await member.send(embed=cr.emb(
