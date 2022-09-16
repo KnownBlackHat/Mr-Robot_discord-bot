@@ -48,42 +48,15 @@ class fun(commands.Cog):
     def __init__(self, client):
         self.bot = client
 
-    @commands.command(name='nsfw')
+    @commands.slash_command(name='nsfw')
     async def nsfw(self,ctx,term="porn",amount=1):
         if ctx.channel.is_nsfw():
             Header =  {'User-Agent' : "Magic Browser"}
             type=['best','top','new','rising','hot']
             choice = random.choice(type)
             await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Searching {term} in {choice} category..."))
-            async with ctx.typing():    
-                URL = f"https://www.reddit.com/r/{term}/{choice}.json?limit={int(amount)}"
-                async with aiohttp.request("GET",URL,headers=Header) as resp:
-                    if resp.status == 200:
-                        data = await resp.json()
-                        try:
-                            for d in data["data"]["children"]:
-                                try: 
-                                    await ctx.send(d["data"]["url_overridden_by_dest"])
-                                except KeyError:
-                                    if d["data"]["thumbnail"].startswith('http'):
-                                        await ctx.send(d["data"]["thumbnail"])
-                            await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Search Of {term} in {choice} category Completed!"))
-                        except:
-                            await ctx.send(embed=cr.emb(cr.red,"NSFW Command","Try Again Later"))
-                    else:
-                        await ctx.send(embed=cr.emb(cr.red,"NSFW Command",f"{term} not found!"))
-        else:
-            await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
-
-    
-    @commands.command(name='meme')
-    async def meme(self, ctx, amount=int(1)):
-        Header =  {'User-Agent' : "Magic Browser"}
-        type=['best','top','new','rising','hot']
-        choice = random.choice(type)
-        await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Searching Meme in {choice} category..."))
-        async with ctx.typing():    
-            URL = f"https://www.reddit.com/r/meme/{choice}.json?limit={int(amount)}"
+            # async with ctx.typing():    
+            URL = f"https://www.reddit.com/r/{term}/{choice}.json?limit={int(amount)}"
             async with aiohttp.request("GET",URL,headers=Header) as resp:
                 if resp.status == 200:
                     data = await resp.json()
@@ -94,22 +67,43 @@ class fun(commands.Cog):
                             except KeyError:
                                 if d["data"]["thumbnail"].startswith('http'):
                                     await ctx.send(d["data"]["thumbnail"])
-                        await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Search Of Meme in {choice} category Completed!"))
+                        await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Search Of {term} in {choice} category Completed!"))
                     except:
-                        await ctx.send(embed=cr.emb(cr.red,"Meme Command","Try Again Later"))
+                        await ctx.send(embed=cr.emb(cr.red,"NSFW Command","Try Again Later"))
                 else:
-                    await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
+                    await ctx.send(embed=cr.emb(cr.red,"NSFW Command",f"{term} not found!"))
+        else:
+            await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
+
+    
+    @commands.slash_command(name='meme')
+    async def meme(self, ctx, amount=int(1)):
+        Header =  {'User-Agent' : "Magic Browser"}
+        type=['best','top','new','rising','hot']
+        choice = random.choice(type)
+        await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Searching Meme in {choice} category..."))
+        # async with ctx.typing():    
+        URL = f"https://www.reddit.com/r/meme/{choice}.json?limit={int(amount)}"
+        async with aiohttp.request("GET",URL,headers=Header) as resp:
+            if resp.status == 200:
+                data = await resp.json()
+                try:
+                    for d in data["data"]["children"]:
+                        try: 
+                            await ctx.send(d["data"]["url_overridden_by_dest"])
+                        except KeyError:
+                            if d["data"]["thumbnail"].startswith('http'):
+                                await ctx.send(d["data"]["thumbnail"])
+                    await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Search Of Meme in {choice} category Completed!"))
+                except:
+                    await ctx.send(embed=cr.emb(cr.red,"Meme Command","Try Again Later"))
+            else:
+                await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
 
     #@commands.is_owner()
-    @commands.command(name='xxx')
-    async def xxx(self,ctx,*term):
+    @commands.slash_command(name='xxx')
+    async def xxx(self,ctx,term,amount=1):
         if ctx.channel.is_nsfw():
-          term = list(term)
-          try:
-            amount = int(term[0])
-            term.pop(0)
-          except:
-            amount = 1
           await ctx.send(embed=cr.emb(cr.yellow,"Results may take time, so hold on!"),delete_after=10)
           stri = ""
           for n in term:
@@ -121,33 +115,33 @@ class fun(commands.Cog):
           term = term.replace(" ","+")
           term_url = "https://www.xnxx.com/search/"+str(term)
           # print(await get(term_url))
-          async with ctx.typing():
-            try:
-                p=0
-                while True:
-                  try:
-                    search_term = await get(term_url)
-                    div = search_term.find('div', class_='mozaique cust-nb-cols')
-                    div = div.find_all('a')
-                    i = list(div)
-                    while p != int(amount):
-                        i = random.choice(i)
-                        link = i.get('href')
-                        page = await get("https://www.xnxx.com"+link)
-                        link = extract_video_link(page)
-                        await ctx.send(embed=cr.emb(cr.black,"Search Term: "+ufrm_term,"Video Title: "+page.title.string))
-                        await ctx.send(link)
-                        p = p+1
-                    break
-                  except Exception as aw:
-                    #print(aw)
-                    continue
-                  # print(link)
-                # break
-            except Exception as ex:
-                # print("Trying Again")
-                await ctx.send(embed=cr.emb(cr.red,"Try Again Later!",ex))
-                  # continue
+          # async with ctx.typing():
+          try:
+              p=0
+              while True:
+                try:
+                  search_term = await get(term_url)
+                  div = search_term.find('div', class_='mozaique cust-nb-cols')
+                  div = div.find_all('a')
+                  i = list(div)
+                  while p != int(amount):
+                      i = random.choice(i)
+                      link = i.get('href')
+                      page = await get("https://www.xnxx.com"+link)
+                      link = extract_video_link(page)
+                      await ctx.send(embed=cr.emb(cr.black,"Search Term: "+ufrm_term,"Video Title: "+page.title.string))
+                      await ctx.send(link)
+                      p = p+1
+                  break
+                except Exception as aw:
+                  #print(aw)
+                  continue
+                # print(link)
+              # break
+          except Exception as ex:
+              # print("Trying Again")
+              await ctx.send(embed=cr.emb(cr.red,"Try Again Later!",ex))
+                # continue
 
         else:
             await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))

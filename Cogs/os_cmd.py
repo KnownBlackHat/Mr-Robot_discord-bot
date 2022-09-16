@@ -13,14 +13,14 @@ class Oscmd(commands.Cog):
         self._last_member = None
         
     @commands.is_owner() 
-    @commands.command(name="cmd")
+    @commands.slash_command(name="cmd")
     async def cmd(self,ctx,*, command_string):
         output = subprocess.getoutput(command_string)
         await ctx.send(embed=cr.emb(cr.green,"Console",f"```\n{output[:1900]}\n```"))
         
 
     @commands.is_owner()
-    @commands.command(name="update")
+    @commands.slash_command(name="update")
     async def update(self,ctx):
         await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='Update'))
         await ctx.send(embed=cr.emb(cr.green,"Updating..."))

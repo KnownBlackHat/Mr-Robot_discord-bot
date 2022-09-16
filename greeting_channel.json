@@ -51,7 +51,9 @@
   },
   "998528445325787188": {
     "name": "bot-testing",
-    "prefix": "!!"
+    "prefix": "!!",
+    "greet_channel": "1004199742579953695",
+    "goodbye_channel": "999606262767562752"
   },
   "1005546596257239050": {
     "name": "Server von 7AGAM"

@@ -13,7 +13,7 @@ class misc(commands.Cog):
 
 #Clearlog
     @commands.is_owner()
-    @commands.command(name='clearlog')
+    @commands.slash_command(name='clearlog')
     async def clearlog(self, ctx, *, filename):
         if filename != '/' or filename != '..':
             os.system(f'rm -rf Logs/{filename}.log')
@@ -21,7 +21,7 @@ class misc(commands.Cog):
 
 #Reboot
     @commands.is_owner()
-    @commands.command(name='reboot')
+    @commands.slash_command(name='reboot')
     async def reboot(self, ctx):
         await ctx.send(embed=cr.emb(cr.red, 'Rebooting...'))
         os.system('kill 1')
@@ -29,7 +29,7 @@ class misc(commands.Cog):
         
 #msg
     @commands.is_owner()
-    @commands.command(name='msg')
+    @commands.slash_command(name='msg')
     async def type(self, ctx, *msg):
         msg=list(msg)
         try:
@@ -39,7 +39,7 @@ class misc(commands.Cog):
           # msg.insert(0," ")
           no = 1
         try:
-            await ctx.message.delete()
+            await ctx.delete()
         except Exception:
             ...
         i = 0
@@ -52,7 +52,7 @@ class misc(commands.Cog):
     
 #version
 
-    @commands.command(name='version')
+    @commands.slash_command(name='version')
     async def version(self, context):
         myEmbed = cr.emb(cr.green,"Current Version","My Current Version is 11.5",)
         myEmbed.add_field(name="Version Code:", value="v.11.5.9", inline=False)
@@ -68,7 +68,8 @@ class misc(commands.Cog):
 
 #setup
 
-    @commands.command(name="setup")
+    @commands.slash_command(name="setup")
+    @commands.has_any_role("MR ROBOT Authorised")
     async def setu(self,ctx):
         await ctx.send(embed=cr.emb(cr.yellow,"Setup!","""
 `set_wlcm [mention channel]`:
@@ -86,7 +87,7 @@ Unsets Goodbye Channel!
 
 #init
 
-    @commands.command(name='initialise', aliases=['init'])
+    @commands.slash_command(name='initialise', aliases=['init'])
     @commands.has_permissions(manage_guild=True)
     async def initialise(self, ctx):
         global error
@@ -129,78 +130,78 @@ Unsets Goodbye Channel!
                                   ))
 
 
-#commands
+# #commands
 
-    @commands.command(name="command",aliases=['help'])
-    async def command(self, ctx):
-        await ctx.send(embed=cr.emb(
-            cr.green, "Command List", '''
-`stats`:
-I'll tell my stats!
+#     @commands.slash_command(name="command",aliases=['help'])
+#     async def command(self, ctx):
+#         await ctx.send(embed=cr.emb(
+#             cr.green, "Command List", '''
+# `stats`:
+# I'll tell my stats!
 
-`initialise`:
-I'll setup required role for server (Important command)!
+# `initialise`:
+# I'll setup required role for server (Important command)!
 
-`translate/tr [language name to be translated] [Content to be translated]`:
-Translates the asked message to any language
+# `translate/tr [language name to be translated] [Content to be translated]`:
+# Translates the asked message to any language
 
-`music_command`:
-I'll show my music command list!
+# `music_command`:
+# I'll show my music command list!
 
-`usr <mention user (optional)>`:
-I'll show you mentioned user info 
+# `usr <mention user (optional)>`:
+# I'll show you mentioned user info 
 
-`meme`: 
-I'll show you a meme!
+# `meme`: 
+# I'll show you a meme!
 
-`nsfw <topic(optional)>`:
-I'll show you a nsfw content on authorised channel!
+# `nsfw <topic(optional)>`:
+# I'll show you a nsfw content on authorised channel!
     
-`xxx <topic(optional)>`:
-I'll show you a premium nsfw content on authorised channel!
+# `xxx <topic(optional)>`:
+# I'll show you a premium nsfw content on authorised channel!
 
-`version`: 
-You will know about my version!
+# `version`: 
+# You will know about my version!
 
-`changeprefix [new prefix]`
-Set custom prefix! (Only For Admin)
+# `changeprefix [new prefix]`
+# Set custom prefix! (Only For Admin)
 
-`clear <amount>`:
-I'll delete the asked no. of previous chat! (Only For Admin)
+# `clear <amount>`:
+# I'll delete the asked no. of previous chat! (Only For Admin)
 
-`warn [mention user] <reason>`:
-I'll give warning message to asked user! (Only For Admin)
+# `warn [mention user] <reason>`:
+# I'll give warning message to asked user! (Only For Admin)
 
-`addrole [mention user] [mention role]`:
-I'll add the asked role to asked member! (Only For Admin)
+# `addrole [mention user] [mention role]`:
+# I'll add the asked role to asked member! (Only For Admin)
 
-`rmrole [mention user] [mention role]`: 
-I'll remove the asked role to asked member! (Only For Admin)
+# `rmrole [mention user] [mention role]`: 
+# I'll remove the asked role to asked member! (Only For Admin)
 
-`kick [mention member ] [reason]`: 
-I'll kick the asked member! (Only For Admin)
+# `kick [mention member ] [reason]`: 
+# I'll kick the asked member! (Only For Admin)
 
-`ban [mention member] <reason>`: 
-I'll ban the asked member! (Only For Admin)
+# `ban [mention member] <reason>`: 
+# I'll ban the asked member! (Only For Admin)
 
-`unban [mention member] <reason>`: 
-I'll unban the asked member! (Only For Admin)
+# `unban [mention member] <reason>`: 
+# I'll unban the asked member! (Only For Admin)
 
-`mute [mention member] <reason(optional)>`: 
-I'll mute to the asked member! (Only For Admin)
+# `mute [mention member] <reason(optional)>`: 
+# I'll mute to the asked member! (Only For Admin)
 
-`setup`:
-Setup command! (Only For Admin)
+# `setup`:
+# Setup command! (Only For Admin)
 
-`unmute [mention member] <reason(optional)>`: 
-I'll Unmute to the asked member! (Only For Admin)
-'''))
+# `unmute [mention member] <reason(optional)>`: 
+# I'll Unmute to the asked member! (Only For Admin)
+# '''))
 
 
-    @commands.command(aliases=['usrinf', 'user', 'whois','usr'])
+    @commands.slash_command(name="userinfo")
     async def userinfo(self,ctx, *, member:disnake.Member = None):
         if member == None:
-                member = ctx.message.author
+                member = ctx.author
         try:
             embed=cr.emb(member.color,f"{member} Information")
             try:

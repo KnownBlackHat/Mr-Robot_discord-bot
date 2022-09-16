@@ -62,7 +62,7 @@ class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='music_command')
+    @commands.slash_command(name='music_command')
     async def music_help(self, ctx):
         await ctx.send(embed=cr.emb(
             cr.blue, "Music Commands", """
@@ -80,7 +80,7 @@ I'll get disconnected from voice channel
                     
                                """))
 
-    @commands.command(name='join')
+    @commands.slash_command(name='join')
     async def join(self, ctx, *, channel: disnake.VoiceChannel):
         """Joins a voice channel"""
         await ctx.send(embed=cr.emb(cr.green,"Voice Channel Joined",f"Channel Name: {channel}"))
@@ -89,21 +89,21 @@ I'll get disconnected from voice channel
 
         await channel.connect()
 
-    @commands.command(name='play')
+    @commands.slash_command(name='play')
     async def play(self, ctx, *, url):
-        async with ctx.typing():
-          ...
         await self.ensure_voice(ctx)
         player = await YTDLSource.from_url(url,loop=self.bot.loop,stream=True)
-            
-        ctx.voice_client.play(player,after=lambda e:  ctx.send(embed=cr.emb(cr.red,"Player Error", e))if e else None)
-        
+        try:
+            ctx.guild.voice_client.play(player,after=lambda e:  ctx.send(embed=cr.emb(cr.red,"Player Error", e))if e else None)
+        except Exception as e:
+            print(e)
+            raise Exception
         await ctx.send(embed=cr.emb(cr.blue,"Playing...",f"""
 Name: {player.title}
                                  
 """))
 
-    @commands.command(name='volume')
+    @commands.slash_command(name='volume')
     async def volume(self, ctx, volume: int):
         """Changes the player's volume"""
 
@@ -113,7 +113,7 @@ Name: {player.title}
         ctx.voice_client.source.volume = volume / 100
         await ctx.send(embed=cr.emb(cr.blue,"Volume",f"Changed volume to {volume}%"))
 
-    @commands.command(name='stop')
+    @commands.slash_command(name='stop')
     async def stop(self, ctx):
         """Stops and disconnects the bot from voice"""
 

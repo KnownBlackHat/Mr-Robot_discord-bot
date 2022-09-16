@@ -14,7 +14,7 @@ class command_error_handling(commands.Cog):
         self.bot = client
 
     @commands.Cog.listener()
-    async def on_command_error(self, ctx, error):
+    async def on_slash_command_error(self, ctx, error):
 
 
         if isinstance(error, commands.errors.MissingPermissions):
@@ -73,3 +73,5 @@ class command_error_handling(commands.Cog):
                 await ctx.send(
                     embed=cr.emb(cr.red, 'Oops! Something went wrong!',f'Error: {str(error)}'))
             traceback.print_exc()
+            traceback.format_exc()
+            

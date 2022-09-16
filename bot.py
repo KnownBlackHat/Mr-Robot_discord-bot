@@ -35,6 +35,10 @@ load_dotenv()
 # EVENTS
 
 
+error = ''
+unloaded_cog_list=[]
+loaded_cog_list= []
+
 class cr:
     red = 0xff0000
     green = 0x00ff00
@@ -53,15 +57,14 @@ class cr:
 @client.remove_command('help')
 
 @commands.is_owner()
-@client.command(name='list_cogs')
+@client.slash_command(description="Shows all loaded Cogs")
 async def list_functions(ctx):
     await ctx.send(embed=cr.emb(cr.green, "Loaded Cogs", '   ✅\n\n'.join(loaded_cog_list) + "  ✅\n"))
     if not unloaded_cog_list == []:
         await ctx.send(embed=cr.emb(cr.red, "Unloaded Cogs", '  ❌\n\n'.join(unloaded_cog_list) +"  ❌\n"))
 
-
 @commands.is_owner()
-@client.command(name='load')
+@client.slash_command(description="Load Cogs")
 async def load(ctx, name):
     client.load_extension(f'Cogs.{name}')
     try:
@@ -69,18 +72,19 @@ async def load(ctx, name):
         loaded_cog_list.append(name)
     except Exception:
         ...
-    await ctx.send(embed=cr.emb(cr.green, "Loaded", f"{name} function"))
 
+    await ctx.send(embed=cr.emb(cr.green, "Loaded", f"{name} function"))
 @commands.is_owner()
-@client.command(name='reload')
-async def reload(ctx, name):
+@client.slash_command(description="Reload Cogs")
+async def reload(ctx, name: str = commands.Param(choices=loaded_cog_list)):
     client.unload_extension(f'Cogs.{name}')
     client.load_extension(f'Cogs.{name}')
     await ctx.send(embed=cr.emb(cr.green, "Reloaded", f"{name} function"))
 
+      
 
 @commands.is_owner()
-@client.command(name='unload')
+@client.slash_command(description="Unloads Cogs")
 async def unload(ctx, name):
     client.unload_extension(f'Cogs.{name}')
     try:
@@ -90,10 +94,6 @@ async def unload(ctx, name):
         ...
     await ctx.send(embed=cr.emb(cr.red, "Unloaded", f"{name} function"))
 
-
-error = ''
-unloaded_cog_list=[]
-loaded_cog_list= []
 try:
     for file in os.listdir('Cogs'):
         if file.endswith('.py'):
@@ -106,7 +106,6 @@ try:
 except Exception as error:
     with open('Logs/error.log','a') as file:
       file.write(f'\nCogs Error: {error}')
-
 # keep_alive()
 try:
   client.loop.run_until_complete(client.start(os.getenv("TOKEN")))

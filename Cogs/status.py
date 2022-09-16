@@ -45,7 +45,7 @@ class command_handling(commands.Cog):
 
 
 
-    @commands.command(name="stats")
+    @commands.slash_command(name="stats")
     async def status(self,ctx):
       current_time = time.time()
       difference = int(round(current_time - start_time))

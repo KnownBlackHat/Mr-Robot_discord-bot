@@ -14,14 +14,14 @@ class moderation(commands.Cog):
     
 #clear
 
-    @commands.command(name='clear')
+    @commands.slash_command(name='clear')
     @commands.has_permissions(manage_messages=True)
     async def clear(self, context, amount=1):
-        await context.message.channel.purge(limit=int(amount) + 1)
-        print("\n [!] Chat Clearing System Was Activated!")
+        await context.channel.purge(limit=int(amount))
+        await context.send(embed=cr.emb(cr.yellow,"Deleting Message..."),delete_after=int(amount))
 
 
-    @commands.command(name='changeprefix')
+    @commands.slash_command(name='changeprefix')
     @commands.has_permissions(manage_guild=True)
     async def changeprefix(self, ctx, *,prefix):
         with open('greeting_channel.json','r') as file:
@@ -34,14 +34,13 @@ class moderation(commands.Cog):
         json.dump(prefixes,open('greeting_channel.json','w'),indent=2)
         await ctx.send(embed=cr.emb(cr.green,"New Server Prefix",f'`{prefix}`'))
 
-    @commands.command(name='addrole', aliases=['ar'])
+    @commands.slash_command(name='addrole', aliases=['ar'])
     @commands.has_permissions(manage_roles=True)
     async def addrole(self, ctx, user: disnake.Member, *, roll: disnake.Role):
-        await ctx.message.delete()
         role = disnake.utils.get(user.guild.roles, name=str(roll))
         await user.add_roles(role)
         await ctx.send(embed=cr.emb(cr.green, "Role Assigned",
-                                  f"{user.mention} Has Got  `{role}`  Role !"))
+                                  f"{user.mention} Has Got  `{role}`  Role !"), delete_after=10)
         try:
             await user.send(
                 embed=cr.emb(cr.green, "Role Assigned",
@@ -49,15 +48,14 @@ class moderation(commands.Cog):
         except:
             ...
 
-    @commands.command(name='rmrole', aliases=['rr'])
+    @commands.slash_command(name='rmrole', aliases=['rr'])
     @commands.has_permissions(manage_roles=True)
     async def rmrole(self, ctx, user: disnake.Member, *, roll: disnake.Role):
-        await ctx.message.delete()
         role = disnake.utils.get(user.guild.roles, name=str(roll))
         await user.remove_roles(role)
         await ctx.send(
             embed=cr.emb(cr.red, "Role Removed",
-                      f"{user.mention} Was Removed  `{role}` Role !"))
+                      f"{user.mention} Was Removed  `{role}` Role !"), delete_after= 10)
         try:
             await user.send(embed=cr.emb(
                 cr.red, "Role Removed",
@@ -65,8 +63,8 @@ class moderation(commands.Cog):
         except:
             ...
 
-    @commands.command(name='unban', aliases=['ub'])
-    @commands.has_permissions(ban_members=True)
+    @commands.slash_command(name='unban', aliases=['ub'])
+    @commands.has_permissions(manage_guild=True)
     async def unban(self, context, *, member):
         banned_users = await context.guild.bans()
         member_name, member_discriminator = member.split('#')
@@ -76,7 +74,7 @@ class moderation(commands.Cog):
                                                    member_discriminator):
                 await context.guild.unban(user)
                 await context.send(
-                    embed=cr.emb(cr.green,"Unbanned",f'Unbanned: {user}'))
+                    embed=cr.emb(cr.green,"Unbanned",f'Unbanned: {user}'),delete_after=10)
                 try:
                     await member.send(embed=cr.emb(
                         name=
@@ -87,19 +85,19 @@ class moderation(commands.Cog):
 
                 return
 
-    @commands.command(name='ban', aliases=['b'])
-    @commands.has_permissions(ban_members=True)
+    @commands.slash_command(name='ban', aliases=['b'])
+    @commands.has_permissions(manage_guild=True)
     async def ban(self, context, member: disnake.Member, *, reason=None):
         try:
-            await member.send(embed=cr.emb(cr.red,f'You Were Banned From The {context.guild.name} Server!',f'Reason: {reason}'))
+            await member.send(embed=cr.emb(cr.red,f'You Were Banned From The {context.guild.name} Server!',f'Reason: {reason}'),delete_after=10)
         except:
             pass
         await member.ban(reason=reason)
         await context.send(
             embed=cr.emb(cr.red,"Banned",f'Banned: {member} Reason: {reason}'))
 
-    @commands.command(name="mute", aliases=['m'])
-    @commands.has_permissions(manage_roles=True)
+    @commands.slash_command(name="mute", aliases=['m'])
+    @commands.has_permissions(manage_guild=True)
     async def mute(self, ctx, member: disnake.Member, *, reason=None):
         guild = ctx.guild
         mutedRole = disnake.utils.get(guild.roles, name="Muted")
@@ -117,24 +115,24 @@ class moderation(commands.Cog):
 
         await member.add_roles(mutedRole)
         await ctx.send(embed=cr.emb(
-            cr.red,"Muted",f" Muted: {member.mention} Reason: {reason}"))
+            cr.red,"Muted",f" Muted: {member.mention} Reason: {reason}"),delete_after=10)
         await member.send(embed=cr.emb(
             cr.red,
             f"You are Muted in the {guild.name} server',f'Reason: {reason}"))
 
-    @commands.command(name="unmute", aliases=['um'])
-    @commands.has_permissions(manage_roles=True)
+    @commands.slash_command(name="unmute", aliases=['um'])
+    @commands.has_permissions(manage_guild=True)
     async def unmute(self, ctx, member: disnake.Member, *, reason=None):
         guild = ctx.guild
         mutedRole = disnake.utils.get(guild.roles, name="Muted")
         await member.remove_roles(mutedRole)
         await ctx.send(
-            embed=cr.emb(cr.green,"Unmuted",f"Unmuted {member.mention}"))
+            embed=cr.emb(cr.green,"Unmuted",f"Unmuted {member.mention}"),delete_after=10)
         await member.send(embed=cr.emb(cr.green,
             f"You are Unmuted in the {guild.name} server!',' 😉😉Enjoy😉😉!"))
 
-    @commands.command(name='kick', aliases=['bye','goodbye'])
-    @commands.has_permissions(kick_members=True)
+    @commands.slash_command(name='kick', aliases=['bye','goodbye'])
+    @commands.has_permissions(manage_guild=True)
     async def kick(self, context, member: disnake.Member, *, reason=None):
         try:
             await member.send(embed=cr.emb(
@@ -147,12 +145,12 @@ class moderation(commands.Cog):
         await context.send(
             embed=cr.emb(cr.red,"Kicked",f'Kicked: {member} Reason: {reason}'))
 
-    @commands.command(name="warn")
+    @commands.slash_command(name="warn")
     @commands.has_permissions(manage_guild=True)
     async def warn(self, ctx, member: disnake.Member, *, msg):
-        await ctx.message.delete()
+        await ctx.delete()
         await ctx.send(embed=cr.emb(cr.red, f"WARNING {member}",
-                                  f'{member.mention} --> {msg}'))
+                                  f'{member.mention} --> {msg}'),delete_after=10)
         try:
             await member.send(embed=cr.emb(cr.red, f"WARNING", msg))
         except:
