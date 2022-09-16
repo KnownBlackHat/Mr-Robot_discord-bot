@@ -69,7 +69,6 @@ class misc(commands.Cog):
 #setup
 
     @commands.command(name="setup")
-    @commands.has_any_role("MR ROBOT Authorised")
     async def setu(self,ctx):
         await ctx.send(embed=cr.emb(cr.yellow,"Setup!","""
 `set_wlcm [mention channel]`:
