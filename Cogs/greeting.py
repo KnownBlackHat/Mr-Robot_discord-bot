@@ -34,7 +34,7 @@ class Greetings(commands.Cog):
 
 
     @commands.command(name='set_wlcm')
-    @commands.has_any_role("MR ROBOT Authorised")
+    @commands.has_permissions(manage_guild = True)
     async def set_wlcm(self,ctx,channel: disnake.TextChannel):
         with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
@@ -66,7 +66,7 @@ class Greetings(commands.Cog):
 
 
     @commands.command(name='set_bye')
-    @commands.has_any_role("MR ROBOT Authorised")
+    @commands.has_permissions(manage_guild = True)
     async def set_bye(self,ctx,channel: disnake.TextChannel):
         with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
@@ -76,7 +76,7 @@ class Greetings(commands.Cog):
 
 
     @commands.command(name='unset_bye')
-    @commands.has_any_role("MR ROBOT Authorised")
+    @commands.has_permissions(manage_guild = True)
     async def unset_bye(self,ctx):
         with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
@@ -86,7 +86,7 @@ class Greetings(commands.Cog):
 
 
     @commands.command(name='unset_wlcm')
-    @commands.has_any_role("MR ROBOT Authorised")
+    @commands.has_permissions(manage_guild = True)
     async def unset_wlcm(self,ctx):
         with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
