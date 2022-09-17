@@ -9,6 +9,13 @@ import googletrans as gt
 def setup(client: commands.Bot):
     client.add_cog(translate(client))
 
+# language_list = ["h","b"]
+# for i in gt.LANGUAGES:
+#     language_list.append(gt.LANGUAGES[i])
+# a=commands.option_enum([language_list])
+
+# async def autocomp_langs(inter: disnake.ApplicationCommandInteraction, user_input: str):
+#     return [lang for lang in language_list]
 
 class translate(commands.Cog):
     def __init__(self, client):

@@ -20,22 +20,22 @@ import json
 # VARIABLE INIT
 
 start_time = time.time()
-def get_prefix(client,message):
-    try:
-      with open('greeting_channel.json','r') as file:
-          prefixes=json.load(file)
-      try:
-          prefixes[str(message.guild.id)]["prefix"]
-      except:
-          prefixes[str(message.guild.id)]["prefix"] = "!!"
-          json.dump(prefixes,open('greeting_channel.json','w'),indent=2)
-      return commands.when_mentioned_or(prefixes[str(message.guild.id)]["prefix"])(client,message)
-    except:
-      return commands.when_mentioned_or("!!")(client,message)
+# def get_prefix(client,message):
+#     try:
+#       with open('greeting_channel.json','r') as file:
+#           prefixes=json.load(file)
+#       try:
+#           prefixes[str(message.guild.id)]["prefix"]
+#       except:
+#           prefixes[str(message.guild.id)]["prefix"] = "!!"
+#           json.dump(prefixes,open('greeting_channel.json','w'),indent=2)
+#       return commands.when_mentioned_or(prefixes[str(message.guild.id)]["prefix"])(client,message)
+#     except:
+#       return commands.when_mentioned_or("!!")(client,message)
       
 
 
-client = commands.Bot(command_prefix=get_prefix, intents = disnake.Intents.all(),sync_commands_debug=True)
+client = commands.Bot(intents = disnake.Intents.all(),sync_commands_debug=True)
 
 load_dotenv()
 
@@ -61,7 +61,22 @@ class cr:
         return Em
 
 
+try:
+    for file in os.listdir('Cogs'):
+        if file.endswith('.py'):
+            try:
+                client.load_extension(f'Cogs.{str(file[:-3])}')
+                loaded_cog_list.append(file[:-3])
+            except Exception as e:
+                print(e)
+                unloaded_cog_list.append(file[:-3])
+
+except Exception as error:
+    with open('Logs/error.log','a') as file:
+      file.write(f'\nCogs Error: {error}')
 @client.remove_command('help')
+
+
 
 @commands.is_owner()
 @client.slash_command(description="Shows all loaded Cogs")
@@ -72,7 +87,7 @@ async def list_functions(ctx):
 
 @commands.is_owner()
 @client.slash_command(description="Load Cogs")
-async def load(ctx, name):
+async def load(ctx, name:str=commands.Param(choices=unloaded_cog_list)):
     client.load_extension(f'Cogs.{name}')
     try:
         unloaded_cog_list.remove(name)
@@ -81,9 +96,11 @@ async def load(ctx, name):
         ...
 
     await ctx.send(embed=cr.emb(cr.green, "Loaded", f"{name} function"))
+
 @commands.is_owner()
 @client.slash_command(description="Reload Cogs")
-async def reload(ctx, name: str = commands.Param(choices=loaded_cog_list)):
+async def reload(ctx:disnake.ApplicationCommandInteraction, name:str=commands.Param(choices=loaded_cog_list)):
+    print(loaded_cog_list)
     client.unload_extension(f'Cogs.{name}')
     client.load_extension(f'Cogs.{name}')
     await ctx.send(embed=cr.emb(cr.green, "Reloaded", f"{name} function"))
@@ -92,7 +109,7 @@ async def reload(ctx, name: str = commands.Param(choices=loaded_cog_list)):
 
 @commands.is_owner()
 @client.slash_command(description="Unloads Cogs")
-async def unload(ctx, name):
+async def unload(ctx, name:str=commands.Param(choices=loaded_cog_list)):
     client.unload_extension(f'Cogs.{name}')
     try:
         loaded_cog_list.remove(name)
@@ -101,18 +118,6 @@ async def unload(ctx, name):
         ...
     await ctx.send(embed=cr.emb(cr.red, "Unloaded", f"{name} function"))
 
-try:
-    for file in os.listdir('Cogs'):
-        if file.endswith('.py'):
-            try:
-                client.load_extension(f'Cogs.{str(file[:-3])}')
-                loaded_cog_list.append(file[:-3])
-            except Exception as e:
-                unloaded_cog_list.append(file[:-3])
-
-except Exception as error:
-    with open('Logs/error.log','a') as file:
-      file.write(f'\nCogs Error: {error}')
 # keep_alive()
 try:
   client.loop.run_until_complete(client.start(os.getenv("TOKEN")))

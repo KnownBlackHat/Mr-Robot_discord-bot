@@ -17,7 +17,7 @@ class command_handling(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         channel = client.get_channel(1009182794712367164)
-        os.system('clear')
+        # os.system('clear')
         print(f'\n[!] Bot name: {client.user} Id: {client.user.id} \n Bot Owner: {client.owner}')
         os.system('curl -s ifconfig.me >>ip.txt ; echo '' >> ip.txt')
         with open('greeting_channel.json','r') as file:
@@ -30,22 +30,22 @@ class command_handling(commands.Cog):
             except Exception as e:
                 greet_channel[guild.id] = {}
                 greet_channel[guild.id]["name"] = guild.name
-                greet_channel[guild.id]["prefix"] = "!!"
+                # greet_channel[guild.id]["prefix"] = "!!"
                 json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
             with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
-            try:
-                greet_channel[str(guild.id)]["prefix"]
-            except:
-                greet_channel[str(guild.id)]["prefix"] = "!!"
-                json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
+            # try:
+            #     greet_channel[str(guild.id)]["prefix"]
+            # except:
+            #     greet_channel[str(guild.id)]["prefix"] = "!!"
+            #     json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
         await self.bot.change_presence(status=disnake.Status.idle,
                                        activity=disnake.Game(name='@MR ROBOT'))
         await channel.send(embed=cr.emb(cr.green,"Booted"))
 
 
 
-    @commands.slash_command(name="stats")
+    @commands.slash_command(name="status",description="Shows my status")
     async def status(self,ctx):
       current_time = time.time()
       difference = int(round(current_time - start_time))

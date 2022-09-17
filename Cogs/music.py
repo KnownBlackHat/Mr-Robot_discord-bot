@@ -62,7 +62,7 @@ class Music(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(name='music_command')
+    @commands.slash_command(name='music_command',description="Shows Music Command List")
     async def music_help(self, ctx):
         await ctx.send(embed=cr.emb(
             cr.blue, "Music Commands", """
@@ -89,12 +89,14 @@ I'll get disconnected from voice channel
 
         await channel.connect()
 
-    @commands.slash_command(name='play')
-    async def play(self, ctx, *, url):
+    @commands.slash_command(name='play',description="Plays music from youtube")
+    async def play(self, ctx, search):
+        url = search
+        await ctx.response.defer(ephemeral=True)
         await self.ensure_voice(ctx)
         player = await YTDLSource.from_url(url,loop=self.bot.loop,stream=True)
         ctx.guild.voice_client.play(player,after=lambda e:  ctx.send(embed=cr.emb(cr.red,"Player Error", ephemeral=True),)if e else None)
-        await ctx.send.defer(embed=cr.emb(cr.blue,"Playing...",f"Name: {player.title}"),ephemeral=True)
+        await ctx.send(embed=cr.emb(cr.blue,"Playing...",f"Name: {player.title}"),ephemeral=True)
 
     @commands.slash_command(name='volume')
     async def volume(self, ctx, volume: int):

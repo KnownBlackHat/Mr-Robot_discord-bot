@@ -33,8 +33,8 @@ class Greetings(commands.Cog):
 
 
 
-    @commands.slash_command(name='set_wlcm')
-    @commands.has_any_role("MR ROBOT Authorised")
+    @commands.slash_command(name='set_wlcm',description="Sets welcoming message channel of server")
+    @commands.has_permissions(manage_guild = True)
     async def set_wlcm(self,ctx,channel: disnake.TextChannel):
         with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
@@ -65,8 +65,8 @@ class Greetings(commands.Cog):
 
 
 
-    @commands.slash_command(name='set_bye')
-    @commands.has_any_role("MR ROBOT Authorised")
+    @commands.slash_command(name='set_bye',description="Sets bye message channel of server")
+    @commands.has_permissions(manage_guild = True)
     async def set_bye(self,ctx,channel: disnake.TextChannel):
         with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
@@ -75,8 +75,8 @@ class Greetings(commands.Cog):
         await ctx.send(embed=cr.emb(cr.green,"Goodbye Channel Set Sucessfully",f"Channel: {channel}"))
 
 
-    @commands.slash_command(name='unset_bye')
-    @commands.has_any_role("MR ROBOT Authorised")
+    @commands.slash_command(name='unset_bye',description="Unsets bye message channel of server")
+    @commands.has_permissions(manage_guild = True)
     async def unset_bye(self,ctx):
         with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
@@ -85,8 +85,8 @@ class Greetings(commands.Cog):
         await ctx.send(embed=cr.emb(cr.green,"Goodbye Channel Unset Sucessfully"))
 
 
-    @commands.slash_command(name='unset_wlcm')
-    @commands.has_any_role("MR ROBOT Authorised")
+    @commands.slash_command(name='unset_wlcm',description="Unsets welcoming message channel of server")
+    @commands.has_permissions(manage_guild = True)
     async def unset_wlcm(self,ctx):
         with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)

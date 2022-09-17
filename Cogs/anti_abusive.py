@@ -49,8 +49,8 @@ class anti_abusive(commands.Cog):
 
 
 
-        if str(message.content) == f"<@{client.user.id}>":
-            await message.channel.send(embed=cr.emb(cr.red,"Server Prefix",f'`{prefixes[str(message.guild.id)]["prefix"]}`')) 
+        # if str(message.content) == f"<@{client.user.id}>":
+        #     await message.channel.send(embed=cr.emb(cr.red,"Server Prefix",f'`{prefixes[str(message.guild.id)]["prefix"]}`')) 
         try:
           if  message.author.id == self.bot.user.id:
              ...
