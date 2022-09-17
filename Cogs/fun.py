@@ -54,7 +54,7 @@ class fun(commands.Cog):
             Header =  {'User-Agent' : "Magic Browser"}
             type=['best','top','new','rising','hot']
             choice = random.choice(type)
-            await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Searching {term} in {choice} category..."))
+            # await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Searching {term} in {choice} category..."))
             # async with ctx.typing():    
             URL = f"https://www.reddit.com/r/{term}/{choice}.json?limit={int(amount)}"
             async with aiohttp.request("GET",URL,headers=Header) as resp:
@@ -67,7 +67,7 @@ class fun(commands.Cog):
                             except KeyError:
                                 if d["data"]["thumbnail"].startswith('http'):
                                     await ctx.send(d["data"]["thumbnail"])
-                        await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Search Of {term} in {choice} category Completed!"))
+                        # await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Search Of {term} in {choice} category Completed!"))
                     except:
                         await ctx.send(embed=cr.emb(cr.red,"NSFW Command","Try Again Later"))
                 else:
@@ -81,7 +81,7 @@ class fun(commands.Cog):
         Header =  {'User-Agent' : "Magic Browser"}
         type=['best','top','new','rising','hot']
         choice = random.choice(type)
-        await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Searching Meme in {choice} category..."))
+        # await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Searching Meme in {choice} category..."))
         # async with ctx.typing():    
         URL = f"https://www.reddit.com/r/meme/{choice}.json?limit={int(amount)}"
         async with aiohttp.request("GET",URL,headers=Header) as resp:
@@ -94,7 +94,7 @@ class fun(commands.Cog):
                         except KeyError:
                             if d["data"]["thumbnail"].startswith('http'):
                                 await ctx.send(d["data"]["thumbnail"])
-                    await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Search Of Meme in {choice} category Completed!"))
+                    # await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Search Of Meme in {choice} category Completed!"))
                 except:
                     await ctx.send(embed=cr.emb(cr.red,"Meme Command","Try Again Later"))
             else:

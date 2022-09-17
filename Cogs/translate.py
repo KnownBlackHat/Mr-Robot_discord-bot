@@ -1,5 +1,6 @@
 from disnake.ext import commands
 from bot import cr
+import disnake
 import os
 os.system("pip install googletrans==3.1.0a0")
 from googletrans import Translator
@@ -13,7 +14,7 @@ class translate(commands.Cog):
     def __init__(self, client):
         self.bot = client
     @commands.slash_command(name="translate",description="Returns translated text")
-    async def translate(self,ctx, language:commands.option_enum(gt.LANGUAGES), *, message):
+    async def translate(self,ctx, language, message):
         translator = Translator()
         try:
             translation = translator.translate(message, dest=language)

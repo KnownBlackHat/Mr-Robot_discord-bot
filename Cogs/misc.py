@@ -130,71 +130,71 @@ Unsets Goodbye Channel!
                                   ))
 
 
-# #commands
+#commands
 
-#     @commands.slash_command(name="command",aliases=['help'])
-#     async def command(self, ctx):
-#         await ctx.send(embed=cr.emb(
-#             cr.green, "Command List", '''
-# `stats`:
-# I'll tell my stats!
+    @commands.slash_command(name="command",aliases=['help'])
+    async def command(self, ctx):
+        await ctx.send(embed=cr.emb(
+            cr.green, "Command List", '''
+`stats`:
+I'll tell my stats!
 
-# `initialise`:
-# I'll setup required role for server (Important command)!
+`initialise`:
+I'll setup required role for server (Important command)!
 
-# `translate/tr [language name to be translated] [Content to be translated]`:
-# Translates the asked message to any language
+`translate/tr [language name to be translated] [Content to be translated]`:
+Translates the asked message to any language
 
-# `music_command`:
-# I'll show my music command list!
+`music_command`:
+I'll show my music command list!
 
-# `usr <mention user (optional)>`:
-# I'll show you mentioned user info 
+`usr <mention user (optional)>`:
+I'll show you mentioned user info 
 
-# `meme`: 
-# I'll show you a meme!
+`meme`: 
+I'll show you a meme!
 
-# `nsfw <topic(optional)>`:
-# I'll show you a nsfw content on authorised channel!
+`nsfw <topic(optional)>`:
+I'll show you a nsfw content on authorised channel!
     
-# `xxx <topic(optional)>`:
-# I'll show you a premium nsfw content on authorised channel!
+`xxx <topic(optional)>`:
+I'll show you a premium nsfw content on authorised channel!
 
-# `version`: 
-# You will know about my version!
+`version`: 
+You will know about my version!
 
-# `changeprefix [new prefix]`
-# Set custom prefix! (Only For Admin)
+`changeprefix [new prefix]`
+Set custom prefix! (Only For Admin)
 
-# `clear <amount>`:
-# I'll delete the asked no. of previous chat! (Only For Admin)
+`clear <amount>`:
+I'll delete the asked no. of previous chat! (Only For Admin)
 
-# `warn [mention user] <reason>`:
-# I'll give warning message to asked user! (Only For Admin)
+`warn [mention user] <reason>`:
+I'll give warning message to asked user! (Only For Admin)
 
-# `addrole [mention user] [mention role]`:
-# I'll add the asked role to asked member! (Only For Admin)
+`addrole [mention user] [mention role]`:
+I'll add the asked role to asked member! (Only For Admin)
 
-# `rmrole [mention user] [mention role]`: 
-# I'll remove the asked role to asked member! (Only For Admin)
+`rmrole [mention user] [mention role]`: 
+I'll remove the asked role to asked member! (Only For Admin)
 
-# `kick [mention member ] [reason]`: 
-# I'll kick the asked member! (Only For Admin)
+`kick [mention member ] [reason]`: 
+I'll kick the asked member! (Only For Admin)
 
-# `ban [mention member] <reason>`: 
-# I'll ban the asked member! (Only For Admin)
+`ban [mention member] <reason>`: 
+I'll ban the asked member! (Only For Admin)
 
-# `unban [mention member] <reason>`: 
-# I'll unban the asked member! (Only For Admin)
+`unban [mention member] <reason>`: 
+I'll unban the asked member! (Only For Admin)
 
-# `mute [mention member] <reason(optional)>`: 
-# I'll mute to the asked member! (Only For Admin)
+`mute [mention member] <reason(optional)>`: 
+I'll mute to the asked member! (Only For Admin)
 
-# `setup`:
-# Setup command! (Only For Admin)
+`setup`:
+Setup command! (Only For Admin)
 
-# `unmute [mention member] <reason(optional)>`: 
-# I'll Unmute to the asked member! (Only For Admin)
+`unmute [mention member] <reason(optional)>`: 
+I'll Unmute to the asked member! (Only For Admin)
 # '''))
 
 

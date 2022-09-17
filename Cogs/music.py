@@ -84,8 +84,8 @@ I'll get disconnected from voice channel
     async def join(self, ctx, *, channel: disnake.VoiceChannel):
         """Joins a voice channel"""
         await ctx.send(embed=cr.emb(cr.green,"Voice Channel Joined",f"Channel Name: {channel}"))
-        if ctx.voice_client is not None:
-            return await ctx.voice_client.move_to(channel)
+        if ctx.guild.voice_client is not None:
+            return await ctx.guild.voice_client.move_to(channel)
 
         await channel.connect()
 
@@ -93,39 +93,32 @@ I'll get disconnected from voice channel
     async def play(self, ctx, *, url):
         await self.ensure_voice(ctx)
         player = await YTDLSource.from_url(url,loop=self.bot.loop,stream=True)
-        try:
-            ctx.guild.voice_client.play(player,after=lambda e:  ctx.send(embed=cr.emb(cr.red,"Player Error", e))if e else None)
-        except Exception as e:
-            print(e)
-            raise Exception
-        await ctx.send(embed=cr.emb(cr.blue,"Playing...",f"""
-Name: {player.title}
-                                 
-"""))
+        ctx.guild.voice_client.play(player,after=lambda e:  ctx.send(embed=cr.emb(cr.red,"Player Error", ephemeral=True),)if e else None)
+        await ctx.send.defer(embed=cr.emb(cr.blue,"Playing...",f"Name: {player.title}"),ephemeral=True)
 
     @commands.slash_command(name='volume')
     async def volume(self, ctx, volume: int):
         """Changes the player's volume"""
 
-        if ctx.voice_client is None:
+        if ctx.guild.voice_client is None:
             return await ctx.send(embed=cr.emb(cr.red,"Not connected to a voice channel."))
 
-        ctx.voice_client.source.volume = volume / 100
+        ctx.guild.voice_client.source.volume = volume / 100
         await ctx.send(embed=cr.emb(cr.blue,"Volume",f"Changed volume to {volume}%"))
 
     @commands.slash_command(name='stop')
     async def stop(self, ctx):
         """Stops and disconnects the bot from voice"""
-
-        await ctx.voice_client.disconnect()
+        await ctx.send(embed=cr.emb(cr.red,"Voice Channel Disconnected"))
+        await ctx.guild.voice_client.disconnect()
 
     async def ensure_voice(self, ctx):
-        if ctx.voice_client is None:
+        if ctx.guild.voice_client is None:
             if ctx.author.voice:
                 await ctx.author.voice.channel.connect()
             else:
                 await ctx.send(embed=cr.emb(
                     cr.red, "Your aren't connected to voice Channel",
                     "Connect to voice channel"))
-        elif ctx.voice_client.is_playing():
-            ctx.voice_client.stop()
+        elif ctx.guild.voice_client.is_playing():
+            ctx.guild.voice_client.stop()

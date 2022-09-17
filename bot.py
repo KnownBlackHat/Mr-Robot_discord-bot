@@ -1,3 +1,10 @@
+# import logging
+
+# logger = logging.getLogger('disnake')
+# logger.setLevel(logging.DEBUG)
+# handler = logging.FileHandler(filename='disnake.log', encoding='utf-8', mode='w')
+# handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+# logger.addHandler(handler)
 
 # MODULES IMPORT
 import os
@@ -28,7 +35,7 @@ def get_prefix(client,message):
       
 
 
-client = commands.Bot(command_prefix=get_prefix, intents = disnake.Intents.all())
+client = commands.Bot(command_prefix=get_prefix, intents = disnake.Intents.all(),sync_commands_debug=True)
 
 load_dotenv()
 
