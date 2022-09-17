@@ -19,33 +19,33 @@ class command_error_handling(commands.Cog):
 
         if isinstance(error, commands.errors.MissingPermissions):
             await ctx.send(
-                embed=cr.emb(cr.red, 'Sorry Permissions are missing! '))
+                embed=cr.emb(cr.red, 'Sorry Permissions are missing! '),ephemeral=True)
 
 
         elif isinstance(error, commands.errors.CommandNotFound):
-            await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `<server prefix>command`  for command list!'))
+            await ctx.send(embed=cr.emb(cr.red,'No Such Command is available! Use  `<server prefix>command`  for command list!'),ephemeral=True)
 
 
         elif isinstance(error,commands.MissingRequiredArgument):
-            await ctx.send(embed=cr.emb(cr.red, 'Arguments Are Missing!'))
+            await ctx.send(embed=cr.emb(cr.red, 'Arguments Are Missing!'),ephemeral=True)
 
 
         elif '404 HTTP response' in str(error) or '403 HTTP response' in str(
                 error):
-            await ctx.send(embed=cr.emb(cr.red, '🔎Search Stopped! 404 NOT FOUND'))
+            await ctx.send(embed=cr.emb(cr.red, '🔎Search Stopped! 404 NOT FOUND'),ephemeral=True)
 
 
         elif isinstance(error,AttributeError):
-            await ctx.send(embed=cr.emb(cr.red, 'ERROR',str(error)))
+            await ctx.send(embed=cr.emb(cr.red, 'ERROR',str(error)),ephemeral=True)
 
         elif isinstance(error, commands.BadArgument):
-            await ctx.send(embed=cr.emb(cr.red,'Argument Error','Pass valid argument'))
+            await ctx.send(embed=cr.emb(cr.red,'Argument Error','Pass valid argument'),ephemeral=True)
 
         elif 'This command cannot be used in private messages.' in str(error):
-            await ctx.send(embed=cr.emb(cr.red, 'Command not available in private'))
+            await ctx.send(embed=cr.emb(cr.red, 'Command not available in private'),ephemeral=True)
 
         elif  isinstance(error, disnake.errors.Forbidden):
-            await ctx.send(embed=cr.emb(cr.red,'Forbidden'))
+            await ctx.send(embed=cr.emb(cr.red,'Forbidden'),ephemeral=True)
 
         # elif "Command raised an exception: AttributeError: 'DMChannel' object has no attribute 'is_nsfw'" in str(error):
         #   await ctx.send(
@@ -71,7 +71,7 @@ class command_error_handling(commands.Cog):
                 file.write('-'*10)
                 file.write(f'Error: {str(error)}')
                 await ctx.send(
-                    embed=cr.emb(cr.red, 'Oops! Something went wrong!',f'Error: {str(error)}'))
+                    embed=cr.emb(cr.red, 'Oops! Something went wrong!',f'Error: {str(error)}'),ephemeral=True)
             traceback.print_exc()
             traceback.format_exc()
             

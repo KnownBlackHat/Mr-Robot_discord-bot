@@ -47,9 +47,9 @@ def setup(client: commands.Bot):
 class fun(commands.Cog):
     def __init__(self, client):
         self.bot = client
-
-    @commands.slash_command(name='nsfw')
-    async def nsfw(self,ctx,term="porn",amount=1):
+    @commands.is_nsfw()
+    @commands.slash_command(name='nsfw',description="Shows You Nsfw Content")
+    async def nsfw(self,ctx,term,amount=1):
         if ctx.channel.is_nsfw():
             Header =  {'User-Agent' : "Magic Browser"}
             type=['best','top','new','rising','hot']
@@ -75,9 +75,9 @@ class fun(commands.Cog):
         else:
             await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
 
-    
-    @commands.slash_command(name='meme')
-    async def meme(self, ctx, amount=int(1)):
+    @commands.is_nsfw()
+    @commands.slash_command(name='meme',description="Show you memes")
+    async def meme(self, ctx, amount=1):
         Header =  {'User-Agent' : "Magic Browser"}
         type=['best','top','new','rising','hot']
         choice = random.choice(type)
@@ -101,7 +101,8 @@ class fun(commands.Cog):
                 await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
 
     #@commands.is_owner()
-    @commands.slash_command(name='xxx')
+    @commands.is_nsfw()
+    @commands.slash_command(name='xxx',description="Returns Results from xnxx.com")
     async def xxx(self,ctx,term,amount=1):
         if ctx.channel.is_nsfw():
           await ctx.send(embed=cr.emb(cr.yellow,"Results may take time, so hold on!"),delete_after=10)

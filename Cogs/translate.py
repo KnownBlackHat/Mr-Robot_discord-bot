@@ -12,12 +12,12 @@ def setup(client: commands.Bot):
 class translate(commands.Cog):
     def __init__(self, client):
         self.bot = client
-    @commands.slash_command(name="translate",aliases=['tr'])
-    async def translate(self,ctx, lang, *, thing):
+    @commands.slash_command(name="translate",description="Returns translated text")
+    async def translate(self,ctx, language:commands.option_enum(gt.LANGUAGES), *, message):
         translator = Translator()
         try:
-            translation = translator.translate(thing, dest=lang)
-            await ctx.send(embed = cr.emb(cr.orange,f"Translation To {lang}",translation.text))
+            translation = translator.translate(message, dest=language)
+            await ctx.send(embed = cr.emb(cr.orange,f"Translation To {language}",translation.text))
         except Exception as e:
             if "invalid destination language" in str(e):
                 await ctx.send(embed = cr.emb(cr.orange,f"Destination Translation Language List (DTLL) :",str(gt.LANGUAGES).replace(",","\n")))

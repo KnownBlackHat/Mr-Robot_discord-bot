@@ -18,7 +18,7 @@ class moderation(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def clear(self, context, amount=1):
         await context.channel.purge(limit=int(amount))
-        await context.send(embed=cr.emb(cr.yellow,"Deleting Message..."),delete_after=int(amount))
+        await context.send(embed=cr.emb(cr.yellow,"Deleting Message..."),delete_after=5)
 
 
     @commands.slash_command(name='changeprefix')
