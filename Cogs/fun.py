@@ -107,12 +107,6 @@ class fun(commands.Cog):
         term = search
         if ctx.channel.is_nsfw():
           await ctx.send(embed=cr.emb(cr.yellow,"Results may take time, so hold on!"),delete_after=10)
-          stri = ""
-          for n in term:
-            stri = stri+" "+n
-          term = stri
-          if term == "":
-            term = "porn"
           ufrm_term = term
           term = term.replace(" ","+")
           term_url = "https://www.xnxx.com/search/"+str(term)

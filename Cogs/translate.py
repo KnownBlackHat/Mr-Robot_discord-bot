@@ -25,7 +25,7 @@ class translate(commands.Cog):
         translator = Translator()
         try:
             translation = translator.translate(message, dest=language)
-            await ctx.send(embed = cr.emb(cr.orange,f"Translation To {language}",translation.text))
+            await ctx.send(embed = cr.emb(cr.orange,f"Translation {translation.src} To {language}",translation.text))
         except Exception as e:
             if "invalid destination language" in str(e):
                 await ctx.send(embed = cr.emb(cr.orange,f"Destination Translation Language List (DTLL) :",str(gt.LANGUAGES).replace(",","\n")))

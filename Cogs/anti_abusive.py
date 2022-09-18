@@ -45,30 +45,32 @@ class anti_abusive(commands.Cog):
             'squirt', 'shemale', 'sperm', 'bsdm', 'sexylady',
             'swollen ovary', 'sexy', 'cunt', 'motherfliper'
                      ]
-        block_word =  ['http://', 'https://', '://', '@here', '@everyone']
+        protocol =  ['http://', 'https://', '://']
+        mention = ['@here', '@everyone']
 
 
 
-        # if str(message.content) == f"<@{client.user.id}>":
-        #     await message.channel.send(embed=cr.emb(cr.red,"Server Prefix",f'`{prefixes[str(message.guild.id)]["prefix"]}`')) 
+        if str(message.content) == f"<@{client.user.id}>":
+            await message.channel.send(embed=cr.emb(cr.red,"Use `/help` command")) 
         try:
           if  message.author.id == self.bot.user.id:
              ...
           elif not "name='Protocol_access'" in str(message.author.roles) :
 
 
-            if any(word in msg_content for word in block_word):
-              await message.delete()
-
+            if any(word in msg_content for word in protocol):
+                await message.delete()
+            elif any(words in msg_content for words in mention):
+                await message.delete()
             if not message.channel.is_nsfw():
-               terms = [re.search(rf'\b{i}', msg_content) for i in curseWord]
-               for j in terms:
-                   if j != None:
-                       await message.delete()
-                       break
-#              if any(word in msg_content for word in curseWord):
-#                await message.delete()
-                
+                terms = [re.search(rf'\b{i}', msg_content) for i in curseWord]
+                for j in terms:
+                    if j != None:
+                        await message.delete()
+                        break
+    #              if any(word in msg_content for word in curseWord):
+    #                await message.delete()
+                    
         except Exception as e:
             print(e)
             
