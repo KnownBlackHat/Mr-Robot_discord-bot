@@ -21,11 +21,11 @@ class moderation(commands.Cog):
         if option == "Activate":
             feature_db[str(ctx.guild.id)][feature] = 'activate'
             json.dump(feature_db,open('greeting_channel.json','w'),indent=2)
-            ctx.send(embed=cr.emb(cr.green,"Activated",feature))
+            await ctx.send(embed=cr.emb(cr.green,"Activated",feature))
         elif option == "Deactivate":
             feature_db[str(ctx.guild.id)][feature] = 'deactivate'
             json.dump(feature_db,open('greeting_channel.json','w'),indent=2)
-            ctx.send(embed=cr.emb(cr.red,"Deactivated",feature))
+            await ctx.send(embed=cr.emb(cr.red,"Deactivated",feature))
 
 #clear
 
