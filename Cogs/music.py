@@ -66,13 +66,13 @@ class Music(commands.Cog):
     async def music_help(self, ctx):
         await ctx.send(embed=cr.emb(
             cr.blue, "Music Commands", """
-`join [Channel Name]`:
+`join`:
 I'll join the asked voice channel
 
-`play [Multiple URLs | Search topic]`:
+`play`:
 I'll play music from youtube
 
-`volume [volume no.]`:
+`volume`:
 I'll change volume within 1% to 100%
 
 `stop`:

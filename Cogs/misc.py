@@ -56,23 +56,23 @@ class misc(commands.Cog):
         await context.send(embed=myEmbed)
 
 
-#setup
+# #setup
 
-    @commands.slash_command(name="setup",description="Setup command for server")
-    async def setu(self,ctx):
-        await ctx.send(embed=cr.emb(cr.yellow,"Setup!","""
-`set_wlcm [mention channel]`:
-Sets welcome Channel!
+#     @commands.slash_command(name="setup",description="Setup command for server")
+#     async def setu(self,ctx):
+#         await ctx.send(embed=cr.emb(cr.yellow,"Setup!","""
+# `set_wlcm [mention channel]`:
+# Sets welcome Channel!
 
-`set_bye [mention channel]`:
-Sets Goodbye Channel!
+# `set_bye [mention channel]`:
+# Sets Goodbye Channel!
 
-`unset_wlcm`:
-Unsets welcome Channel!
+# `unset_wlcm`:
+# Unsets welcome Channel!
 
-`unset_bye`:
-Unsets Goodbye Channel!
-"""))
+# `unset_bye`:
+# Unsets Goodbye Channel!
+# """))
 
 #init
 
@@ -101,10 +101,8 @@ Unsets Goodbye Channel!
             '''
                                
   1) Assign `Protocol_access` role in order to share link in the server!
-                      
-  2) Use `setup` command for some optional setup!
-         
-  3) You are all set :)'''))
+                               
+  2) You are all set :)'''))
         await ctx.send(embed=cr.emb(name='Additional Features',
                                   value='''
 1) I try to block offensive words in non-nsfw channel!
@@ -128,6 +126,9 @@ Unsets Goodbye Channel!
 `status`:
 I'll tell my status!
 
+`manage_feature`:
+You can toggle between activate/deactivate my features!
+
 `initialise`:
 I'll setup required role for server (Important command)!
 
@@ -137,7 +138,7 @@ Translates the asked message to any language
 `music_command`:
 I'll show my music command list!
 
-`usr`:
+`userinfo`:
 I'll show you mentioned user info 
 
 `meme`: 
@@ -176,8 +177,9 @@ I'll unban the asked member! (Only For Admin)
 `mute`: 
 I'll mute to the asked member! (Only For Admin)
 
-`setup`:
-Setup command!
+`set`|`unset`:
+Set/unset command for welcome/goodbye!
+
 
 `unmute`: 
 I'll Unmute to the asked member! (Only For Admin)
