@@ -53,13 +53,18 @@ class anti_abusive(commands.Cog):
         try:
             if feature_db[str(message.guild.id)]["Link Blocker"] == "deactivate":
                 protocol=[]
-            elif feature_db[str(message.guild.id)]["Anti-Abusive"] == "deactivate":
+        except:
+            ...
+        try:
+            if feature_db[str(message.guild.id)]["Anti-Abusive"] == "deactivate":
                 curseWord=[]
-            elif feature_db[str(message.guild.id)]["@everyone/@here mention blocker"] == "deactivate":
+        except:
+            ...
+        try:
+            if feature_db[str(message.guild.id)]["@everyone/@here mention blocker"] == "deactivate":
                 mention=[]
         except:
             ...
-
         if str(message.content) == f"<@{client.user.id}>":
             await message.channel.send(embed=cr.emb(cr.red,"Use `/help` command")) 
         try:

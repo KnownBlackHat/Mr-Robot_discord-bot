@@ -72,6 +72,3 @@ class command_error_handling(commands.Cog):
                 file.write(f'Error: {str(error)}')
                 await ctx.send(
                     embed=cr.emb(cr.red, 'Oops! Something went wrong!',f'Error: {str(error)}'),ephemeral=True)
-            traceback.print_exc()
-            traceback.format_exc()
-            

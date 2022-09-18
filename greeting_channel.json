@@ -47,7 +47,8 @@
   },
   "1003683013625925664": {
     "name": "MR_ROBOT",
-    "prefix": "!!"
+    "prefix": "!!",
+    "Anti-Abusive": "deactivate"
   },
   "998528445325787188": {
     "name": "bot-testing",
