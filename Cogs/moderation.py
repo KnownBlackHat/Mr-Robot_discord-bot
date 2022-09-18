@@ -15,7 +15,7 @@ class moderation(commands.Cog):
 #add and remove feature
     @commands.slash_command(name='manage_features',description="Toggles my features in server")
     @commands.default_member_permissions(manage_guild = True)
-    async def manage_features(self,ctx,option:str = commands.Param(choices=["Activate","Deactivate"]),feature:str = commands.Param(choices=["Link Blocker","Anti-abusive","@everyone/@here mention blocker"])):
+    async def manage_features(self,ctx,option:str = commands.Param(choices=["Activate","Deactivate"]),feature:str = commands.Param(choices=["Link Blocker","Anti-Abusive","@everyone/@here mention blocker"])):
         with open('greeting_channel.json','r') as file:
                 feature_db=json.load(file)
         if option == "Activate":

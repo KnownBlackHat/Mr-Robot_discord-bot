@@ -48,7 +48,17 @@ class anti_abusive(commands.Cog):
         protocol =  ['http://', 'https://', '://']
         mention = ['@here', '@everyone']
 
-
+        with open('greeting_channel.json','r') as file:
+                feature_db=json.load(file)
+        try:
+            if feature_db[str(message.guild.id)]["Link Blocker"] == "deactivate":
+                protocol=[]
+            elif feature_db[str(message.guild.id)]["Anti-Abusive"] == "deactivate":
+                curseWord=[]
+            elif feature_db[str(message.guild.id)]["@everyone/@here mention blocker"] == "deactivate":
+                mention=[]
+        except:
+            ...
 
         if str(message.content) == f"<@{client.user.id}>":
             await message.channel.send(embed=cr.emb(cr.red,"Use `/help` command")) 
