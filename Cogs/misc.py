@@ -80,12 +80,9 @@ class misc(commands.Cog):
     @commands.default_member_permissions(manage_guild=True)
     async def initialise(self, ctx):
         global error
-        authrole = disnake.utils.get(ctx.guild.roles,
-                                     name="MR ROBOT Authorised")
-        bwa = disnake.utils.get(ctx.guild.roles, name="Protocol_access")
-        if not authrole or not bwa:
+        authrole = disnake.utils.get(ctx.guild.roles, name="Protocol_access")
+        if not authrole:
             try:
-                await ctx.guild.create_role(name="MR ROBOT Authorised")
                 await ctx.guild.create_role(name="Protocol_access")
                 await ctx.send(embed=cr.emb(cr.green, "!!DONE!!",
                                           "Successfully initialised!"))
@@ -102,19 +99,7 @@ class misc(commands.Cog):
                                
   1) Assign `Protocol_access` role in order to share link in the server!
                                
-  2) You are all set :)'''))
-        await ctx.send(embed=cr.emb(name='Additional Features',
-                                  value='''
-1) I try to block offensive words in non-nsfw channel!
-
-2) I won't allow links to be shared until and unless you don't have `Protocol_access` role!
-                               
-3) I won't allow `everyone and here` mention until you don't have `Protocol_access` role!
-
-4) I can play Musics from youtube `!!music_command`!
-
-                                 '''
-                                  ))
+  2) [Optional] Use `/manage_feature`,`/set`,`/unset` command for more customisation!'''))
 
 
 #commands
