@@ -34,8 +34,7 @@ start_time = time.time()
 #       return commands.when_mentioned_or("!!")(client,message)
       
 
-
-client = commands.Bot(intents = disnake.Intents.all(),sync_commands_debug=True)
+client = commands.Bot(intents = disnake.Intents.all()) # ,sync_commands_debug=True
 
 load_dotenv()
 
@@ -79,14 +78,14 @@ except Exception as error:
 
 
 @commands.is_owner()
-@client.slash_command(description="Shows all loaded Cogs")
+@client.slash_command(description="Shows all loaded Cogs",guild_ids=[1003683013625925664])
 async def list_functions(ctx):
     await ctx.send(embed=cr.emb(cr.green, "Loaded Cogs", '   ✅\n\n'.join(loaded_cog_list) + "  ✅\n"))
     if not unloaded_cog_list == []:
         await ctx.send(embed=cr.emb(cr.red, "Unloaded Cogs", '  ❌\n\n'.join(unloaded_cog_list) +"  ❌\n"))
 
 @commands.is_owner()
-@client.slash_command(description="Load Cogs")
+@client.slash_command(description="Load Cogs",guild_ids=[1003683013625925664])
 async def load(ctx, name:str=commands.Param(choices=unloaded_cog_list)):
     client.load_extension(f'Cogs.{name}')
     try:
@@ -98,9 +97,9 @@ async def load(ctx, name:str=commands.Param(choices=unloaded_cog_list)):
     await ctx.send(embed=cr.emb(cr.green, "Loaded", f"{name} function"))
 
 @commands.is_owner()
-@client.slash_command(description="Reload Cogs")
+@client.slash_command(description="Reload Cogs",guild_ids=[1003683013625925664])
 async def reload(ctx:disnake.ApplicationCommandInteraction, name:str=commands.Param(choices=loaded_cog_list)):
-    print(loaded_cog_list)
+    # print(loaded_cog_list)
     client.unload_extension(f'Cogs.{name}')
     client.load_extension(f'Cogs.{name}')
     await ctx.send(embed=cr.emb(cr.green, "Reloaded", f"{name} function"))
@@ -108,7 +107,7 @@ async def reload(ctx:disnake.ApplicationCommandInteraction, name:str=commands.Pa
       
 
 @commands.is_owner()
-@client.slash_command(description="Unloads Cogs")
+@client.slash_command(description="Unloads Cogs",guild_ids=[1003683013625925664])
 async def unload(ctx, name:str=commands.Param(choices=loaded_cog_list)):
     client.unload_extension(f'Cogs.{name}')
     try:

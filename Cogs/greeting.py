@@ -33,14 +33,14 @@ class Greetings(commands.Cog):
 
 
 
-    @commands.slash_command(name='set_wlcm',description="Sets welcoming message channel of server")
-    @commands.has_permissions(manage_guild = True)
-    async def set_wlcm(self,ctx,channel: disnake.TextChannel):
-        with open('greeting_channel.json','r') as file:
-                greet_channel=json.load(file)
-        greet_channel[str(ctx.guild.id)]["greet_channel"] = str(channel.id)
-        json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
-        await ctx.send(embed=cr.emb(cr.green,"Welcome Channel Set Sucessfully",f"Channel: {channel}"))
+    # @commands.slash_command(name='set_wlcm',description="Sets welcoming message channel of server")
+    # @commands.default_member_permissions(manage_guild = True)
+    # async def set_wlcm(self,ctx,channel: disnake.TextChannel):
+    #     with open('greeting_channel.json','r') as file:
+    #             greet_channel=json.load(file)
+    #     greet_channel[str(ctx.guild.id)]["greet_channel"] = str(channel.id)
+    #     json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
+    #     await ctx.send(embed=cr.emb(cr.green,"Welcome Channel Set Sucessfully",f"Channel: {channel}"))
 
     @commands.Cog.listener()
     async def on_member_remove(self,member):
@@ -63,33 +63,53 @@ class Greetings(commands.Cog):
             except Exception as e:
                 ...
 
-
-
-    @commands.slash_command(name='set_bye',description="Sets bye message channel of server")
-    @commands.has_permissions(manage_guild = True)
-    async def set_bye(self,ctx,channel: disnake.TextChannel):
-        with open('greeting_channel.json','r') as file:
+    @commands.slash_command(name='set',description="Set's the features of channel in the server")
+    @commands.default_member_permissions(manage_guild = True)
+    async def set(self,ctx,channel: disnake.TextChannel,feature:str = commands.Param(choices=["Welcome Channel","Goodbye Channel"])):
+        if feature == "Welcome Channel":
+            with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
-        greet_channel[str(ctx.guild.id)]["goodbye_channel"] = str(channel.id)
-        json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
-        await ctx.send(embed=cr.emb(cr.green,"Goodbye Channel Set Sucessfully",f"Channel: {channel}"))
-
-
-    @commands.slash_command(name='unset_bye',description="Unsets bye message channel of server")
-    @commands.has_permissions(manage_guild = True)
-    async def unset_bye(self,ctx):
-        with open('greeting_channel.json','r') as file:
+            greet_channel[str(ctx.guild.id)]["greet_channel"] = str(channel.id)
+            json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
+            await ctx.send(embed=cr.emb(cr.green,"Welcome Channel Set Sucessfully",f"Channel: {channel}"))
+        elif feature == "Goodbye Channel":
+            with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
-        greet_channel[str(ctx.guild.id)]["goodbye_channel"] = None
-        json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
-        await ctx.send(embed=cr.emb(cr.green,"Goodbye Channel Unset Sucessfully"))
+            greet_channel[str(ctx.guild.id)]["goodbye_channel"] = str(channel.id)
+            json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
+            await ctx.send(embed=cr.emb(cr.green,"Goodbye Channel Set Sucessfully",f"Channel: {channel}"))
+
+    # @commands.slash_command(name='set_bye',description="Sets bye message channel of server")
+    # @commands.default_member_permissions(manage_guild = True)
+    # async def set_bye(self,ctx,channel: disnake.TextChannel):
+    #     with open('greeting_channel.json','r') as file:
+    #             greet_channel=json.load(file)
+    #     greet_channel[str(ctx.guild.id)]["goodbye_channel"] = str(channel.id)
+    #     json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
+    #     await ctx.send(embed=cr.emb(cr.green,"Goodbye Channel Set Sucessfully",f"Channel: {channel}"))
 
 
-    @commands.slash_command(name='unset_wlcm',description="Unsets welcoming message channel of server")
-    @commands.has_permissions(manage_guild = True)
-    async def unset_wlcm(self,ctx):
-        with open('greeting_channel.json','r') as file:
+    @commands.slash_command(name='unset',description="Unset's the features of channel in the server")
+    @commands.default_member_permissions(manage_guild = True)
+    async def unset(self,ctx,channel: disnake.TextChannel,feature:str = commands.Param(choices=["Welcome Channel","Goodbye Channel"])):
+        if feature == "Welcome Channel":
+            with open('greeting_channel.json','r') as file:
                 greet_channel=json.load(file)
-        greet_channel[str(ctx.guild.id)]["greet_channel"] = None
-        json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
-        await ctx.send(embed=cr.emb(cr.green,"Welcome Channel Unset Sucessfully"))
+            greet_channel[str(ctx.guild.id)]["greet_channel"] = None
+            json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
+            await ctx.send(embed=cr.emb(cr.red,"Welcome Channel Unset Sucessfully"))
+        elif feature == "Goodbye Channel":
+            with open('greeting_channel.json','r') as file:
+                greet_channel=json.load(file)
+            greet_channel[str(ctx.guild.id)]["goodbye_channel"] = None
+            json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
+            await ctx.send(embed=cr.emb(cr.red,"Goodbye Channel Unset Sucessfully"))
+
+    # @commands.slash_command(name='unset_wlcm',description="Unsets welcoming message channel of server")
+    # @commands.default_member_permissions(manage_guild = True)
+    # async def unset_wlcm(self,ctx):
+    #     with open('greeting_channel.json','r') as file:
+    #             greet_channel=json.load(file)
+    #     greet_channel[str(ctx.guild.id)]["greet_channel"] = None
+    #     json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
+    #     await ctx.send(embed=cr.emb(cr.green,"Welcome Channel Unset Sucessfully"))

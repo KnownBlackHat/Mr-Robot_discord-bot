@@ -101,7 +101,6 @@ class fun(commands.Cog):
             else:
                 await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
 
-    #@commands.is_owner()
     @commands.slash_command(name='xxx',description="Returns Results from xnxx.com")
     @commands.is_nsfw()
     async def xxx(self,ctx,search,amount=1):

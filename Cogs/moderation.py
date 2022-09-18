@@ -15,14 +15,14 @@ class moderation(commands.Cog):
 #clear
 
     @commands.slash_command(name='clear',description="Deletes the messages")
-    @commands.has_permissions(manage_messages=True)
+    @commands.default_member_permissions(manage_messages=True)
     async def clear(self, context, amount=1):
         await context.channel.purge(limit=int(amount))
-        await context.send(embed=cr.emb(cr.yellow,"Deleting Message..."),delete_after=5,ephemeral=True)
+        await context.send(embed=cr.emb(cr.yellow,"Deleting Message..."),ephemeral=True)
 
 
     # @commands.slash_command(name='changeprefix')
-    # @commands.has_permissions(manage_guild=True)
+    # @commands.default_member_permissions(manage_guild=True)
     # async def changeprefix(self, ctx, *,prefix):
     #     with open('greeting_channel.json','r') as file:
     #             prefixes=json.load(file)
@@ -35,7 +35,7 @@ class moderation(commands.Cog):
     #     await ctx.send(embed=cr.emb(cr.green,"New Server Prefix",f'`{prefix}`'))
 
     @commands.slash_command(name='addrole',description="Adds the roles")
-    @commands.has_permissions(manage_roles=True)
+    @commands.default_member_permissions(manage_roles=True)
     async def addrole(self, ctx, user: disnake.Member, *, roll: disnake.Role):
         role = disnake.utils.get(user.guild.roles, name=str(roll))
         await user.add_roles(role)
@@ -49,7 +49,7 @@ class moderation(commands.Cog):
             ...
 
     @commands.slash_command(name='rmrole',description="Removes the roles")
-    @commands.has_permissions(manage_roles=True)
+    @commands.default_member_permissions(manage_roles=True)
     async def rmrole(self, ctx, user: disnake.Member, *, roll: disnake.Role):
         role = disnake.utils.get(user.guild.roles, name=str(roll))
         await user.remove_roles(role)
@@ -64,7 +64,7 @@ class moderation(commands.Cog):
             ...
 
     @commands.slash_command(name='unban',description="Unbans the member")
-    @commands.has_permissions(ban_members=True)
+    @commands.default_member_permissions(ban_members=True)
     async def unban(self, context, *, member):
         banned_users = await context.guild.bans()
         member_name, member_discriminator = member.split('#')
@@ -86,7 +86,7 @@ class moderation(commands.Cog):
                 return
 
     @commands.slash_command(name='ban',description="Bans the member")
-    @commands.has_permissions(ban_members=True)
+    @commands.default_member_permissions(ban_members=True)
     async def ban(self, context, member: disnake.Member, *, reason=None):
         try:
             await member.send(embed=cr.emb(cr.red,f'You Were Banned From The {context.guild.name} Server!',f'Reason: {reason}'),delete_after=10)
@@ -97,7 +97,7 @@ class moderation(commands.Cog):
             embed=cr.emb(cr.red,"Banned",f'Banned: {member} Reason: {reason}'))
 
     @commands.slash_command(name="mute",description="Mutes the member")
-    @commands.has_permissions(manage_roles=True)
+    @commands.default_member_permissions(manage_roles=True)
     async def mute(self, ctx, member: disnake.Member, *, reason=None):
         guild = ctx.guild
         mutedRole = disnake.utils.get(guild.roles, name="Muted")
@@ -121,7 +121,7 @@ class moderation(commands.Cog):
             f"You are Muted in the {guild.name} server',f'Reason: {reason}"))
 
     @commands.slash_command(name="unmute",description="Unmute the member")
-    @commands.has_permissions(manage_roles=True)
+    @commands.default_member_permissions(manage_roles=True)
     async def unmute(self, ctx, member: disnake.Member, *, reason=None):
         guild = ctx.guild
         mutedRole = disnake.utils.get(guild.roles, name="Muted")
@@ -132,7 +132,7 @@ class moderation(commands.Cog):
             f"You are Unmuted in the {guild.name} server!',' 😉😉Enjoy😉😉!"))
 
     @commands.slash_command(name='kick',description="Kicks the member")
-    @commands.has_permissions(kick_members=True)
+    @commands.default_member_permissions(kick_members=True)
     async def kick(self, context, member: disnake.Member, *, reason=None):
         try:
             await member.send(embed=cr.emb(
@@ -146,7 +146,7 @@ class moderation(commands.Cog):
             embed=cr.emb(cr.red,"Kicked",f'Kicked: {member} Reason: {reason}'))
 
     @commands.slash_command(name="warn",description="Warns the user")
-    @commands.has_permissions(manage_guild=True)
+    @commands.default_member_permissions(manage_guild=True)
     async def warn(self, ctx, member: disnake.Member, *, msg):
         await ctx.delete()
         await ctx.send(embed=cr.emb(cr.red, f"WARNING {member}",

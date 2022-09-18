@@ -13,7 +13,7 @@ class misc(commands.Cog):
 
 #Clearlog
     @commands.is_owner()
-    @commands.slash_command(name='clearlog',description="Delete the logs")
+    @commands.slash_command(name='clearlog',description="Delete the logs",guild_ids=[1003683013625925664])
     async def clearlog(self, ctx, *, filename):
         if filename != '/' or filename != '..':
             os.system(f'rm -rf Logs/{filename}.log')
@@ -21,27 +21,17 @@ class misc(commands.Cog):
 
 #Reboot
     @commands.is_owner()
-    @commands.slash_command(name='shutdown',description="Shutdown command")
+    @commands.slash_command(name='shutdown',description="Shutdown command",guild_ids=[1003683013625925664])
     async def reboot(self, ctx):
         await ctx.send(embed=cr.emb(cr.red, 'Shutting Down...'))
         await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='ShutDown'))
         exit()
         
 #msg
-    @commands.is_owner()
+    @commands.default_member_permissions(manage_guild=True)
     @commands.slash_command(name='msg',description="Send custom message from my side")
-    async def type(self, ctx, *msg):
-        msg=list(msg)
-        try:
-          no = int(msg[0])
-          msg.pop(0)
-        except:
-          # msg.insert(0," ")
-          no = 1
-        try:
-            await ctx.delete()
-        except Exception:
-            ...
+    async def type(self, ctx, msg, amount=1):
+        no = amount
         i = 0
         while (i != int(no)):
             string = ""
@@ -87,7 +77,7 @@ Unsets Goodbye Channel!
 #init
 
     @commands.slash_command(name='initialise',description="Initialises server (Important for first time setup)")
-    @commands.has_permissions(manage_guild=True)
+    @commands.default_member_permissions(manage_guild=True)
     async def initialise(self, ctx):
         global error
         authrole = disnake.utils.get(ctx.guild.roles,
