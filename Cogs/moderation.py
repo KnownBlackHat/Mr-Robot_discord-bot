@@ -173,7 +173,6 @@ class moderation(commands.Cog):
     @commands.slash_command(name="warn",description="Warns the user")
     @commands.default_member_permissions(moderate_members=True)
     async def warn(self, ctx, member: disnake.Member, msg:str):
-        await ctx.delete()
         await ctx.send(embed=cr.emb(cr.red, f"WARNING {member}",
                                   f'{member.mention} --> {msg}'),delete_after=10)
         try:
