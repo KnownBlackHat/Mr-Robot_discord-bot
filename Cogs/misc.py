@@ -34,10 +34,7 @@ class misc(commands.Cog):
         no = amount
         i = 0
         while (i != int(no)):
-            string = ""
-            for k in msg:
-              string = string+" "+k
-            await ctx.send(embed=cr.emb(value=string))
+            await ctx.send(embed=cr.emb(value=msg))
             i = int(i) + 1
     
 #version
