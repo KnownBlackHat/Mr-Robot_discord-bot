@@ -33,6 +33,7 @@ class misc(commands.Cog):
     async def type(self, ctx, msg, amount=1):
         no = amount
         i = 0
+        await ctx.send(embed=cr.emb(cr.green,"Message sent",ephemeral=True))
         while (i != int(no)):
             await ctx.send(embed=cr.emb(value=msg))
             i = int(i) + 1
