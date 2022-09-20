@@ -106,7 +106,6 @@ class fun(commands.Cog):
     async def xxx(self,ctx,search,amount=1):
         term = search
         if ctx.channel.is_nsfw():
-          await ctx.send(embed=cr.emb(cr.yellow,"Results may take time, so hold on!"),delete_after=10)
           ufrm_term = term
           term = term.replace(" ","+")
           term_url = "https://www.xnxx.com/search/"+str(term)
