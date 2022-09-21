@@ -124,8 +124,8 @@ class fun(commands.Cog):
                       link = i.get('href')
                       page = await get("https://www.xnxx.com"+link)
                       link = extract_video_link(page)
-                      await ctx.send(embed=cr.emb(cr.black,"Search Term: "+ufrm_term,"Video Title: "+page.title.string))
-                      await ctx.send(link)
+                      await ctx.send(embed=cr.emb(cr.black,"Search Term: "+ufrm_term,"Video Title: "+page.title.string),ephemeral=True)
+                      await ctx.send(link,ephemeral=True)
                       p = p+1
                   break
                 except Exception as aw:
