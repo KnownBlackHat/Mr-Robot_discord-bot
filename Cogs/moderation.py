@@ -120,7 +120,7 @@ class moderation(commands.Cog):
             cr.red,"Muted",f" Muted: {member.mention} Reason: {reason}"))
         await member.send(embed=cr.emb(
             cr.red,
-            f"You are Muted in the {guild.name} server',f'Reason: {reason}"))
+            f'You are Muted in the {guild.name} server',f'Reason: {reason}'))
 
     @commands.command(name="unmute", aliases=['um'])
     @commands.has_permissions(manage_roles=True)
@@ -131,7 +131,7 @@ class moderation(commands.Cog):
         await ctx.send(
             embed=cr.emb(cr.green,"Unmuted",f"Unmuted {member.mention}"))
         await member.send(embed=cr.emb(cr.green,
-            f"You are Unmuted in the {guild.name} server!',' 😉😉Enjoy😉😉!"))
+            f'You are Unmuted in the {guild.name} server!',' 😉😉Enjoy😉😉!'))
 
     @commands.command(name='kick', aliases=['bye','goodbye'])
     @commands.has_permissions(kick_members=True)
