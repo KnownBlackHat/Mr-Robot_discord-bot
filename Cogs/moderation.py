@@ -113,7 +113,7 @@ class moderation(commands.Cog):
 
     @commands.slash_command(name="mute",description="Mutes the member")
     @commands.default_member_permissions(moderate_members=True)
-    async def mute(self, ctx, member: disnake.Member, *, reason=None):
+    async def mute(self, ctx, member: disnake.Member,reason=None):
         guild = ctx.guild
         mutedRole = disnake.utils.get(guild.roles, name="Muted")
 
@@ -137,7 +137,7 @@ class moderation(commands.Cog):
 
     @commands.slash_command(name="unmute",description="Unmute the member")
     @commands.default_member_permissions(moderate_members=True)
-    async def unmute(self, ctx, member: disnake.Member, *, reason=None):
+    async def unmute(self, ctx, member: disnake.Member):
         guild = ctx.guild
         mutedRole = disnake.utils.get(guild.roles, name="Muted")
         await member.remove_roles(mutedRole)
