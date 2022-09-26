@@ -29,12 +29,13 @@ class misc(commands.Cog):
         
 #message
     @commands.is_owner()
-    @commands.command(name='msg')
-    async def type(self, ctx,title,message,no=1):
-        i = 0
-        while (i != int(no)):
-            await ctx.send(embed=cr.emb(value=title,message))
-            i = int(i) + 1
+    @commands.command(name='embed')
+    async def type(self, ctx,colour=cr.green,title,message,):
+            await ctx.send(embed=cr.emb(colour,title,message))
+    @type.error
+    async def type_handler(self, ctx, error):
+        if isinstance(error, commands.MissingRequiredArgument):
+            await ctx.send(f"Missing argument: {error.param.name}!")
 
     @commands.default_member_permissions(manage_guild=True)
     @commands.slash_command(name='message',description="Send custom message from my side in server")
