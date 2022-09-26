@@ -28,14 +28,22 @@ class misc(commands.Cog):
         exit()
         
 #message
+    @commands.is_owner()
+    @commands.command(name='message')
+    async def type(self, ctx,title,msg,no=1):
+        i = 0
+        while (i != int(no)):
+            await ctx.send(embed=cr.emb(value=title,message))
+            i = int(i) + 1
+
     @commands.default_member_permissions(manage_guild=True)
-    @commands.slash_command(name='message',description="Send custom message from my side in server")
-    async def type(self, ctx,title,message, amount=1):
+    @commands.slash_command(name='message',description="Send custom message from my side in serve
+    async def type(self,ctx,message, amount=1):
         no = amount
         i = 0
         await ctx.send(embed=cr.emb(cr.green,"Message sent"),ephemeral=True)
         while (i != int(no)):
-            await ctx.send(embed=cr.emb(cr.green,title,message))
+            await ctx.send(embed=cr.emb(cr.green,message))
             i = int(i) + 1
     
 #version
