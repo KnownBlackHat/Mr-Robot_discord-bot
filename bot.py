@@ -88,11 +88,8 @@ async def list_functions(ctx):
 @client.slash_command(description="Load Cogs",guild_ids=[1003683013625925664])
 async def load(ctx, name:str=commands.Param(choices=unloaded_cog_list)):
     client.load_extension(f'Cogs.{name}')
-    try:
-        unloaded_cog_list.remove(name)
-        loaded_cog_list.append(name)
-    except Exception:
-        ...
+    unloaded_cog_list.remove(name)
+    loaded_cog_list.append(name)
 
     await ctx.send(embed=cr.emb(cr.green, "Loaded", f"{name} function"))
 
@@ -110,11 +107,8 @@ async def reload(ctx:disnake.ApplicationCommandInteraction, name:str=commands.Pa
 @client.slash_command(description="Unloads Cogs",guild_ids=[1003683013625925664])
 async def unload(ctx, name:str=commands.Param(choices=loaded_cog_list)):
     client.unload_extension(f'Cogs.{name}')
-    try:
-        loaded_cog_list.remove(name)
-        unloaded_cog_list.append(name)
-    except Exception:
-        ...
+    loaded_cog_list.remove(name)
+    unloaded_cog_list.append(name)
     await ctx.send(embed=cr.emb(cr.red, "Unloaded", f"{name} function"))
 
 # keep_alive()
