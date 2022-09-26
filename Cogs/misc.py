@@ -30,8 +30,8 @@ class misc(commands.Cog):
 #message
     @commands.is_owner()
     @commands.command(name='embed')
-    async def type(self, ctx,colour,title,message):
-            await ctx.send(embed=cr.emb(colour,title,message))
+    async def type(self, ctx,title,message):
+            await ctx.send(embed=cr.emb(disnake.Colour.random(),title,message))
     @type.error
     async def type_handler(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
