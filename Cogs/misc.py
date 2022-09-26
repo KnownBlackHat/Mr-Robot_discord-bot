@@ -30,7 +30,7 @@ class misc(commands.Cog):
 #message
     @commands.default_member_permissions(manage_guild=True)
     @commands.slash_command(name='message',description="Send custom message from my side in server")
-    async def type(self, ctx,Title='',message, amount=1):
+    async def type(self, ctx,Title,message, amount=1):
         no = amount
         i = 0
         await ctx.send(embed=cr.emb(cr.green,"Message sent"),ephemeral=True)
