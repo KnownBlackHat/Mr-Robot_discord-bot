@@ -27,10 +27,10 @@ class misc(commands.Cog):
         await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='ShutDown'))
         exit()
         
-#msg
+#message
     @commands.default_member_permissions(manage_guild=True)
     @commands.slash_command(name='message',description="Send custom message from my side")
-    async def type(self, ctx,Title=None,message, amount=1):
+    async def type(self, ctx,Title='',message, amount=1):
         no = amount
         i = 0
         await ctx.send(embed=cr.emb(cr.green,"Message sent"),ephemeral=True)
