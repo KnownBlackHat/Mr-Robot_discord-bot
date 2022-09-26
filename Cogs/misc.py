@@ -29,8 +29,8 @@ class misc(commands.Cog):
         
 #message
     @commands.is_owner()
-    @commands.command(name='message')
-    async def type(self, ctx,title,msg,no=1):
+    @commands.command(name='msg')
+    async def type(self, ctx,title,message,no=1):
         i = 0
         while (i != int(no)):
             await ctx.send(embed=cr.emb(value=title,message))
