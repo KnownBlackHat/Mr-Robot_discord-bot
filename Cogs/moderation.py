@@ -51,8 +51,8 @@ class moderation(commands.Cog):
 
     @commands.slash_command(name='addrole',description="Adds the roles")
     @commands.default_member_permissions(manage_roles=True)
-    async def addrole(self, ctx, user: disnake.Member, *, roll: disnake.Role):
-        role = disnake.utils.get(user.guild.roles, name=str(roll))
+    async def addrole(self, ctx, user: disnake.Member, role: disnake.Role):
+        role = disnake.utils.get(user.guild.roles, name=str(role))
         await user.add_roles(role)
         await ctx.send(embed=cr.emb(cr.green, "Role Assigned",
                                   f"{user.mention} Has Got  `{role}`  Role !"), delete_after=10)
@@ -65,8 +65,8 @@ class moderation(commands.Cog):
 
     @commands.slash_command(name='rmrole',description="Removes the roles")
     @commands.default_member_permissions(manage_roles=True)
-    async def rmrole(self, ctx, user: disnake.Member, *, roll: disnake.Role):
-        role = disnake.utils.get(user.guild.roles, name=str(roll))
+    async def rmrole(self, ctx, user: disnake.Member, role: disnake.Role):
+        role = disnake.utils.get(user.guild.roles, name=str(role))
         await user.remove_roles(role)
         await ctx.send(
             embed=cr.emb(cr.red, "Role Removed",
@@ -80,7 +80,7 @@ class moderation(commands.Cog):
 
     @commands.slash_command(name='unban',description="Unbans the member")
     @commands.default_member_permissions(ban_members=True)
-    async def unban(self, context, *, member):
+    async def unban(self, context, member):
         banned_users = await context.guild.bans()
         member_name, member_discriminator = member.split('#')
         for ban_entry in banned_users:
