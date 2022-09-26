@@ -35,7 +35,7 @@ class misc(commands.Cog):
     @type.error
     async def type_handler(self, ctx, error):
         if isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(embed=cr.emb(cr.red,"Missing Argument", f"`{error.param.name}`")
+            await ctx.send(embed=cr.emb(cr.red,"Missing Argument", f"`{error.param.name}`"))
 
     @commands.default_member_permissions(manage_guild=True)
     @commands.slash_command(name='message',description="Send custom message from my side in server")
