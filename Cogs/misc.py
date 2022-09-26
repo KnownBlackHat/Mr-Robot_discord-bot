@@ -30,7 +30,7 @@ class misc(commands.Cog):
 #message
     @commands.is_owner()
     @commands.command(name='embed')
-    async def type(self, ctx,colour=cr.green,title,message):
+    async def type(self, ctx,colour,title,message):
             await ctx.send(embed=cr.emb(colour,title,message))
     @type.error
     async def type_handler(self, ctx, error):
