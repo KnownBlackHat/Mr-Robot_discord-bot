@@ -32,9 +32,8 @@ class moderation(commands.Cog):
     @commands.slash_command(name='clear',description="Deletes the messages")
     @commands.default_member_permissions(manage_messages=True)
     async def clear(self, context, amount=1):
-        await context.channel.purge(limit=int(amount))
         await context.send(embed=cr.emb(cr.yellow,"Deleting Message..."),ephemeral=True)
-
+        await context.channel.purge(limit=int(amount))
 
     # @commands.slash_command(name='changeprefix')
     # @commands.default_member_permissions(manage_guild=True)
