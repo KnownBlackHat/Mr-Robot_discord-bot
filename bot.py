@@ -34,7 +34,7 @@ start_time = time.time()
 #       return commands.when_mentioned_or("!!")(client,message)
       
 
-client = commands.Bot(intents = disnake.Intents.all()) # ,sync_commands_debug=True
+client = commands.Bot(command_prefix=commands.when_mentioned,intents = disnake.Intents.all()) # ,sync_commands_debug=True
 
 load_dotenv()
 
