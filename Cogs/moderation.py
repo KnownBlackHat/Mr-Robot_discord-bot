@@ -112,11 +112,11 @@ class moderation(commands.Cog):
 
     @commands.slash_command(name="temporary mute",description="Temporarily mutes the member")
     @commands.default_member_permissions(moderate_members=True)
-    async def tempmute(self,ctx, duration: Optional[Union[float, datetime.timedelta]] = MISSING,
-        until: Optional[datetime.datetime] = MISSING,
+    async def tempmute(self,ctx, duration: Optional[Union[float, datetime.timedelta]] = "MISSING",
+        until: Optional[datetime.datetime] = "MISSING",
         reason: Optional[str] = None,
     ) -> Member:
-        if duration is not MISSING:
+        if duration is not "MISSING":
             return await self.guild.timeout(self, duration=duration, reason=reason)
         else:
             return await self.guild.timeout(self, until=until, reason=reason)
