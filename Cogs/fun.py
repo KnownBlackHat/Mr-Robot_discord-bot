@@ -101,7 +101,7 @@ class fun(commands.Cog):
             else:
                 await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
 
-    @commands.slash_command(name='xxx',description="Returns results from nsfw website")
+    @commands.slash_command(name='nsfw_premium',description="Returns results from nsfw website")
     @commands.is_nsfw()
     async def xxx(self,ctx,search,amount=1):
         term = search
@@ -124,8 +124,8 @@ class fun(commands.Cog):
                       link = i.get('href')
                       page = await get("https://www.xnxx.com"+link)
                       link = extract_video_link(page)
-                      await ctx.send(embed=cr.emb(cr.black,"Search Term: "+ufrm_term,"Video Title: "+page.title.string),delete_after=60*60*2)
-                      await ctx.send(link,delete_after=60*60*2)
+                      await ctx.send(embed=cr.emb(cr.black,"Search Term: "+ufrm_term,"Video Title: "+page.title.string),ephemeral=True)
+                      await ctx.send(link,ephemeral=True)
                       p = p+1
                   break
                 except Exception as aw:
@@ -135,8 +135,8 @@ class fun(commands.Cog):
               # break
           except Exception as ex:
               # print("Trying Again")
-              await ctx.send(embed=cr.emb(cr.red,"Try Again Later!",ex))
+              await ctx.send(embed=cr.emb(cr.red,"Try Again Later!",ex),ephemeral=True)
                 # continue
 
         else:
-            await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"))
+            await ctx.send(embed=cr.emb(cr.black,"NSFW Command", "Sorry Buddy! This is not nsfw channel!"),ephemeral=True)
