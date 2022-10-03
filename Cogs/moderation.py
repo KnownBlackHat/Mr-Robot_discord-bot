@@ -1,41 +1,9 @@
-
-from __future__ import annotations
-
-import asyncio
-import datetime
-import itertools
-import sys
-from operator import attrgetter
-from typing import (
-    TYPE_CHECKING,
-    Any,
-    Dict,
-    List,
-    Literal,
-    Optional,
-    Sequence,
-    Tuple,
-    Union,
-    cast,
-    overload,
-)
-
-import disnake.abc
-
-from . import utils
-from .activity import ActivityTypes, create_activity
-from .asset import Asset
-from .colour import Colour
-from .enums import Status, try_enum
-from .object import Object
-from .permissions import Permissions
-from .user import BaseUser, User, _UserTag
-from .utils import MISSING
-
 import disnake
 from disnake.ext import commands
 from bot import cr
 import json
+
+MISSING="MISSING"
 
 def setup(client: commands.Bot):
     client.add_cog(moderation(client))
@@ -144,50 +112,50 @@ class moderation(commands.Cog):
         await context.send(
             embed=cr.emb(cr.red,"Banned",f'Banned: {member} Reason: {reason}'))
 
-    @commands.slash_command(name="temporary mute",description="Temporarily mutes the member")
+#     @commands.slash_command(name="temporary mute",description="Temporarily mutes the member")
+#     @commands.default_member_permissions(moderate_members=True)
+#     async def tempmute(self,ctx, duration: Optional[Union[float, datetime.timedelta]] = MISSING,
+#         until: Optional[datetime.datetime] = MISSING,
+#         reason: Optional[str] = None,
+#     ) -> Member:
+#         if duration is not MISSING:
+#             return await self.guild.timeout(self, duration=duration, reason=reason)
+#         else:
+#             return await self.guild.timeout(self, until=until, reason=reason)
+    @commands.slash_command(name="mute",description="Mutes the member")
     @commands.default_member_permissions(moderate_members=True)
-    async def tempmute(self,ctx, duration: Optional[Union[float, datetime.timedelta]] = MISSING,
-        until: Optional[datetime.datetime] = MISSING,
-        reason: Optional[str] = None,
-    ) -> Member:
-        if duration is not MISSING:
-            return await self.guild.timeout(self, duration=duration, reason=reason)
-        else:
-            return await self.guild.timeout(self, until=until, reason=reason)
-#     @commands.slash_command(name="mute",description="Mutes the member")
-#     @commands.default_member_permissions(moderate_members=True)
-#     async def mute(self, ctx, member: disnake.Member,reason=None):
-#         guild = ctx.guild
-#         mutedRole = disnake.utils.get(guild.roles, name="Muted")
+    async def mute(self, ctx, member: disnake.Member,reason=None):
+        guild = ctx.guild
+        mutedRole = disnake.utils.get(guild.roles, name="Muted")
 
-#         if not mutedRole:
-#             mutedRole = await guild.create_role(name="Muted")
+        if not mutedRole:
+            mutedRole = await guild.create_role(name="Muted")
 
-#             for channel in guild.channels:
-#                 await channel.set_permissions(mutedRole,
-#                                               speak=False,
-#                                               send_messages=False,
-#                                               read_message_history=True,
-#                                               read_messages=True,
-#                                               view_channel=True)
+            for channel in guild.channels:
+                await channel.set_permissions(mutedRole,
+                                              speak=False,
+                                              send_messages=False,
+                                              read_message_history=True,
+                                              read_messages=True,
+                                              view_channel=True)
 
-#         await member.add_roles(mutedRole)
-#         await ctx.send(embed=cr.emb(
-#             cr.red,"Muted",f" Muted: {member.mention} Reason: {reason}"),delete_after=10)
-#         await member.send(embed=cr.emb(
-#             cr.red,
-#             f"You are Muted in the {guild.name} server",f"Reason: {reason}"))
+        await member.add_roles(mutedRole)
+        await ctx.send(embed=cr.emb(
+            cr.red,"Muted",f" Muted: {member.mention} Reason: {reason}"),delete_after=10)
+        await member.send(embed=cr.emb(
+            cr.red,
+            f"You are Muted in the {guild.name} server",f"Reason: {reason}"))
 
-#     @commands.slash_command(name="unmute",description="Unmute the member")
-#     @commands.default_member_permissions(moderate_members=True)
-#     async def unmute(self, ctx, member: disnake.Member):
-#         guild = ctx.guild
-#         mutedRole = disnake.utils.get(guild.roles, name="Muted")
-#         await member.remove_roles(mutedRole)
-#         await ctx.send(
-#             embed=cr.emb(cr.green,"Unmuted",f"Unmuted {member.mention}"),delete_after=10)
-#         await member.send(embed=cr.emb(cr.green,
-#             f"You are Unmuted in the {guild.name} server!"," 😉😉Enjoy😉😉!"))
+    @commands.slash_command(name="unmute",description="Unmute the member")
+    @commands.default_member_permissions(moderate_members=True)
+    async def unmute(self, ctx, member: disnake.Member):
+        guild = ctx.guild
+        mutedRole = disnake.utils.get(guild.roles, name="Muted")
+        await member.remove_roles(mutedRole)
+        await ctx.send(
+            embed=cr.emb(cr.green,"Unmuted",f"Unmuted {member.mention}"),delete_after=10)
+        await member.send(embed=cr.emb(cr.green,
+            f"You are Unmuted in the {guild.name} server!"," 😉😉Enjoy😉😉!"))
 
     @commands.slash_command(name='kick',description="Kicks the member")
     @commands.default_member_permissions(kick_members=True)
