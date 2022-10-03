@@ -1,3 +1,37 @@
+
+from __future__ import annotations
+
+import asyncio
+import datetime
+import itertools
+import sys
+from operator import attrgetter
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    Dict,
+    List,
+    Literal,
+    Optional,
+    Sequence,
+    Tuple,
+    Union,
+    cast,
+    overload,
+)
+
+import disnake.abc
+
+from . import utils
+from .activity import ActivityTypes, create_activity
+from .asset import Asset
+from .colour import Colour
+from .enums import Status, try_enum
+from .object import Object
+from .permissions import Permissions
+from .user import BaseUser, User, _UserTag
+from .utils import MISSING
+
 import disnake
 from disnake.ext import commands
 from bot import cr
@@ -112,11 +146,11 @@ class moderation(commands.Cog):
 
     @commands.slash_command(name="temporary mute",description="Temporarily mutes the member")
     @commands.default_member_permissions(moderate_members=True)
-    async def tempmute(self,ctx, duration: Optional[Union[float, datetime.timedelta]] = "MISSING",
-        until: Optional[datetime.datetime] = "MISSING",
+    async def tempmute(self,ctx, duration: Optional[Union[float, datetime.timedelta]] = MISSING,
+        until: Optional[datetime.datetime] = MISSING,
         reason: Optional[str] = None,
     ) -> Member:
-        if duration is not "MISSING":
+        if duration is not MISSING:
             return await self.guild.timeout(self, duration=duration, reason=reason)
         else:
             return await self.guild.timeout(self, until=until, reason=reason)
