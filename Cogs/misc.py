@@ -44,7 +44,7 @@ class misc(commands.Cog):
         i = 0
         await ctx.send(embed=cr.emb(cr.green,"Message sent"),ephemeral=True)
         while (i != int(no)):
-            await ctx.send(embed=cr.emb(cr.green,message))
+            await ctx.send(embed=cr.emb(disnake.Colour.random(),"Mr Robot Messaging System",message))
             i = int(i) + 1
     
 #version
