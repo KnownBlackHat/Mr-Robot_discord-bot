@@ -174,9 +174,10 @@ class moderation(commands.Cog):
     @commands.slash_command(name="dm",description="Dm's the user")
     @commands.default_member_permissions(moderate_members=True)
     async def dm(self, ctx, member: disnake.Member, title:str, msg:str):
+        ctx.response.defer(ephemeral=True)
         try:
             await member.send(embed=cr.emb(cr.yellow, title, msg))
-            await ctx.send(embed=cr.emb(cr.green,"Dm sent"),ephemeral=True)
+            await ctx.send(embed=cr.emb(cr.yellow, title, msg),ephemeral=True)
         except:
             await ctx.send(embed=cr.emb(cr.red,"Dm not sent"),ephemeral=True)
             
