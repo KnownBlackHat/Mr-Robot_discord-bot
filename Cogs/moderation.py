@@ -117,7 +117,8 @@ class moderation(commands.Cog):
      @commands.default_member_permissions(moderate_members=True)
      async def edit(self,ctx,member: disnake.Members,days=0,hours=0,minutes=0):
           if days == 0 and hours == 0 and minutes == 0:
-                ctx.send(embed=cr.emb(),ephermal=True)
+                ctx.send(embed=cr.emb(cr.red,"Error","User can't be muted for 0 minutes
+"),ephermal=True)
           else:
                 member.edit(timeout=datetime.timedelta(days=int(days),hours=int(hours),minute=int(minutes)))
                 ctx.send(embed=cr.emb(cr.red,"Temporarily Muted",f"{member.mention} is muted For {datetime.timedelta(days=int(days),hours=int(hours),minute=int(minutes))}"),ephermal=True)
