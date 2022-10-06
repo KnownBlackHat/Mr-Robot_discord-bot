@@ -1,5 +1,6 @@
 import disnake
 from disnake.ext import commands
+import datetime
 from bot import cr
 import json
 
@@ -114,7 +115,12 @@ class moderation(commands.Cog):
 
      @commands.slash_command(name="temporary mute",description="Temporarily mutes the member")
      @commands.default_member_permissions(moderate_members=True)
-     async def edit(self,ctx,timeout=datetime.timedelta())
+     async def edit(self,ctx,member: disnake.Members,days=0,hours=0,minutes=0):
+          if days == 0 and hours == 0 and minutes == 0:
+                ctx.send(embed=cr.emb(),ephermal=True)
+          else:
+                member.edit(timeout=datetime.timedelta(days=int(days),hours=int(hours),minute=int(minutes)))
+                ctx.send(embed=cr.emb(cr.red,"Temporarily Muted",f"{member.mention} is muted For {datetime.timedelta(days=int(days),hours=int(hours),minute=int(minutes))}"),ephermal=True)
 #         until: Optional[datetime.datetime] = MISSING,
 #         reason: Optional[str] = None,
 #     ) -> Member:
