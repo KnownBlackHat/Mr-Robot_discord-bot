@@ -112,9 +112,9 @@ class moderation(commands.Cog):
         await context.send(
             embed=cr.emb(cr.red,"Banned",f'Banned: {member} Reason: {reason}'))
 
-#     @commands.slash_command(name="temporary mute",description="Temporarily mutes the member")
-#     @commands.default_member_permissions(moderate_members=True)
-#     async def tempmute(self,ctx, duration: Optional[Union[float, datetime.timedelta]] = MISSING,
+     @commands.slash_command(name="temporary mute",description="Temporarily mutes the member")
+     @commands.default_member_permissions(moderate_members=True)
+     async def edit(self,ctx,timeout=datetime.timedelta())
 #         until: Optional[datetime.datetime] = MISSING,
 #         reason: Optional[str] = None,
 #     ) -> Member:
