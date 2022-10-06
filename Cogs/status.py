@@ -14,6 +14,7 @@ class command_handling(commands.Cog):
     def __init__(self, client):
         self.bot = client
 
+    
     @commands.Cog.listener()
     async def on_ready(self):
         channel = client.get_channel(1009182794712367164)
@@ -45,8 +46,30 @@ class command_handling(commands.Cog):
 
 
 
-    @commands.slash_command(name="status",description="Shows my status")
+    @commands.slash_command(name="status",description="Shows status")
     async def status(self,ctx):
+      def get_feature_status(feature):
+        with open('greeting_channel.json','r') as file:
+            feature_status=json.load(file)
+        try:
+            feature_status[str(ctx.guild.id)][feature]
+        except Exception as e:
+            return "Activated"
+        if feature_status[str(ctx.guild.id)][feature] == "activate":
+            return "Activated"
+        else:
+            return "Deactivated"
+      def get_fe_status(feature):
+        with open('greeting_channel.json','r') as file:
+            feature_status=json.load(file)
+        try:
+            feature_status[str(ctx.guild.id)][feature]
+        except Exception as e:
+            return "Deactivated"
+        if feature_status[str(ctx.guild.id)][feature] != "null":
+            return "Activated"
+        else:
+            return "Deactivated"
       current_time = time.time()
       difference = int(round(current_time - start_time))
       text = str(datetime.timedelta(seconds=difference))
@@ -58,4 +81,10 @@ class command_handling(commands.Cog):
       embed.add_field("Available Usage: ",f"{round(psutil.virtual_memory().available * 100 / psutil.virtual_memory().total)}%",inline=False)
       embed.add_field("Users: ", ctx.guild.member_count, inline=False)
       embed.add_field("Channels: ", len(ctx.guild.channels), inline=False)
+      embed.add_field("Features: ", "Managed By `/manage_features` commands", inline=False)
+      embed.add_field("Welcomer: ",get_fe_status("greet_channel"),inline=False)
+      embed.add_field("Goodbyer: ",get_fe_status("goodbye_channel"),inline=False)
+      embed.add_field("Link Blocker: ",get_feature_status("Link Blocker"),inline=False)
+      embed.add_field("Anti-Abusive: ",get_feature_status("Anti-Abusive"),inline=False)
+      embed.add_field("Everyone/here Mention Blocker: ",get_feature_status("@everyone/@here mention blocker"),inline=False)
       await ctx.send(embed=embed)
