@@ -110,18 +110,16 @@ class moderation(commands.Cog):
         except:
             pass
         await member.ban(reason=reason)
-        await context.send(
-            embed=cr.emb(cr.red,"Banned",f'Banned: {member} Reason: {reason}'))
+        await context.send(embed=cr.emb(cr.red,"Banned",f'Banned: {member} Reason: {reason}'))
 
      @commands.slash_command(name="temporary mute",description="Temporarily mutes the member")
      @commands.default_member_permissions(moderate_members=True)
      async def edit(self,ctx,member: disnake.Members,days=0,hours=0,minutes=0):
-          if days == 0 and hours == 0 and minutes == 0:
-                ctx.send(embed=cr.emb(cr.red,"Error","User can't be muted for 0 minutes
-"),ephermal=True)
-          else:
-                member.edit(timeout=datetime.timedelta(days=int(days),hours=int(hours),minute=int(minutes)))
-                ctx.send(embed=cr.emb(cr.red,"Temporarily Muted",f"{member.mention} is muted For {datetime.timedelta(days=int(days),hours=int(hours),minute=int(minutes))}"),ephermal=True)
+        if days == 0 and hours == 0 and minutes == 0:
+            ctx.send(embed=cr.emb(cr.red,"Error","User can't be muted for 0 minutes"),ephermal=True)
+        else:
+            member.edit(timeout=datetime.timedelta(days=int(days),hours=int(hours),minute=int(minutes)))
+            ctx.send(embed=cr.emb(cr.red,"Temporarily Muted",f"{member.mention} is muted For {datetime.timedelta(days=int(days),hours=int(hours),minute=int(minutes))}"),ephermal=True)
 #         until: Optional[datetime.datetime] = MISSING,
 #         reason: Optional[str] = None,
 #     ) -> Member:
