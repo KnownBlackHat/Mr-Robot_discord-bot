@@ -166,16 +166,12 @@ I'll ban the asked member! (Only For Admin)
 `unban`: 
 I'll unban the asked member! (Only For Admin)
 
-`mute`: 
-I'll mute to the asked member! (Only For Admin)
+`temporary_mute`: 
+I'll temporarily mute to the asked member! (Only For Admin)
 
 `set`|`unset`:
 Set/unset command for welcome/goodbye!
-
-
-`unmute`: 
-I'll Unmute to the asked member! (Only For Admin)
- '''))
+'''))
 
 
     @commands.slash_command(name="userinfo",description="Shows User Info")
