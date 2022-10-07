@@ -81,7 +81,7 @@ class command_handling(commands.Cog):
       embed.add_field("Available Usage: ",f"{round(psutil.virtual_memory().available * 100 / psutil.virtual_memory().total)}%",inline=False)
       embed.add_field("Users: ", ctx.guild.member_count, inline=False)
       embed.add_field("Channels: ", len(ctx.guild.channels), inline=False)
-      embed.add_field("Features: ", "Managed By `/manage_features` commands", inline=False)
+      embed.add_field("Features: ", "Managed By `/manage_features`,`/set`,`/unset` commands", inline=False)
       embed.add_field("Welcomer: ",get_fe_status("greet_channel"),inline=False)
       embed.add_field("Goodbyer: ",get_fe_status("goodbye_channel"),inline=False)
       embed.add_field("Link Blocker: ",get_feature_status("Link Blocker"),inline=False)
