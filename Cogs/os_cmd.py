@@ -22,7 +22,7 @@ class Oscmd(commands.Cog):
     @commands.is_owner()
     @commands.slash_command(name="update",description="Updates the software from github",guild_ids=[1003683013625925664])
     async def update(self,ctx):
-        await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='Update'))
+        await self.bot.change_presence(status=disnake.Status.dnd,activity=disnake.Game(name='Update'))
         await ctx.send(embed=cr.emb(cr.green,"Updating..."))
         os.system("rm -rf Mr*")
         os.system('git clone -b Mr_Robot https://github.com/KnownBlackHat/Mr-Robot_discord-bot.git')
