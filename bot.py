@@ -127,9 +127,9 @@ async def on_ready():
       
 loop = asyncio.new_event_loop()
 asyncio.set_event_loop(loop)
-loop.create_task(client.start('TOKEN'))
-loop.create_task(client1.start('TOKEN1'))
-loop.create_task(client2.start('TOKEN2'))
+loop.create_task(client.start(os.getenv('TOKEN')))
+loop.create_task(client1.start(os.getenv('TOKEN1')))
+loop.create_task(client2.start(os.getenv('TOKEN2')))
 loop.run_forever()
 # try:
 #   client.loop.run_until_complete(client.start(os.getenv("TOKEN")))
