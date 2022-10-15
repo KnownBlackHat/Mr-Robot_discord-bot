@@ -79,19 +79,15 @@ class fun(commands.Cog):
     # @commands.is_nsfw()
     @commands.slash_command(name='meme',description="Show you memes")
     async def meme(self, ctx):
-         Header =  {'User-Agent' : "Magic Browser"}
-#         type=['best','top','new','rising','hot']
-#         choice = random.choice(type)
-#         # await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Searching Meme in {choice} category..."))
-#          async with ctx.typing():
-           URL = "https://meme-api.herokuapp.com/gimme"
-           async with aiohttp.request("GET",URL,headers=Header) as resp:
-               if resp.status == 200:
-                  data = await resp.json()
-                  meme_pic = data["preview"][-2]
-                  await ctx.send(meme_pic)
-               else:
-                  await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
+       Header =  {'User-Agent' : "Magic Browser"}
+       URL = "https://meme-api.herokuapp.com/gimme"
+       async with aiohttp.request("GET",URL,headers=Header) as resp:
+           if resp.status == 200:
+              data = await resp.json()
+              meme_pic = data["preview"][-2]
+              await ctx.send(meme_pic)
+           else:
+              await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
 
     @commands.slash_command(name='nsfw_premium',description="Returns results from nsfw website")
     @commands.is_nsfw()
