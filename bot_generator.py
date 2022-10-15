@@ -15,7 +15,7 @@ def get_cmd():
 
   elif sys.argv[2] == '2':
     # Setting `Streaming ` status
-    return client.change_presence(activity=discord.Streaming(name=sys.argv[3], url="https://www.youtube.com"))
+    return client.change_presence(activity=discord.Streaming(name=sys.argv[3], url="https://discord.gg/yuwTXBadzK"))
 
   elif sys.argv[2] == '3':
     # Setting `Listening ` status
