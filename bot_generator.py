@@ -1,5 +1,5 @@
 
-# Argument Format: python bot_generator.py <token var name> <status no.> <name> 
+# Argument Format: python bot_generator.py <token var name> <status no.> <name> <bot=True|False>
 
 import discord
 from discord.ext import tasks, commands
@@ -31,4 +31,8 @@ async def on_ready():
     print(f'\n [!] Logged in as {client.user}')
     await get_cmd()
 #     await client.change_presence(status=discord.Status.dnd, activity=discord.Activity(type=discord.ActivityType.watching, name='OUR WORLD GETTING HACKED'))
-client.run(os.getenv(f"{sys.argv[1]}"), bot=False)
+if sys.argv[4].lower() == 'true':
+  is_bot = True
+else:
+  is_bot = False
+client.run(os.getenv(f"{sys.argv[1]}"), bot=is_bot)
