@@ -78,26 +78,28 @@ class fun(commands.Cog):
 
     # @commands.is_nsfw()
     @commands.slash_command(name='meme',description="Show you memes")
-    async def meme(self, ctx, amount=1):
+    async def meme(self, ctx):
         Header =  {'User-Agent' : "Magic Browser"}
-        type=['best','top','new','rising','hot']
-        choice = random.choice(type)
-        # await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Searching Meme in {choice} category..."))
-        # async with ctx.typing():    
-        URL = f"https://www.reddit.com/r/meme/{choice}.json?limit={int(amount)}"
-        async with aiohttp.request("GET",URL,headers=Header) as resp:
-            if resp.status == 200:
-                data = await resp.json()
-                try:
-                    for d in data["data"]["children"]:
-                        try: 
-                            await ctx.send(d["data"]["url_overridden_by_dest"])
-                        except KeyError:
-                            if d["data"]["thumbnail"].startswith('http'):
-                                await ctx.send(d["data"]["thumbnail"])
-                    # await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Search Of Meme in {choice} category Completed!"))
-                except:
-                    await ctx.send(embed=cr.emb(cr.red,"Meme Command","Try Again Later"))
+#         type=['best','top','new','rising','hot']
+#         choice = random.choice(type)
+#         # await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Searching Meme in {choice} category..."))
+         async with ctx.typing():
+             URL = "https://meme-api.herokuapp.com/gimme"
+             async with aiohttp.request("GET",URL,headers=Header) as resp:
+                 if resp.status == 200:
+                    data = await resp.json()
+                    meme_pic = data["preview"][-2]
+                    await ctx.send(meme_pic))
+#                 try:
+#                     for d in data["data"]["children"]:
+#                         try: 
+#                             await ctx.send(d["data"]["url_overridden_by_dest"])
+#                         except KeyError:
+#                             if d["data"]["thumbnail"].startswith('http'):
+#                                 await ctx.send(d["data"]["thumbnail"])
+#                     # await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Search Of Meme in {choice} category Completed!"))
+#                 except:
+#                     await ctx.send(embed=cr.emb(cr.red,"Meme Command","Try Again Later"))
             else:
                 await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
 
