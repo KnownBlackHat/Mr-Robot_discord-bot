@@ -112,7 +112,7 @@ async def unload(ctx, name:str=commands.Param(choices=loaded_cog_list)):
     await ctx.send(embed=cr.emb(cr.red, "Unloaded", f"{name} function"))
 
 try:
-  client.loop.run_until_complete(client.start(os.getenv("TOKEN")))
+  client.loop.run_until_complete(client.start(os.getenv("Mr_Robot")))
 except Exception as e:
   print(f"Login Failure at {datetime.datetime.now()}")
 finally:
