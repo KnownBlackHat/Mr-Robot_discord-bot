@@ -41,7 +41,7 @@ class command_handling(commands.Cog):
             # except:
             #     greet_channel[str(guild.id)]["prefix"] = "!!"
             #     json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
-        await self.bot.change_presence(activity=disnake.Streaming(name='@MR ROBOT', url="https://discord.gg/yuwTXBadzK"))
+        await self.bot.change_presence(activity=disnake.Streaming(name='@MR ROBOT', url="https://www.youtube.com/"))
         await channel.send(embed=cr.emb(cr.green,"Booted"))
 
 
