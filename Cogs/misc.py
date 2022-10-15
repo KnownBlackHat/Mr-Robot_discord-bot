@@ -24,7 +24,7 @@ class misc(commands.Cog):
     @commands.slash_command(name='shutdown',description="Shutdown command",guild_ids=[1003683013625925664])
     async def reboot(self, ctx):
         await ctx.send(embed=cr.emb(cr.red, 'Shutting Down...'))
-        await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='ShutDown'))
+        await self.bot.change_presence(status=disnake.Status.dnd,activity=disnake.Game(name='ShutDown'))
         exit()
         
 #message
