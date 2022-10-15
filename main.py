@@ -8,6 +8,6 @@ os.system("clear")
 
 #     print("[=] Starting Bot...")
 os.system('pip freeze > pip_log.txt')
-os.system('python bot1.py & ')
-os.system('python bot2.py & ')
+os.system('python bot1.py &> bot1.log & ')
+os.system('python bot2.py &> bot2.log & ')
 os.system('python bot.py')
