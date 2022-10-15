@@ -83,7 +83,7 @@ class fun(commands.Cog):
 #         type=['best','top','new','rising','hot']
 #         choice = random.choice(type)
 #         # await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Searching Meme in {choice} category..."))
-         async with ctx.typing():
+#          async with ctx.typing():
              URL = "https://meme-api.herokuapp.com/gimme"
              async with aiohttp.request("GET",URL,headers=Header) as resp:
                  if resp.status == 200:
