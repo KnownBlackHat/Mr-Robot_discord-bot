@@ -10,7 +10,7 @@ import sys
 client = commands.Bot(command_prefix=':',intents = discord.Intents.all(),self_bot=True)
 def get_cmd():
   if sys.argv[2] == '1':
-    # Setting `Playing Game` status
+    # Setting `Playing` status
     return await bot.change_presence(activity=discord.Game(name=f"sys.argv[3]"))
 
   elif sys.argv[2] == '2':
