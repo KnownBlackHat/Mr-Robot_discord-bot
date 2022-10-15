@@ -1,5 +1,5 @@
 
-# Argument Format: python bot_generator.py <token no.> <status no.> <name> 
+# Argument Format: python bot_generator.py <token var name> <status no.> <name> 
 
 import discord
 from discord.ext import tasks, commands
@@ -15,7 +15,7 @@ def get_cmd():
 
   elif sys.argv[2] == '2':
     # Setting `Streaming ` status
-    return client.change_presence(status=discord.Status.dnd, activity=discord.Streaming(name=sys.argv[3], url="https://www.twitch.tv/amouranth"))
+    return client.change_presence(activity=discord.Streaming(name=sys.argv[3], url="https://www.twitch.tv/amouranth"))
 
   elif sys.argv[2] == '3':
     # Setting `Listening ` status
@@ -28,7 +28,7 @@ def get_cmd():
     
 @client.event
 async def on_ready():
-    print(f'\n [!] TOKEN{sys.argv[1]} Logged in as {client.user}')
+    print(f'\n [!] Logged in as {client.user}')
     await get_cmd()
 #     await client.change_presence(status=discord.Status.dnd, activity=discord.Activity(type=discord.ActivityType.watching, name='OUR WORLD GETTING HACKED'))
-client.run(os.getenv(f"TOKEN{sys.argv[1]}"), bot=False)
+client.run(os.getenv(f"{sys.argv[1]}"), bot=False)
