@@ -10,6 +10,7 @@
 import os
 import datetime
 import time
+import asyncio
 # from webserver import keep_alive
 import disnake
 from disnake.client import Client
@@ -35,6 +36,8 @@ start_time = time.time()
       
 
 client = commands.Bot(command_prefix=commands.when_mentioned,intents = disnake.Intents.all()) # ,sync_commands_debug=True
+client1 = commands.Bot(command_prefix=commands.when_mentioned,intents = disnake.Intents.all()) # ,sync_commands_debug=True
+client2 = commands.Bot(command_prefix=commands.when_mentioned,intents = disnake.Intents.all()) # ,sync_commands_debug=True
 
 load_dotenv()
 
@@ -112,15 +115,25 @@ async def unload(ctx, name:str=commands.Param(choices=loaded_cog_list)):
     await ctx.send(embed=cr.emb(cr.red, "Unloaded", f"{name} function"))
 
 # keep_alive()
-try:
-  client.loop.run_until_complete(client.start(os.getenv("TOKEN")))
-except Exception as e:
-  print(f"Login Failure at {datetime.datetime.now()}")
-  with open('Runtime_error.log','a') as f:
-    f.write("-"*20)
-    f.write(str(e))
-  if "429 Too Many Requests" in str(e):
-    os.system("kill 1")
-  client.loop.run_until_complete(client.logout())
-finally:
-  client.loop.close()
+@client1.event()
+async def on_ready():
+      print(f'\n [!] Logged in as {client1.user}')
+      await client.change_presence(status=discord.Status.dnd, activity=discord.Activity(type=discord.ActivityType.watching, name='OUR WORLD GETTING HACKED'))
+      
+@client2.event()
+async def on_ready():
+      print(f'\n [!] Logged in as {client2.user}')
+      await client.change_presence(status=discord.Status.dnd, activity=discord.Activity(type=discord.ActivityType.watching, name='OVER 4FARMY'))
+      
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+loop.create_task(client.start('TOKEN'))
+loop.create_task(client1.start('TOKEN1'))
+loop.create_task(client2.start('TOKEN2'))
+loop.run_forever()
+# try:
+#   client.loop.run_until_complete(client.start(os.getenv("TOKEN")))
+# except Exception as e:
+#   print(f"Login Failure at {datetime.datetime.now()}")
+# finally:
+#   client.loop.close()
