@@ -115,12 +115,12 @@ async def unload(ctx, name:str=commands.Param(choices=loaded_cog_list)):
     await ctx.send(embed=cr.emb(cr.red, "Unloaded", f"{name} function"))
 
 # keep_alive()
-@client1.event()
+@client1.event
 async def on_ready():
       print(f'\n [!] Logged in as {client1.user}')
       await client.change_presence(status=discord.Status.dnd, activity=discord.Activity(type=discord.ActivityType.watching, name='OUR WORLD GETTING HACKED'))
       
-@client2.event()
+@client2.event
 async def on_ready():
       print(f'\n [!] Logged in as {client2.user}')
       await client.change_presence(status=discord.Status.dnd, activity=discord.Activity(type=discord.ActivityType.watching, name='OVER 4FARMY'))
