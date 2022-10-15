@@ -89,7 +89,7 @@ class fun(commands.Cog):
                  if resp.status == 200:
                     data = await resp.json()
                     meme_pic = data["preview"][-2]
-                    await ctx.send(meme_pic))
+                    await ctx.send(meme_pic)
 #                 try:
 #                     for d in data["data"]["children"]:
 #                         try: 
