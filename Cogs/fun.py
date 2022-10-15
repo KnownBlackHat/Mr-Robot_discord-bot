@@ -79,7 +79,7 @@ class fun(commands.Cog):
     # @commands.is_nsfw()
     @commands.slash_command(name='meme',description="Show you memes")
     async def meme(self, ctx):
-        Header =  {'User-Agent' : "Magic Browser"}
+         Header =  {'User-Agent' : "Magic Browser"}
 #         type=['best','top','new','rising','hot']
 #         choice = random.choice(type)
 #         # await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Searching Meme in {choice} category..."))
