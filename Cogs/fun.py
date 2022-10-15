@@ -90,18 +90,8 @@ class fun(commands.Cog):
                     data = await resp.json()
                     meme_pic = data["preview"][-2]
                     await ctx.send(meme_pic)
-#                 try:
-#                     for d in data["data"]["children"]:
-#                         try: 
-#                             await ctx.send(d["data"]["url_overridden_by_dest"])
-#                         except KeyError:
-#                             if d["data"]["thumbnail"].startswith('http'):
-#                                 await ctx.send(d["data"]["thumbnail"])
-#                     # await ctx.send(embed=cr.emb(cr.black,"Meme Command",f"🔎Search Of Meme in {choice} category Completed!"))
-#                 except:
-#                     await ctx.send(embed=cr.emb(cr.red,"Meme Command","Try Again Later"))
-            else:
-                await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
+                 else:
+                    await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme not found!"))
 
     @commands.slash_command(name='nsfw_premium',description="Returns results from nsfw website")
     @commands.is_nsfw()
