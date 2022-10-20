@@ -13,6 +13,7 @@ def setup(client: commands.Bot):
 class command_handling(commands.Cog):
     def __init__(self, client):
         self.bot = client
+        self.bot_alive.start()
 
     @tasks.loop(hours=1)
     async def bot_alive(self):
