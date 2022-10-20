@@ -27,7 +27,7 @@ class anti_abusive(commands.Cog):
         try:
             with open(f'Logs/{message.guild.name}.log', 'a') as msg:
                 msg.write(
-                    f'{message.channel.name}--> {message.author}: {message.content}\n'
+                    f'{message.channel.name} {message.channel.id}--> {message.author}: {message.content}\n'
                 )
         except:
             pass
