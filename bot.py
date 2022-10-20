@@ -98,7 +98,11 @@ async def load(ctx, name:str=commands.Param(choices=unloaded_cog_list)):
 async def reload(ctx:disnake.ApplicationCommandInteraction, name:str=commands.Param(choices=loaded_cog_list)):
     # print(loaded_cog_list)
     client.unload_extension(f'Cogs.{name}')
+    loaded_cog_list.remove(name)
+    unloaded_cog_list.append(name)
     client.load_extension(f'Cogs.{name}')
+    unloaded_cog_list.remove(name)
+    loaded_cog_list.append(name)
     await ctx.send(embed=cr.emb(cr.green, "Reloaded", f"{name} function"))
 
       
