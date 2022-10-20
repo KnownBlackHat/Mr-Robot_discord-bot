@@ -19,6 +19,14 @@ class misc(commands.Cog):
             os.system(f'rm -rf Logs/{filename}.log')
             await ctx.send(embed=cr.emb(cr.green, f'{filename}.log deleted!'))
 
+#Link Generator
+    @commands.is_owner()
+    @commands.slash_command(name="Link_Generator",description="Returns Invite Link")
+    async def link(ctx,id,expire=0,number_of_uses=1):
+        server = self.bot.get_channel(int(id))
+        link = await server.create_invite(temporary=True,max_age=int(expire),max_uses=int(number_of_uses))
+        await ctx.send(link)
+
 #Reboot
     @commands.is_owner()
     @commands.slash_command(name='shutdown',description="Shutdown command",guild_ids=[1003683013625925664])
