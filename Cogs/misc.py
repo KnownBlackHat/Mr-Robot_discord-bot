@@ -111,67 +111,67 @@ class misc(commands.Cog):
 
 #commands
 
-    @commands.slash_command(name="help",description="Shows Command List")
-    async def command(self, ctx):
-        await ctx.send(embed=cr.emb(
-            cr.green, "Command List", '''
-`status`:
-I'll tell my status!
+#     @commands.slash_command(name="help",description="Shows Command List")
+#     async def command(self, ctx):
+#         await ctx.send(embed=cr.emb(
+#             cr.green, "Command List", 
+# `status`:
+# I'll tell my status!
 
-`manage_feature`:
-You can toggle between activate/deactivate my features!
+# `manage_feature`:
+# You can toggle between activate/deactivate my features!
 
-`initialise`:
-I'll setup required role for server (Important command)!
+# `initialise`:
+# I'll setup required role for server (Important command)!
 
-`translate`:
-Translates the asked message to any language
+# `translate`:
+# Translates the asked message to any language
 
-`music_command`:
-I'll show my music command list!
+# `music_command`:
+# I'll show my music command list!
 
-`userinfo`:
-I'll show you mentioned user info 
+# `userinfo`:
+# I'll show you mentioned user info 
 
-`meme`: 
-I'll show you a meme!
+# `meme`: 
+# I'll show you a meme!
 
-`nsfw`:
-I'll show you a nsfw content on authorised channel!
+# `nsfw`:
+# I'll show you a nsfw content on authorised channel!
     
-`xxx`:
-I'll show you a premium nsfw content on authorised channel!
+# `xxx`:
+# I'll show you a premium nsfw content on authorised channel!
 
-`version`: 
-You will know about my version!
+# `version`: 
+# You will know about my version!
 
-`clear`:
-I'll delete the asked no. of previous chat! (Only For Admin)
+# `clear`:
+# I'll delete the asked no. of previous chat! (Only For Admin)
 
-`warn`:
-I'll give warning message to asked user! (Only For Admin)
+# `warn`:
+# I'll give warning message to asked user! (Only For Admin)
 
-`addrole`:
-I'll add the asked role to asked member! (Only For Admin)
+# `addrole`:
+# I'll add the asked role to asked member! (Only For Admin)
 
-`rmrole`: 
-I'll remove the asked role to asked member! (Only For Admin)
+# `rmrole`: 
+# I'll remove the asked role to asked member! (Only For Admin)
 
-`kick`: 
-I'll kick the asked member! (Only For Admin)
+# `kick`: 
+# I'll kick the asked member! (Only For Admin)
 
-`ban`: 
-I'll ban the asked member! (Only For Admin)
+# `ban`: 
+# I'll ban the asked member! (Only For Admin)
 
-`unban`: 
-I'll unban the asked member! (Only For Admin)
+# `unban`: 
+# I'll unban the asked member! (Only For Admin)
 
-`temporary_mute`: 
-I'll temporarily mute to the asked member! (Only For Admin)
+# `temporary_mute`: 
+# I'll temporarily mute to the asked member! (Only For Admin)
 
-`set`|`unset`:
-Set/unset command for welcome/goodbye!
-'''))
+# `set`|`unset`:
+# Set/unset command for welcome/goodbye!
+# '''))
 
 
     @commands.slash_command(name="userinfo",description="Shows User Info")
