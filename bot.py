@@ -75,12 +75,6 @@ except Exception as error:
       file.write(f'\nCogs Error: {error}')
 @client.remove_command('help')
 
-@commands.is_owner()
-@client.slash_command()
-async def link(ctx,id: int):
-    server = client.get_channel(id)
-    link = await server.create_invite(temporary=True,max_age=0,max_uses=1)
-    await ctx.send(link)
 
 @tasks.loop(hours=1)
 async def bot_alive():
