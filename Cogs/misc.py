@@ -59,10 +59,10 @@ class misc(commands.Cog):
 
     @commands.slash_command(name='version',description="Shows my version")
     async def version(self, context):
-        myEmbed = cr.emb(cr.green,"Current Version","My Current Version is 14.8",)
-        myEmbed.add_field(name="Version Code:", value="v.14.8.2", inline=False)
+        myEmbed = cr.emb(cr.green,"Current Version","My Current Version is 17.2",)
+        myEmbed.add_field(name="Version Code:", value="v.17.2.0", inline=False)
         myEmbed.add_field(name="Last Updated:",
-                          value="September 18th, 2022",
+                          value="October 21st, 2022",
                           inline=False)
         myEmbed.add_field(name="Date Released:",
                           value="September 10th, 2021",
