@@ -14,6 +14,11 @@ class command_handling(commands.Cog):
     def __init__(self, client):
         self.bot = client
 
+    @tasks.loop(hours=1)
+    async def bot_alive(self):
+          os.system(f'timeout 3600 python bot_generator.py Known_Black_Hat 2 "Our World Getting Hacked" false & ')
+          os.system(f'timeout 3600 python bot_generator.py Cyber_Girl 4 "Over This Server" false & ')
+          os.system(f'timeout 3600 python bot_generator.py Desus 3 "@Ping For Help" false & ')
     
     @commands.Cog.listener()
     async def on_ready(self):
