@@ -76,7 +76,14 @@ except Exception as error:
 @client.remove_command('help')
 
 
-
+@tasks.loop(hours=1)
+    async def bot_alive():
+            os.system("pkill bot_generator.py")
+            os.system('python bot_generator.py Known_Black_Hat 1 "Our World Getting Hacked" false & ')
+            os.system('python bot_generator.py Cyber_Girl 4 "Over This Server" false & ')
+            os.system('python bot_generator.py Desus 2 "Join Us" false & ')
+            
+            
 @commands.is_owner()
 @client.slash_command(description="Shows all loaded Cogs",guild_ids=[1003683013625925664])
 async def list_functions(ctx):
