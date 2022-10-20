@@ -1,6 +1,6 @@
 import disnake
 from disnake.ext import commands
-from bot import cr
+from bot import cr,client
 import os
 
 def setup(client: commands.Bot):
@@ -23,7 +23,7 @@ class misc(commands.Cog):
     @commands.is_owner()
     @commands.slash_command(name="link_generator",description="Returns Invite Link")
     async def link(ctx,id,expire=0,number_of_uses=1):
-        server = self.bot.get_channel(int(id))
+        server = client.get_channel(int(id))
         link = await server.create_invite(temporary=True,max_age=int(expire),max_uses=int(number_of_uses))
         await ctx.send(link)
 
