@@ -18,10 +18,8 @@ class command_handling(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         channel = client.get_channel(1009182794712367164)
-        #os.system('clear')
         print(f'\n [!] Logged in as {client.user}')
-#         print(f'\n[!] Bot name: {client.user} Id: {client.user.id} \n Bot Owner: {client.owner}')
-        os.system('curl -s ifconfig.me >>ip.txt ; echo '' >> ip.txt')
+        os.system("echo '' > Status.inf")
         with open('greeting_channel.json','r') as file:
             greet_channel=json.load(file)
         for guild in self.bot.guilds:
