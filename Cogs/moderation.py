@@ -106,7 +106,7 @@ class moderation(commands.Cog):
     @commands.default_member_permissions(ban_members=True)
     async def ban(self, context, member: disnake.Member, *, reason=None):
         try:
-            await member.send(embed=cr.emb(cr.red,f'You Were Banned From The {context.guild.name} Server!',f'Reason: {reason}'),delete_after=10)
+            await member.send(embed=cr.emb(cr.red,f'You Were Banned From The {context.guild.name} Server!',f'Reason: {reason}'))
         except:
             pass
         await member.ban(reason=reason)
