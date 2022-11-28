@@ -130,7 +130,7 @@ async def unload(ctx, name:str=commands.Param(choices=loaded_cog_list)):
 try:
   client.loop.run_until_complete(client.start(os.getenv("Mr_Robot")))
 except Exception as e:
-      if "429" in e:
+      if "429" in str(e):
             print("\n [+] Turning on Proxy Mode")
             with open("proxy_mode.conf","w") as file:
                   file.write('on')
