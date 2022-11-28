@@ -8,7 +8,7 @@
 
 # MODULES IMPORT
 import os
-from main import proxy_generator as proxy
+from main import proxy_generator 
 import datetime
 import time
 import asyncio
@@ -20,7 +20,7 @@ import random
 from dotenv import load_dotenv
 import json
 # VARIABLE INIT
-proxy=proxy()
+proxy=proxy_generator()
 start_time = time.time()
 # def get_prefix(client,message):
 #     try:
