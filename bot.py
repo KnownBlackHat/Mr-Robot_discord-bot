@@ -126,6 +126,6 @@ async def unload(ctx, name:str=commands.Param(choices=loaded_cog_list)):
 try:
   client.loop.run_until_complete(client.start(os.getenv("Mr_Robot")))
 except Exception as e:
-  print(f"Login Failure at {datetime.datetime.now()}")
+  print(f"\n [!] Login Failure at {datetime.datetime.now()} \n [!] Proxy: {proxy}")
 finally:
   client.loop.close()
