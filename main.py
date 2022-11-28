@@ -1,9 +1,9 @@
 import os
 if __name__=="__main__":
   os.system("pip install -r requirements.txt ")
+  os.system("clear")
   while True:
     os.system('python bot.py')
-    os.system("clear")
 else:
   import requests
   from bs4 import BeautifulSoup
