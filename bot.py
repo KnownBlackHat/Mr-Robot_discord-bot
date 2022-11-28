@@ -68,7 +68,7 @@ try:
                 client.load_extension(f'Cogs.{str(file[:-3])}')
                 loaded_cog_list.append(file[:-3])
             except Exception as e:
-                print(e)
+                #print(e)
                 unloaded_cog_list.append(file[:-3])
 
 except Exception as error:
