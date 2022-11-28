@@ -32,3 +32,4 @@ typing-extensions==4.4.0
 urllib3==1.26.12
 yarl==1.8.1
 youtube-dl==2021.12.17
+html5lib
