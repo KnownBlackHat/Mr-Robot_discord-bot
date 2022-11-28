@@ -1,10 +1,9 @@
 import time,datetime
 import os
-from main import proxy
 import psutil
 import disnake
 from disnake.ext import commands,tasks
-from bot import cr,client,start_time
+from bot import cr,client,start_time,proxy
 import json
 
 def setup(client: commands.Bot):
