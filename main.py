@@ -2,6 +2,8 @@ import os
 if __name__=="__main__":
   os.system("pip install -r requirements.txt ")
   os.system("clear")
+  with open("proxy_mode.conf","w") as file:
+    file.write('off')
   while True:
     os.system('python bot.py 2> /dev/null')
 else:
