@@ -21,6 +21,10 @@ from dotenv import load_dotenv
 import json
 # VARIABLE INIT
 proxy=proxy_generator()
+with open("proxy_mode.conf","r") as file:
+      data = file.read()
+if data != "on":
+      proxy=None
 start_time = time.time()
 # def get_prefix(client,message):
 #     try:
@@ -126,6 +130,10 @@ async def unload(ctx, name:str=commands.Param(choices=loaded_cog_list)):
 try:
   client.loop.run_until_complete(client.start(os.getenv("Mr_Robot")))
 except Exception as e:
-  print(f"\n [!] Login Failure at {datetime.datetime.now()} \n [!] Proxy: {proxy}")
+      if "429" in e:
+            print("\n [+] Turning on Proxy Mode")
+            with open("proxy_mode.conf","w") as file:
+                  file.write('on')
+            print(f"\n [!] Login Failure at {datetime.datetime.now()} \n [!] Proxy: {proxy}")
 finally:
   client.loop.close()
