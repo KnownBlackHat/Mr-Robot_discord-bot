@@ -1,8 +1,8 @@
+import os
 if __name__=="__main__":
+  os.system("pip install -r requirements.txt ")
   while True:
-    import os
     os.system('python bot.py')
-    os.system("pip install -r requirements.txt ")
     os.system("clear")
 else:
   import requests
