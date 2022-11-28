@@ -8,6 +8,7 @@
 
 # MODULES IMPORT
 import os
+from main import proxy
 import datetime
 import time
 import asyncio
@@ -35,7 +36,7 @@ start_time = time.time()
 #       return commands.when_mentioned_or("!!")(client,message)
       
 
-client = commands.Bot(command_prefix=commands.when_mentioned,intents = disnake.Intents.all())
+client = commands.Bot(proxy=proxy, command_prefix=commands.when_mentioned,intents = disnake.Intents.all())
 load_dotenv()
 
 # EVENTS
