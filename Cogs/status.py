@@ -25,8 +25,7 @@ class command_handling(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         channel = client.get_channel(1009182794712367164)
-        print(f'\n [!] Logged in as {client.user}')
-        print(f"\n [!] Proxy Used: {proxy}")
+        print(f"\n [!] Logged in as {client.user}\n [!] Proxy: {proxy}")
         os.system("echo '' > Status.inf")
         with open('greeting_channel.json','r') as file:
             greet_channel=json.load(file)
