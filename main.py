@@ -1,7 +1,7 @@
 if __name__=="__main__":
   while True:
-    os.system('python bot.py')
     import os
+    os.system('python bot.py')
     os.system("pip install -r requirements.txt ")
     os.system("clear")
 else:
