@@ -15,7 +15,6 @@ os.system("pip install -r requirements.txt ")
 os.system("clear")
 
 #os.system('pip freeze > pip_log.txt')
-
-while True:
-  proxy = proxy_generator()
-  os.system('python bot.py')
+if __name__=="__main__":
+  while True:
+    os.system('python bot.py')
