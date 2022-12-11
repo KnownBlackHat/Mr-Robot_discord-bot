@@ -118,10 +118,13 @@ class misc(commands.Cog):
 
 
 # Help command
-
-    @commands.slash_command(name="help",description="Shows Command List")
+    # @commands.slash_command(name="eval")
+    # async def eva(self,ctx,cmd):
+    #     await ctx.send(eval(cmd))
+    @commands.slash_command(name="help",description="Shows Command List")   
     async def command(self, ctx):
-        await ctx.send("type /")
+        # await ctx.send(embed=cr.emb(cr.yellow,"Command Lists",f'**Slash Commands:**\n {",".join([f"`{co  if await co.can_run(ctx) else ... }`" for co in client.global_slash_commands])}'))
+        await ctx.send(embed=cr.emb(cr.yellow,"Type / to get list of all commands"))
 #         await ctx.send(embed=cr.emb(
 #             cr.green, "Command List", 
 # `status`:

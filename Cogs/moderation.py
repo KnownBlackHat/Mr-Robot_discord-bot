@@ -83,7 +83,8 @@ class moderation(commands.Cog):
     @commands.slash_command(name='unban',description="Unbans the member")
     @commands.default_member_permissions(ban_members=True)
     async def unban(self, context, member):
-        banned_users = await context.guild.bans()
+        banned_users = context.guild.bans()
+        print(banned_users)
         member_name, member_discriminator = member.split('#')
         for ban_entry in banned_users:
             user = ban_entry.user
