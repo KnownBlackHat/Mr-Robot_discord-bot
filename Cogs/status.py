@@ -46,6 +46,11 @@ class command_handling(commands.Cog):
             # except:
             #     greet_channel[str(guild.id)]["prefix"] = "!!"
             #     json.dump(greet_channel,open('greeting_channel.json','w'),indent=2)
+        with open("proxy_mode.conf","r") as file:
+            proxy_mode = file.read()
+        if proxy_mode == "on":
+            await self.bot.change_presence(status=disnake.Status.idle,activity=disnake.Game(name='In Starvation Mode'))
+            await channel.send(embed=cr.emb(cr.green,"Booted","Proxy_mode"))
         await self.bot.change_presence(activity=disnake.Streaming(name='@MR ROBOT', url="https://www.youtube.com/watch?v=OdGqHZrqG4k"))
         await channel.send(embed=cr.emb(cr.green,"Booted"))
 

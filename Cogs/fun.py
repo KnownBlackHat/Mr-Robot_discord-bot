@@ -87,16 +87,36 @@ class fun(commands.Cog):
 
     # @commands.is_nsfw()
     @commands.slash_command(name='meme',description="Show you memes")
-    async def meme(self, ctx):
-       Header =  {'User-Agent' : "Magic Browser"}
-       URL = "https://meme-api.herokuapp.com/gimme"
-       async with aiohttp.request("GET",URL,headers=Header) as resp:
-           if resp.status == 200:
-              data = await resp.json()
-              meme_pic = data["preview"][-2]
-              await ctx.send(meme_pic)
-           else:
-              await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme API not responding!"),ephemeral=True)
+    async def meme(self, ctx, amount:int=1):
+    #    Header =  {'User-Agent' : "Magic Browser"}
+    #    URL = "https://meme-api.herokuapp.com/gimme"
+    #    async with aiohttp.request("GET",URL,headers=Header) as resp:
+    #        if resp.status == 200:
+    #           data = await resp.json()
+    #           meme_pic = data["preview"][-2]
+    #           await ctx.send(meme_pic)
+        if amount > 100:
+            raise Exception("Amount Should be <= 100")
+        await ctx.response.defer()
+        Header =  {'User-Agent' : "Magic Browser"}
+        type=['best','top','new','rising','hot']
+        choice = random.choice(type)
+        URL = f"https://www.reddit.com/r/meme/{choice}.json?limit=1000"
+        async with aiohttp.request("GET",URL,headers=Header) as resp:
+            if resp.status == 200:
+                data = await resp.json()
+                meme_list=[]
+                try:
+                    for d in data["data"]["children"]:
+                        try: 
+                            meme_list.append(str(d["data"]["url_overridden_by_dest"]))
+                        except KeyError:
+                            if d["data"]["thumbnail"].startswith('http'):
+                                meme_list.append(str(d["data"]["thumbnail"]))
+                    for i in range(amount):
+                        await ctx.send(random.choice(meme_list))
+                except:
+                    await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme API didn't respond"),ephemeral=True)
 
     @commands.slash_command(name='nsfw_premium',description="Returns results from nsfw website")
     @commands.is_nsfw()

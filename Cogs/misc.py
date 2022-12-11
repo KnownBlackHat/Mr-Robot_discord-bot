@@ -117,10 +117,11 @@ class misc(commands.Cog):
   2) [Optional] Use `/manage_feature`,`/set`,`/unset` command for more customisation!'''))
 
 
-#commands
+# Help command
 
-#     @commands.slash_command(name="help",description="Shows Command List")
-#     async def command(self, ctx):
+    @commands.slash_command(name="help",description="Shows Command List")
+    async def command(self, ctx):
+        await ctx.send("type /")
 #         await ctx.send(embed=cr.emb(
 #             cr.green, "Command List", 
 # `status`:
