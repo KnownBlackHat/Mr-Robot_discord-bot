@@ -76,8 +76,8 @@ class fun(commands.Cog):
                                     # await ctx.send(d["data"]["thumbnail"])
                                     nsfw_list.append(str(d["data"]["thumbnail"]))
                         # await ctx.send(embed=cr.emb(cr.black,"NSFW Command",f"🔎Search Of {term} in {choice} category Completed!"))
-                        for i in range(amount):
-                            await ctx.send(random.choice(nsfw_list))
+                        #for i in range(amount):
+                        await ctx.send(" ".join(random.choices(nsfw_list,k=amount)))
                     except:
                         await ctx.send(embed=cr.emb(cr.red,"NSFW Command","Try Again Later"))
                 else:
@@ -113,14 +113,14 @@ class fun(commands.Cog):
                         except KeyError:
                             if d["data"]["thumbnail"].startswith('http'):
                                 meme_list.append(str(d["data"]["thumbnail"]))
-                    for i in range(amount):
-                        await ctx.send(random.choice(meme_list))
+#                     for i in range(amount):
+                    await ctx.send(" ".join(random.choices(meme_list,k=amount)))
                 except:
                     await ctx.send(embed=cr.emb(cr.red,"Meme Command",f"Meme API didn't respond"),ephemeral=True)
 
     @commands.slash_command(name='nsfw_premium',description="Returns results from nsfw website")
     @commands.is_nsfw()
-    async def xxx(self,ctx,search,amount=1):
+    async def xxx(self,ctx,search,amount:int=1):
         term = search
         if amount > 100:
             raise Exception("Amount Should be <= 100")
@@ -134,11 +134,8 @@ class fun(commands.Cog):
               while True:
                 try:
                   search_term = await get(term_url)
-                  div = search_term.find('div', class_='mozaique cust-nb-cols')
-                  div = div.find_all('a')
-                  i = list(div)
-                  while p != int(amount):
-                      i = random.choice(i)
+                  items = random.choices(list(search_term.find('div', class_='mozaique cust-nb-cols').find_all('a')),k=amount)
+                  for i in items:
                       link = i.get('href')
                       page = await get("https://www.xnxx.com"+link)
                       link = extract_video_link(page)
