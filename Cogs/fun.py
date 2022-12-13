@@ -146,7 +146,7 @@ class fun(commands.Cog):
                 except Exception as aw:
                   #print(aw)
                   continue
-                # print(link)
+                # print(link) 
               # break
           except Exception as ex:
               # print("Trying Again")
